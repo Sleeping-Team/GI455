@@ -5,19 +5,15 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    [SerializeField, Tooltip("In radius")] private float interactionArea = 1f;
-    [SerializeField] private float interactionDistance = 5f;
-    [SerializeField] private LayerMask interactableLayer;
-
-    private Ray _rayProperty;
-
     private PlayerInput _input;
+    
+    private GameObject _interactingObject;
+
+    #region Unity Function
 
     private void Awake()
     {
         _input = new PlayerInput();
-        
-        _rayProperty = new Ray(transform.position, transform.forward);
     }
 
     #region Input System Activation
@@ -36,24 +32,29 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Start()
     {
-        _input.Player.Interact.performed += _ => CastInteraction();
+        _input.Player.Interact.performed += _ => BasicInteraction();
     }
 
-    /// <summary>
-    /// Do laser thing to cast interaction Ray with sphere on its end
-    /// </summary>
-    private void CastInteraction()
+    private void OnTriggerEnter(Collider other)
     {
-        if (Physics.SphereCast(_rayProperty, interactionArea, out RaycastHit hitInfo, interactionDistance, interactableLayer))
+        if (other == null)
         {
-            Debug.Log("Interact");
+            _interactingObject = other.gameObject;
         }
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnTriggerExit(Collider other)
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + (transform.forward * interactionDistance));
-        Gizmos.DrawWireSphere(transform.position + (transform.forward * interactionDistance), interactionArea);
+        if (other != null)
+        {
+            _interactingObject = null;
+        }
+    }
+
+    #endregion
+
+    private void BasicInteraction()
+    {
+        if(_interactingObject != null) Debug.Log("Object Here");
     }
 }
