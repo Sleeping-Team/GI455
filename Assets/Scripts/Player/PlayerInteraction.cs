@@ -37,7 +37,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other == null)
+        if (_interactingObject == null)
         {
             _interactingObject = other.gameObject;
         }
@@ -45,7 +45,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other != null)
+        if (_interactingObject == other.gameObject)
         {
             _interactingObject = null;
         }
