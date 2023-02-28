@@ -18,7 +18,7 @@ public class ClickToStartController : MonoBehaviour
 
 	void ButtonOnClick()
 	{
-		Debug.Log ("You have clicked the button!");
+		Debug.Log ("Get Start!");
 		firstScene.SetActive(false);
 		nameScene.SetActive(true);
 	}
