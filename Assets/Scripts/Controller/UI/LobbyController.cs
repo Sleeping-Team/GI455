@@ -17,7 +17,7 @@ public class LobbyController : MonoBehaviour
     {
         if (_lobbyCode.text == null)
         {
-            _lobbyCode.text = PlayerData.Instance.lobbyCode;
+            _lobbyCode.text = "Code : " + PlayerData.Instance.lobbyCode;
         }
     }
 }
