@@ -45,11 +45,10 @@ public class RelayController : Singleton<RelayController>
         
         _transport.SetHostRelayData(a.RelayServer.IpV4,
             (ushort)a.RelayServer.Port,a.AllocationIdBytes,a.Key,a.ConnectionData);
-
+        
         NetworkManager.Singleton.StartHost();
-
-        SceneManager.LoadScene("Gameplay Lab");
-
+        
+        NetworkManager.Singleton.SceneManager.LoadScene("Gameplay Lab", LoadSceneMode.Single);
     }
     
     public async void JoinGame(string code)

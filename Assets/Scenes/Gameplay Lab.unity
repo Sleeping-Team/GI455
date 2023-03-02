@@ -341,7 +341,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh35782
+  m_Name: pb_Mesh46886
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -1572,7 +1572,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 702772347514546234, guid: fc69b22849a2bf046b88ae6ba45871f7, type: 3}
       propertyPath: m_Name
-      value: NetworkManager
+      value: Debug NetworkManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 702772347514546234, guid: fc69b22849a2bf046b88ae6ba45871f7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1936,7 +1940,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 364789151654167465, guid: 0e1ecd07004d7f649a76afe912fbac6c, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Debug Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 364789151654167465, guid: 0e1ecd07004d7f649a76afe912fbac6c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 364789151654167474, guid: 0e1ecd07004d7f649a76afe912fbac6c, type: 3}
       propertyPath: m_RootOrder

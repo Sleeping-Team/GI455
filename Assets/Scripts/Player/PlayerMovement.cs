@@ -1,8 +1,11 @@
 using System;
+using System.Collections.Generic;
+using Unity.Netcode.Components;
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkTransform
 {
     #region Variable
 
@@ -13,25 +16,64 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 _movementValue;
 
+    public static Dictionary<ulong, PlayerMovement> Players = new Dictionary<ulong, PlayerMovement>();
+
     #endregion
 
     #region Unity Function
 
-    private void Update()
+    private void FixedUpdate()
     {
+        if(!IsSpawned || !IsOwner) return;
+        
         MovementSystem();
     }
 
     public void OnMove(InputValue value)
     {
-        _movementValue = value.Get<Vector2>();
+        if(!IsSpawned || !IsOwner) return;
         
-        if(_movementValue != Vector2.zero) animator.SetBool("Walking", true);
-        else animator.SetBool("Walking", false);
+        _movementValue = value.Get<Vector2>();
     }
 
     #endregion
 
+    #region Network
+
+    protected override bool OnIsServerAuthoritative()
+    {
+        return false;
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        Debug.Log("On Network");
+        
+        if (IsOwner)
+        {
+            var temp = transform.position;
+            temp.y = 2.5f;
+            transform.position = temp;
+
+            rigidbody = GetComponent<Rigidbody>();
+        }
+
+        Players[OwnerClientId] = this;
+        
+        base.OnNetworkSpawn();
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        if (Players.ContainsKey(OwnerClientId))
+        {
+            Players.Remove(OwnerClientId);
+        }
+        base.OnNetworkDespawn();
+    }
+
+    #endregion
+    
     #region Custom Function
 
     /// <summary>
@@ -49,7 +91,11 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="control">Value to control direction</param>
     private void Move(Vector3 control)
     {
+        if(control != Vector3.zero) animator.SetBool("Walking", true);
+        else animator.SetBool("Walking", false);
+            
         transform.position += (control * speed * Time.deltaTime);
+        //transform.position = Vector3.Lerp(transform.position, transform.position + control * speed, Time.deltaTime);
     }
 
     /// <summary>
