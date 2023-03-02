@@ -20,6 +20,7 @@ public class MenuController : MonoBehaviour
     [SerializeField] private Button joinButton;
     [SerializeField] private Button backButton;
     [SerializeField] private Button exitButton;
+    [SerializeField] private Button confirmButton;
     
     
     [SerializeField] private TMP_InputField _joinInput;
@@ -41,11 +42,13 @@ public class MenuController : MonoBehaviour
         Button joinBtn = joinButton.GetComponent<Button>();
         Button backBtn = backButton.GetComponent<Button>();
         Button exitBtn = exitButton.GetComponent<Button>();
+        Button confirmBtn = confirmButton.GetComponent<Button>();
 
         createBtn.onClick.AddListener(CreateButtonOnClick);
         joinBtn.onClick.AddListener(JoinButtonOnClick);
         backBtn.onClick.AddListener(BackButtonOnClick);
         exitBtn.onClick.AddListener(ExitButtonOnClick);
+
         
         RelayController.Instance.Initialize();
     }
@@ -77,8 +80,11 @@ public class MenuController : MonoBehaviour
         
         menuUI.SetActive(false);
         joinUI.SetActive(true);
+
+        _joinInput.text = _joinInput.text.ToUpper();
+
+        PlayerData.Instance.joinCode = _joinCodeText.text;
         
-        RelayController.Instance.JoinGame(_joinInput.text);
     }
     
     void BackButtonOnClick()
@@ -89,7 +95,15 @@ public class MenuController : MonoBehaviour
         joinUI.SetActive(false);
         menuUI.SetActive(true);
     }
-    
+
+    void ConfirmButtonOnClick()
+    {
+        //check the button is clicked
+        Debug.Log("You have clicked the confirm button!");
+
+        RelayController.Instance.JoinGame(_joinInput.text);
+    }
+
     void ExitButtonOnClick()
     {
         //check the button is clicked

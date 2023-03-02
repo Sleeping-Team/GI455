@@ -10,7 +10,7 @@ public class LobbyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _lobbyCode.GetComponent<TMP_Text>().text = PlayerData.Instance.lobbyCode;
+        
     }
 
     // Update is called once per frame
@@ -18,7 +18,15 @@ public class LobbyController : MonoBehaviour
     {
         if (_lobbyCode.text == null)
         {
-            _lobbyCode.text = PlayerData.Instance.lobbyCode;
+            if (PlayerData.Instance.lobbyCode == null)
+            {
+                _lobbyCode.text = PlayerData.Instance.joinCode;
+            }
+            if (PlayerData.Instance.joinCode == null)
+            {
+                _lobbyCode.text = PlayerData.Instance.lobbyCode;
+            }
+            
         }
     }
 }
