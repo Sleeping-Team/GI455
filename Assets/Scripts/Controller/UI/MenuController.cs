@@ -30,6 +30,8 @@ public class MenuController : MonoBehaviour
 
     [SerializeField] private GameObject menuUI;
     [SerializeField] private GameObject joinUI;
+
+    private string joinInput;
     
     
     // Start is called before the first frame update
@@ -80,13 +82,26 @@ public class MenuController : MonoBehaviour
         
         menuUI.SetActive(false);
         joinUI.SetActive(true);
-
+        /*
         _joinInput.text = _joinInput.text.ToUpper();
 
         PlayerData.Instance.joinCode = _joinCodeText.text;
-        
+        */
     }
-    
+
+    public void StoreCode()
+    {
+        //get player name from Inputfield
+        joinInput = _joinInput.GetComponent<TMP_InputField>().text;
+        joinInput = joinInput.ToUpper();
+        //keep name in player data
+        PlayerData.Instance.joinCode = joinInput;
+
+        Debug.Log("Get the code. " + playerInputName);
+        //temporary test
+        //ShowName();
+    }
+
     void BackButtonOnClick()
     {
         //check the button is clicked
@@ -101,7 +116,7 @@ public class MenuController : MonoBehaviour
         //check the button is clicked
         Debug.Log("You have clicked the confirm button!");
 
-        RelayController.Instance.JoinGame(_joinInput.text);
+        RelayController.Instance.JoinGame(joinInput);
     }
 
     void ExitButtonOnClick()
