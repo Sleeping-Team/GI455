@@ -50,11 +50,11 @@ public class RelayController : Singleton<RelayController>
         
     }
     
-    public async void JoinGame(string ID)
+    public async void JoinGame()
     {
         //_button.SetActive(false);
 
-        JoinAllocation a = await RelayService.Instance.JoinAllocationAsync(ID);
+        JoinAllocation a = await RelayService.Instance.JoinAllocationAsync(PlayerData.Instance.joinCode);
         _transport.SetClientRelayData(a.RelayServer.IpV4,(ushort)a.RelayServer.Port,a.AllocationIdBytes,a.Key,a.ConnectionData,a.HostConnectionData);
 
         NetworkManager.Singleton.StartClient();
