@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class OrderProperties : MonoBehaviour
 {
-    public int TableNumber;
-    public ItemProperties Dishes;
+    public MenuProperties Dishes;
     public Coroutine OrderProcess;
 }
