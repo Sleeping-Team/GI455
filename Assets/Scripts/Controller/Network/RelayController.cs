@@ -12,6 +12,7 @@ using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using Unity.Netcode.Transports.UTP;
 using Unity.Services.Core;
+using UnityEngine.SceneManagement;
 
 public class RelayController : Singleton<RelayController>
 {
@@ -46,6 +47,7 @@ public class RelayController : Singleton<RelayController>
             (ushort)a.RelayServer.Port,a.AllocationIdBytes,a.Key,a.ConnectionData);
 
         NetworkManager.Singleton.StartHost();
+        
     }
     
     public async void JoinGame(string ID)
@@ -56,5 +58,10 @@ public class RelayController : Singleton<RelayController>
         _transport.SetClientRelayData(a.RelayServer.IpV4,(ushort)a.RelayServer.Port,a.AllocationIdBytes,a.Key,a.ConnectionData,a.HostConnectionData);
 
         NetworkManager.Singleton.StartClient();
+    }
+
+    public async Task Initialize()
+    { 
+        
     }
 }

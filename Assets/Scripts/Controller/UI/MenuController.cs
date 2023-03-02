@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using Unity.Services.Core;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
@@ -44,6 +46,17 @@ public class MenuController : MonoBehaviour
         joinBtn.onClick.AddListener(JoinButtonOnClick);
         backBtn.onClick.AddListener(BackButtonOnClick);
         exitBtn.onClick.AddListener(ExitButtonOnClick);
+        
+        RelayController.Instance.Initialize();
+    }
+
+    private void Update()
+    {
+        if (_joinCodeText.text == null)
+        {
+            _joinCodeText.text = PlayerData.Instance.lobbyCode;
+        }
+            
     }
 
     void CreateButtonOnClick()
@@ -53,6 +66,8 @@ public class MenuController : MonoBehaviour
         
         RelayController.Instance.CreateGame();
         _joinCodeText.text = PlayerData.Instance.lobbyCode;
+
+        SceneManager.LoadScene("Gameplay Lab");
     }
 
     void JoinButtonOnClick()
