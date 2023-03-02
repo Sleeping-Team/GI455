@@ -6,6 +6,7 @@ using UnityEngine;
 public class LobbyController : MonoBehaviour
 {
     [SerializeField] private TMP_Text _lobbyCode;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +18,7 @@ public class LobbyController : MonoBehaviour
     {
         if (_lobbyCode.text == null)
         {
-            _lobbyCode.text = "Code : " + PlayerData.Instance.lobbyCode;
+            _lobbyCode.text = PlayerData.Instance.lobbyCode;
         }
     }
 }
