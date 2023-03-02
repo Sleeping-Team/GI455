@@ -51,6 +51,8 @@ public class MenuController : MonoBehaviour
         backBtn.onClick.AddListener(BackButtonOnClick);
         exitBtn.onClick.AddListener(ExitButtonOnClick);
 
+        confirmBtn.onClick.AddListener(ConfirmButtonOnClick);
+
         
         RelayController.Instance.Initialize();
     }
