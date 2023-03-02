@@ -97,7 +97,7 @@ public class MenuController : MonoBehaviour
         //keep name in player data
         PlayerData.Instance.joinCode = joinInput;
 
-        Debug.Log("Get the code. " + playerInputName);
+        Debug.Log("Get the code. " + joinInput);
         //temporary test
         //ShowName();
     }
@@ -110,13 +110,15 @@ public class MenuController : MonoBehaviour
         joinUI.SetActive(false);
         menuUI.SetActive(true);
     }
+    
 
-    void ConfirmButtonOnClick()
+    public override void ConfirmButtonOnClick()
     {
         //check the button is clicked
         Debug.Log("You have clicked the confirm button!");
 
         RelayController.Instance.JoinGame(joinInput);
+        SceneManager.LoadScene("Gameplay Lab");
     }
 
     void ExitButtonOnClick()
