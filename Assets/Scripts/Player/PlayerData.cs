@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerData : SingletonTest<PlayerData>
+public class PlayerData : Singleton<PlayerData>
 {
     public string playerName;
+    public string lobbyCode;
 }
