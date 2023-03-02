@@ -62,6 +62,5 @@ public class RelayController : Singleton<RelayController>
 
     public async Task Initialize()
     { 
-        
-    }
+        }
 }
