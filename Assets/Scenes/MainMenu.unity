@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -987,6 +987,7 @@ MonoBehaviour:
   joinButton: {fileID: 664645153}
   backButton: {fileID: 2090413949}
   exitButton: {fileID: 125774028}
+  confirmButton: {fileID: 2066167621}
   _joinInput: {fileID: 1055330570}
   pName: {fileID: 932546848}
   _joinCodeText: {fileID: 1304999553}
@@ -2491,9 +2492,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 496829387}
-        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: CreateGame
-        m_Mode: 1
+        m_TargetAssemblyTypeName: UnityEngine.MonoBehaviour, UnityEngine
+        m_MethodName: set_runInEditMode
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
