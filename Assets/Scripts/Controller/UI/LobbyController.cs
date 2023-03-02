@@ -10,7 +10,14 @@ public class LobbyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (PlayerData.Instance.lobbyCode == null)
+        {
+            _lobbyCode.text = PlayerData.Instance.joinCode;
+        }
+        else
+        {
+            _lobbyCode.text = PlayerData.Instance.lobbyCode;
+        }
     }
 
     // Update is called once per frame
@@ -22,7 +29,7 @@ public class LobbyController : MonoBehaviour
             {
                 _lobbyCode.text = PlayerData.Instance.joinCode;
             }
-            if (PlayerData.Instance.joinCode == null)
+            else if(PlayerData.Instance.joinCode == null)
             {
                 _lobbyCode.text = PlayerData.Instance.lobbyCode;
             }
