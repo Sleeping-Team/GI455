@@ -62,5 +62,6 @@ public class RelayController : Singleton<RelayController>
 
     public async Task Initialize()
     { 
-        }
+        Debug.Log("Is now Initialize");
+    }
 }
