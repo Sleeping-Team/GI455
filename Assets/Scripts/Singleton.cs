@@ -1,8 +1,7 @@
 using UnityEngine;
 
 // https://gist.github.com/mstevenson/4325117
-public class Singleton<T> : MonoBehaviour
-    where T : Component
+public class Singleton<T> : MonoBehaviour where T : Component
 {
     private static T _instance;
     public static T Instance {
