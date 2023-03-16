@@ -8,10 +8,10 @@ public class PlayerInteraction : MonoBehaviour
     public GameObject DishOnHand => _dishOnHand;
 
     [SerializeField] private Transform _hand;
-    
+
     private PlayerInput _input;
     
-    private GameObject _interactingObject;
+    [SerializeField] private GameObject _interactingObject;
     private GameObject _dishOnHand;
 
     #region Unity Function
@@ -62,37 +62,65 @@ public class PlayerInteraction : MonoBehaviour
     {
         if(_interactingObject == null) return;
 
+        Debug.Log("Interact");
+        
         bool pass;
         switch(_interactingObject.tag)
         {
             case "Customer":
+                Debug.Log("It's Customer");
+                
                 pass = _interactingObject.TryGetComponent(out Customer customer);
                 
                 if(!pass) return;
 
+                Debug.Log("Get Customer Pass");
+                
                 switch (customer.State)
                 {
-                    case Customer.CustomerState.Entering:
+                    case Customer.CustomerState.WaitingTable:
+                        Debug.Log("Customer is waiting");
+                        customer.AssignTable(FloorPlan.Instance.SearchVacantTable(customer.Quantity));
+                        break;
+                }
+                break;
+            case "Table":
+                pass = _interactingObject.TryGetComponent(out TableOrder table);
+                
+                if(!pass) return;
+
+                switch (table.State)
+                {
+                    case TableOrder.TableState.Ordering:
                         //if(!FloorPlan.Instance.TableIsAvailable) return;
                         
-                        customer.RandomOrder();
-                        customer.SetState(Customer.CustomerState.Waiting);
+                        table.RandomOrder();
+                        table.ChangeState(TableOrder.TableState.Waiting);
                         break;
-                    case Customer.CustomerState.Waiting:
+                    case TableOrder.TableState.Waiting:
                         if(_dishOnHand == null) return;
 
-                        if (customer.OrderStatus[_dishOnHand.name])
+                        if (table.OrderStatus[_dishOnHand.name])
                         {
                             Debug.LogWarning("Already Served");
                             return;
                         }
                         
                         Debug.Log("Served!");
-                        customer.OrderStatus[_dishOnHand.name] = true;
+                        table.OrderStatus[_dishOnHand.name] = true;
                         
                         Destroy(_dishOnHand);
 
                         _dishOnHand = null;
+
+                        foreach (string dish in table.OrderStatus.Keys)
+                        {
+                            bool allServed = table.OrderStatus[dish];
+                            if (!allServed) break;
+                            
+                            table.ChangeState(TableOrder.TableState.Dirty);
+                            Destroy(table.Customers.gameObject);
+                        }
                         break;
                 }
                 break;

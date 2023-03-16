@@ -24,7 +24,7 @@ public class Kitchen : Singletor<Kitchen>
     {
         DishesOnMenu = _menus.Count;
 
-        Customer.OnCustomerOrder += Order;
+        TableOrder.OnCustomerOrder += Order;
 
         int counterQuantity = _countersPosition.Length;
         _counters = new CounterProperties[counterQuantity];
