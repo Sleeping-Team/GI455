@@ -61,6 +61,7 @@ public class RelayController : Singleton<RelayController>
         NetworkManager.Singleton.StartClient();
 
         SceneManager.LoadScene("Gameplay Lab");
+        
     }
 
     public async Task Initialize()
