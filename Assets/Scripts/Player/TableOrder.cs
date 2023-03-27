@@ -93,6 +93,7 @@ public class TableOrder : MonoBehaviour
     public void Reset()
     {
         Orders.Clear();
+        Debug.Log("is now clear oder");
     }
 
     public void AssignCustomer(Customer person)

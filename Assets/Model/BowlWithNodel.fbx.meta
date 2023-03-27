@@ -3,29 +3,9 @@ guid: 39d4cf40dc4330e47a335ab9df234ccc
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: SharmWithSoup_Base_color
-    second: {fileID: 2800000, guid: bab816c4aedd41d4baf80296eaf49826, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: SharmWithSoup_Metallic
-    second: {fileID: 2800000, guid: e96684b6cec9d284e816a0dc0bd847f8, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: SharmWithSoup_Roughness
-    second: {fileID: 2800000, guid: 5973840651e4ead429f7de5dfeee2274, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: texture_diff
-    second: {fileID: 2800000, guid: 2db0b470ec3875142a43a770b4d50522, type: 3}
+  externalObjects: {}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Plate
   m_EditorClassIdentifier: 
   itemName: Plate
-  itemPrefab: {fileID: 7511801917551575027, guid: cbc648a7c0e397545aa38dc4db43fb4b, type: 3}
+  itemPrefab: {fileID: 6824746860715104557, guid: dc6af35d3a3f115418366066b6c5601b, type: 3}
   itemImage: {fileID: 0}

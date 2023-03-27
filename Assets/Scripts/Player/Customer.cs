@@ -47,3 +47,4 @@ public class Customer : MonoBehaviour
         transform.localPosition = Vector3.zero;
     }
 }
+
