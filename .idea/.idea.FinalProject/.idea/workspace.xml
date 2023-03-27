@@ -1,82 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7b3b2d8c-bbe2-4b06-b531-796c0891b806" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FinalProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FinalProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/Bowl1.fbm/DefaultMaterial.026.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/Bowl1.fbm/DefaultMaterial.026.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/Bowl1.fbm/DefaultMaterial.027.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/Bowl1.fbm/DefaultMaterial.027.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/Bowl1.fbm/DefaultMaterial.028.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/Bowl1.fbm/DefaultMaterial.028.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/Bowl1.fbm/DefaultMaterial.029.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/Bowl1.fbm/DefaultMaterial.029.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/Bowl1.fbm/DefaultMaterial5.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/Bowl1.fbm/DefaultMaterial5.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/Bowl1.fbm/lambert5.007.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/Bowl1.fbm/lambert5.007.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/Bowl1.fbx" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/Bowl1.fbx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/Bowl1.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/Bowl1.fbx.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/BowlWithNodel.fbm/SharmWithSoup_Base_color 1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/BowlWithNodel.fbm/SharmWithSoup_Base_color 1.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/BowlWithNodel.fbm/SharmWithSoup_Metallic 1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/BowlWithNodel.fbm/SharmWithSoup_Metallic 1.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/BowlWithNodel.fbm/SharmWithSoup_Roughness 1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/BowlWithNodel.fbm/SharmWithSoup_Roughness 1.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/BowlWithNodel.fbm/texture_diff 1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/BowlWithNodel.fbm/texture_diff 1.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/BowlWithNodel.fbx" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/BowlWithNodel.fbx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/BowlWithNodel.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/BowlWithNodel.fbx.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/Plane.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/Plane.fbx.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/PlaneWithEgg.fbm/EggAndRice_Base_color.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/PlaneWithEgg.fbm/EggAndRice_Base_color.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/PlaneWithEgg.fbm/EggAndRice_Metallic.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/PlaneWithEgg.fbm/EggAndRice_Metallic.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/PlaneWithEgg.fbm/EggAndRice_Roughness.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/PlaneWithEgg.fbm/EggAndRice_Roughness.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/PlaneWithEgg.fbm/Plate_Base_color.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/PlaneWithEgg.fbm/Plate_Base_color.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/PlaneWithEgg.fbm/Plate_Metallic.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/PlaneWithEgg.fbm/Plate_Metallic.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/PlaneWithEgg.fbm/Plate_Roughness.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/PlaneWithEgg.fbm/Plate_Roughness.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/PlaneWithEgg.fbm/Pug_Base_color.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/PlaneWithEgg.fbm/Pug_Base_color.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/PlaneWithEgg.fbm/Pug_Metallic.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/PlaneWithEgg.fbm/Pug_Metallic.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/PlaneWithEgg.fbm/Pug_Roughness.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/PlaneWithEgg.fbm/Pug_Roughness.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/PlaneWithEgg.fbx" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/PlaneWithEgg.fbx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/PlaneWithEgg.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/PlaneWithEgg.fbx.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Bowl1.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Bowl1.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BowlWithNodel.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BowlWithNodel.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Couter1.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Couter1.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Couter2.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Couter2.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Couter3.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Couter3.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Couter4.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Couter4.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/GasStation.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/GasStation.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Plane.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Plane.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/PlaneWithEgg.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/PlaneWithEgg.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Table.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Table.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Table2.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Table2.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tree.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tree.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tree2.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tree2.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/pan 1.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/pan 1.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/refrigerator.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/refrigerator.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Gameplay Lab.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Gameplay Lab.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ReallyLab.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ReallyLab.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/Customer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Customer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerInteraction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerInteraction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/TableOrder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/TableOrder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
-    </list>
+    <list default="true" id="7b3b2d8c-bbe2-4b06-b531-796c0891b806" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -160,7 +85,7 @@
       <workItem from="1677937602994" duration="1829000" />
       <workItem from="1678083892935" duration="2366000" />
       <workItem from="1678446229851" duration="26000" />
-      <workItem from="1679917163168" duration="2948000" />
+      <workItem from="1679917163168" duration="3656000" />
     </task>
     <servers />
   </component>
