@@ -7,6 +7,9 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Temp/Compiled-Standard.shader" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -86,6 +89,7 @@
       <workItem from="1678083892935" duration="2366000" />
       <workItem from="1678446229851" duration="26000" />
       <workItem from="1679917163168" duration="3656000" />
+      <workItem from="1679979947564" duration="627000" />
     </task>
     <servers />
   </component>
