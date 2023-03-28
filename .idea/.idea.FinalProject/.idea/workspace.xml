@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7b3b2d8c-bbe2-4b06-b531-796c0891b806" name="Changes" comment="" />
+    <list default="true" id="7b3b2d8c-bbe2-4b06-b531-796c0891b806" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FinalProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FinalProject/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FlatKit/Demos/[Demo] Mugs/Mugs-Materials/2 - OneColorVariousParameters/02.2-BlueprintGrid-Mug-10.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FlatKit/Demos/[Demo] Mugs/Mugs-Materials/2 - OneColorVariousParameters/02.2-BlueprintGrid-Mug-10.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FlatKit/Demos/[Demo] Mugs/Mugs-Materials/2 - OneColorVariousParameters/02.2-BlueprintGrid-Mug-5.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FlatKit/Demos/[Demo] Mugs/Mugs-Materials/2 - OneColorVariousParameters/02.2-BlueprintGrid-Mug-5.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model/Couter1.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/Couter1.fbx.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model/Couter4.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/Couter4.fbx.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model/New Material.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/New Material.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model/Tree.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/Tree.fbx.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model/Tree2.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/Tree2.fbx.meta" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -89,7 +98,9 @@
       <workItem from="1678083892935" duration="2366000" />
       <workItem from="1678446229851" duration="26000" />
       <workItem from="1679917163168" duration="3656000" />
-      <workItem from="1679979947564" duration="627000" />
+      <workItem from="1679979947564" duration="1285000" />
+      <workItem from="1679988823797" duration="5000" />
+      <workItem from="1679988936050" duration="606000" />
     </task>
     <servers />
   </component>
