@@ -40,7 +40,7 @@ public class MenuController : MonoBehaviour
         //show name as text
         pName.GetComponent<TMP_Text>().text = PlayerData.Instance.playerName;
         
-        Button createBtn =createButton.GetComponent<Button>();
+        Button createBtn = createButton.GetComponent<Button>();
         Button joinBtn = joinButton.GetComponent<Button>();
         Button backBtn = backButton.GetComponent<Button>();
         Button exitBtn = exitButton.GetComponent<Button>();
