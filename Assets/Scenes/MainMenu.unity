@@ -981,7 +981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aa13f691604f224d9f1fcac7954ee92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  createButton: {fileID: 0}
+  createButton: {fileID: 25600243}
   joinButton: {fileID: 664645153}
   backButton: {fileID: 2090413949}
   exitButton: {fileID: 125774028}
@@ -2230,7 +2230,7 @@ GameObject:
   - component: {fileID: 1142512667}
   - component: {fileID: 1142512666}
   m_Layer: 5
-  m_Name: RawImage
+  m_Name: Player(Model)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2270,9 +2270,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2909,7 +2909,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1984679684}
   - component: {fileID: 1984679683}
-  - component: {fileID: 1984679682}
   - component: {fileID: 1984679681}
   m_Layer: 0
   m_Name: Camera
@@ -2961,14 +2960,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!81 &1984679682
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1984679680}
-  m_Enabled: 1
 --- !u!20 &1984679683
 Camera:
   m_ObjectHideFlags: 0
@@ -3169,7 +3160,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7120350cf74a5e0489051b1f13f9846c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cc55d341abc677d489e9717ba84690c0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -403,7 +403,7 @@ GameObject:
   - component: {fileID: 225088525}
   - component: {fileID: 225088524}
   m_Layer: 5
-  m_Name: Image
+  m_Name: LogoTeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -418,7 +418,7 @@ RectTransform:
   m_GameObject: {fileID: 225088522}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.9371986, y: 4.9371986, z: 4.9371986}
+  m_LocalScale: {x: 6.0283194, y: 6.0283194, z: 6.0283194}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1648182692}
@@ -442,14 +442,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9339623, g: 0.9339623, b: 0.9339623, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7efeaa04a610dda4ca0c75b19b2cb9bb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 68334c720b5625b47aa3cb0d92165a69, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1924,14 +1924,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7120350cf74a5e0489051b1f13f9846c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cc55d341abc677d489e9717ba84690c0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2096,7 +2096,7 @@ GameObject:
   - component: {fileID: 2132352380}
   - component: {fileID: 2132352379}
   m_Layer: 5
-  m_Name: Image
+  m_Name: LogoGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
