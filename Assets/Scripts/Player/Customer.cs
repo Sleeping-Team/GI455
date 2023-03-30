@@ -49,7 +49,7 @@ public class Customer : MonoBehaviour
     
     IEnumerator EatCoroutine(float waitTime)
     {
-        yeild return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(waitTime);
     }
 }
 
