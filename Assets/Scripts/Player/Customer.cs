@@ -46,5 +46,10 @@ public class Customer : MonoBehaviour
         transform.SetParent(_table.ChairPosition[0]);
         transform.localPosition = Vector3.zero;
     }
+    
+    IEnumerator EatCoroutine(float waitTime)
+    {
+        yeild return new WaitForSeconds(waitTime);
+    }
 }
 
