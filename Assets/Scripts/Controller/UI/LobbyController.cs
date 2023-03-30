@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class LobbyController : MonoBehaviour
 {
     [SerializeField] private TMP_Text _lobbyCode;
-
+    
     [SerializeField] private Button continueButton;
     [SerializeField] private Button exitButton;
 
@@ -70,7 +70,7 @@ public class LobbyController : MonoBehaviour
         pauseUI.SetActive(false);
     }
     
-    void ExitButtonOnClick()
+    public void ExitButtonOnClick()
     {
         //check the button is clicked
         Debug.Log ("You have clicked the exit button!");
