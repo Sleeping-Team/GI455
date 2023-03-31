@@ -43,8 +43,8 @@ public class Customer : MonoBehaviour
         theTable.SetStatus(true);
         theTable.AssignCustomer(this);
         
-        transform.SetParent(_table.ChairPosition[0]);
-        transform.localPosition = Vector3.zero;
+        transform.SetParent(_table.transform);
+        transform.position = _table.ChairPosition[0].position;
     }
     
     IEnumerator EatCoroutine(float waitTime)

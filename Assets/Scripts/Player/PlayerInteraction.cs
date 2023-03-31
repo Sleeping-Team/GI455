@@ -109,7 +109,7 @@ public class PlayerInteraction : MonoBehaviour
                         Debug.Log("Served!");
                         table.OrderStatus[_dishOnHand.name] = true;
                         
-                        Destroy(_dishOnHand);
+                        _dishOnHand.GetComponent<Grabbable>().ReleaseServerRpc();
 
                         _dishOnHand = null;
 
@@ -127,11 +127,15 @@ public class PlayerInteraction : MonoBehaviour
             case "Dish":
                 if(_dishOnHand != null) return;
                 
+                Debug.Log("Activated Dish Protocal");
+                
                 _dishOnHand = _interactingObject;
                 
-                _dishOnHand.transform.SetParent(_hand);
+                _dishOnHand.GetComponent<Grabbable>().TryGrabServerRpc();
                 
-                _dishOnHand.transform.localPosition = Vector3.zero;
+                // _dishOnHand.transform.SetParent(_hand);
+                //
+                // _dishOnHand.transform.localPosition = Vector3.zero;
 
                 _interactingObject = null;
                 break;

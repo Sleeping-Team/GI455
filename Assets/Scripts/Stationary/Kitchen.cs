@@ -46,7 +46,9 @@ public class Kitchen : Singletor<Kitchen>
 
     IEnumerator ProcessOrder(int counterIndex, MenuProperties order)
     {
+        Debug.Log($"Start Order: {order.name}");
         yield return new WaitForSeconds(_orderProcessDelay);
+        Debug.Log($"Cooked Order: {order.name}");
         
         GameObject dish = Instantiate(order.prefab, _counters[counterIndex].Position);
         dish.name = order.name;

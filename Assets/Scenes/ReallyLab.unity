@@ -395,6 +395,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lobbyCode: {fileID: 714479483}
+  continueButton: {fileID: 0}
+  exitButton: {fileID: 0}
+  pauseUI: {fileID: 0}
 --- !u!4 &245446439
 Transform:
   m_ObjectHideFlags: 0
@@ -1939,7 +1942,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh38646
+  m_Name: pb_Mesh38402
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -2515,8 +2518,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _orderProcessDelay: 1
   _menus:
-  - {fileID: 11400000, guid: 2d363a2f1eea0f84b8c2cc56cbdcb628, type: 2}
-  - {fileID: 11400000, guid: d05296ab7a4559548a326570669ea304, type: 2}
+  - {fileID: 11400000, guid: e14bc291921edc6418b924a567020253, type: 2}
+  - {fileID: 11400000, guid: 5e6225442cb754942b370a32c75195f4, type: 2}
+  - {fileID: 11400000, guid: d759df6e28e77b74d9c26d94fd0d00a7, type: 2}
+  - {fileID: 11400000, guid: c7d414e62e55bd04aa7555130894cc05, type: 2}
   _countersPosition:
   - {fileID: 2065870869}
   - {fileID: 704078286}
@@ -2666,7 +2671,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 364789151654167465, guid: 0e1ecd07004d7f649a76afe912fbac6c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 364789151654167474, guid: 0e1ecd07004d7f649a76afe912fbac6c, type: 3}
       propertyPath: m_RootOrder
