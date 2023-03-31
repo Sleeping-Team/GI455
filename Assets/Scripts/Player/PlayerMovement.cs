@@ -9,12 +9,15 @@ public class PlayerMovement : NetworkTransform
 {
     #region Variable
 
+    public bool IsMoving => _isMoving;
+    
     [SerializeField] private Rigidbody rigidbody;
     [SerializeField] private Animator animator;
     [SerializeField] private float speed = 1f;
     [SerializeField] private float lookSmooth = 0.05f;
 
     private Vector2 _movementValue;
+    private bool _isMoving;
 
     public static Dictionary<ulong, PlayerMovement> Players = new Dictionary<ulong, PlayerMovement>();
 
@@ -91,8 +94,8 @@ public class PlayerMovement : NetworkTransform
     /// <param name="control">Value to control direction</param>
     private void Move(Vector3 control)
     {
-        if(control != Vector3.zero) animator.SetBool("Walking", true);
-        else animator.SetBool("Walking", false);
+        if (control != Vector3.zero) _isMoving = true; //animator.SetBool("Walking", true);
+        else _isMoving = false; //animator.SetBool("Walking", false);
             
         transform.position += (control * speed * Time.deltaTime);
         //transform.position = Vector3.Lerp(transform.position, transform.position + control * speed, Time.deltaTime);
