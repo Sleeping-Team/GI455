@@ -29,7 +29,7 @@ inline half NdotLTransitionTexture(half3 normal, half3 lightDir, sampler2D stepT
     return angleDiffTransition;
 }
 
-half3 LightingPhysicallyBased_DSTRM(Light light, half3 normalWS, half3 viewDirectionWS, float3 positionWS)
+half3 LightingPhysicallyBased_DSTRM(Light light, half3 normalWS, float3 viewDirectionWS, float3 positionWS)
 {
     // If all light in the scene is baked, we use custom light direction for the cel shading.
     light.direction = lerp(light.direction, _LightmapDirection, _OverrideLightmapDir);
@@ -72,7 +72,7 @@ half3 LightingPhysicallyBased_DSTRM(Light light, half3 normalWS, half3 viewDirec
     const float rimSpread = 1.0 - _FlatRimSize - NdotL * _FlatRimLightAlign;
     const float rimEdgeSmooth = _FlatRimEdgeSmoothness;
     const float rimTransition = smoothstep(rimSpread - rimEdgeSmooth * 0.5, rimSpread + rimEdgeSmooth * 0.5, rim);
-    c = lerp(c, _FlatRimColor, rimTransition);
+    c.rgb = lerp(c.rgb, _FlatRimColor.rgb, rimTransition * _FlatRimColor.a);
 #endif  // DR_RIM_ON
 
 #if defined(DR_SPECULAR_ON)
@@ -108,7 +108,7 @@ void StylizeLight(inout Light light)
     const half shadowAttenuation = saturate(light.shadowAttenuation * _UnityShadowSharpness);
     light.shadowAttenuation = shadowAttenuation;
 
-    const half distanceAttenuation = smoothstep(0, _LightFalloffSize + 0.001, light.distanceAttenuation);
+    const float distanceAttenuation = smoothstep(0, _LightFalloffSize + 0.001, light.distanceAttenuation);
     light.distanceAttenuation = distanceAttenuation;
 
     const half3 lightColor = lerp(half3(1, 1, 1), light.color, _LightContribution);
@@ -157,7 +157,8 @@ half4 UniversalFragment_DSTRM(InputData inputData, half3 albedo, half3 emission,
 #endif
 
     BRDFData brdfData;
-    InitializeBRDFData(albedo, 1.0 - 1.0 / kDieletricSpec.a, 0, 0, alpha, brdfData);
+    // Albedo should be set to 0 here because it is applied in `StylizedPassFragment`.
+    InitializeBRDFData(albedo, 1.0 - 1.0 / kDielectricSpec.a, 0, 0, alpha, brdfData);
     half3 color = GlobalIllumination(brdfData, inputData.bakedGI, 1.0, inputData.normalWS, inputData.viewDirectionWS);
     color += LightingPhysicallyBased_DSTRM(mainLight, inputData.normalWS, inputData.viewDirectionWS, inputData.positionWS);
 

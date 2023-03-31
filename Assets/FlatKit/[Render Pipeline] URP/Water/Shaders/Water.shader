@@ -367,7 +367,7 @@
                     noise_foam_base = GradientNoise(noise_uv_foam * stretch_factor, _FoamScale);
                 #endif
 
-                    float foam_blur = 1.0 - _FoamSharpness;
+                    float foam_blur = 1.0 - _FoamSharpness + 1e-6;
                     float shore_fade = saturate(depth_fade / _FoamDepth);
                     float hard_foam_end = 0.1;
                     float soft_foam_end = hard_foam_end + foam_blur * 0.3;

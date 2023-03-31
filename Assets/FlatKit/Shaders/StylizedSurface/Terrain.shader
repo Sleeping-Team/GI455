@@ -140,38 +140,28 @@
 
             // -------------------------------------
             // Universal Pipeline keywords
-            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Version.hlsl"
-            #if VERSION_GREATER_EQUAL(11, 0)
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
-            #else
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
-            #endif
             #pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
             #pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
+            #pragma multi_compile_fragment _ _REFLECTION_PROBE_BLENDING
             #pragma multi_compile_fragment _ _SHADOWS_SOFT
             #pragma multi_compile _ LIGHTMAP_SHADOW_MIXING
             #pragma multi_compile _ SHADOWS_SHADOWMASK
             #pragma multi_compile_fragment _ _SCREEN_SPACE_OCCLUSION
-            #if VERSION_GREATER_EQUAL(12, 0)
             #pragma multi_compile_fragment _ _DBUFFER_MRT1 _DBUFFER_MRT2 _DBUFFER_MRT3
             #pragma multi_compile_fragment _ _LIGHT_LAYERS
             #pragma multi_compile_fragment _ _LIGHT_COOKIES
             #pragma multi_compile _ _CLUSTERED_RENDERING
-            #endif
 
             // -------------------------------------
             // Unity defined keywords
             #pragma multi_compile _ DIRLIGHTMAP_COMBINED
             #pragma multi_compile _ LIGHTMAP_ON
+            #pragma multi_compile _ DYNAMICLIGHTMAP_ON
             #pragma multi_compile_fog
-            #if VERSION_GREATER_EQUAL(12, 0)
-            // #pragma multi_compile _ DYNAMICLIGHTMAP_ON
             #pragma multi_compile_fragment _ DEBUG_DISPLAY
-            #endif
-
             #pragma multi_compile_instancing
-            #pragma instancing_options assumeuniformscaling nomatrices nolightprobe nolightmap
+            #pragma instancing_options norenderinglayer assumeuniformscaling nomatrices nolightprobe nolightmap
 
             #pragma shader_feature_local_fragment _TERRAIN_BLEND_HEIGHT
             #pragma shader_feature_local _NORMALMAP
@@ -213,12 +203,7 @@
             #pragma fragment ShadowPassFragment
 
             #pragma multi_compile_instancing
-            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Version.hlsl"
-            #if VERSION_GREATER_EQUAL(12, 0)
-            #pragma instancing_options norenderinglayer assumeuniformscaling nomatrices nolightprobe nolightmap
-            #else
             #pragma instancing_options assumeuniformscaling nomatrices nolightprobe nolightmap
-            #endif
 
             // -------------------------------------
             // Universal Pipeline keywords
@@ -289,11 +274,7 @@
             #pragma instancing_options assumeuniformscaling nomatrices nolightprobe nolightmap
 
             #include "Packages/com.unity.render-pipelines.universal/Shaders/Terrain/TerrainLitInput.hlsl"
-            #if VERSION_GREATER_EQUAL(12, 1)
             #include "Packages/com.unity.render-pipelines.universal/Shaders/Terrain/TerrainLitDepthNormalsPass.hlsl"
-            #else
-            #include "Packages/com.unity.render-pipelines.universal/Shaders/Terrain/TerrainLitPasses.hlsl"
-            #endif
 
 			/* start CurvedWorld */
 			//#define CURVEDWORLD_BEND_TYPE_CLASSICRUNNER_X_POSITIVE
