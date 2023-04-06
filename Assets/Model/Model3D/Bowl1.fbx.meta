@@ -9,6 +9,21 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: lambert7
     second: {fileID: 2100000, guid: 89152a60ee546bc4e9fe2818f4517a7b, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Bowl_Base_color
+    second: {fileID: 2800000, guid: aab825d7086d4394fac15fc6f23146bc, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Bowl_Metallic
+    second: {fileID: 2800000, guid: e14f031282dfc904ea7d909fa39fcf39, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Bowl_Roughness
+    second: {fileID: 2800000, guid: f1597a1f69720034284186ff56371eee, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -75,7 +90,7 @@ ModelImporter:
     strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
-    normalImportMode: 0
+    normalImportMode: 1
     tangentImportMode: 3
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0

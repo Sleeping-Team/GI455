@@ -26,15 +26,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 805017eab33489c4ea2dd7b1098638c5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.216
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 805017eab33489c4ea2dd7b1098638c5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.916
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 805017eab33489c4ea2dd7b1098638c5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.241
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 805017eab33489c4ea2dd7b1098638c5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -70,7 +70,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 805017eab33489c4ea2dd7b1098638c5, type: 3}
       propertyPath: m_Name
-      value: GlassEmpty
+      value: GlassEmpty Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

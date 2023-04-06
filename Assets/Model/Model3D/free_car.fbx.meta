@@ -3,7 +3,12 @@ guid: 205eeec9bafb1ee4b905c2bac46dcf42
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CartoonVehiclesAtlas
+    second: {fileID: 2100000, guid: 6612266f98b3b3941ba978fc93c070f5, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

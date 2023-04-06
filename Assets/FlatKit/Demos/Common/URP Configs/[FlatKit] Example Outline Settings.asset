@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   edgeColor: {r: 1, g: 1, b: 1, a: 1}
   thickness: 1
-  resolutionInvariant: 0
+  resolutionInvariant: 1
   useDepth: 0
   useNormals: 1
   useColor: 1

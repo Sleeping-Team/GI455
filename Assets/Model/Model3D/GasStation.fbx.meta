@@ -3,7 +3,12 @@ guid: 98426b260e9b6cd43a42d613e3df317c
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GasStation1
+    second: {fileID: 2100000, guid: ff72b65f51f2d4a0c8103502494dd539, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
