@@ -32,6 +32,7 @@ public class FloorPlan : Singletor<FloorPlan>
                 else
                 {
                     Debug.Log($"{table.name} is 4 seat");
+                    Debug.Log("Customer have not more than 2");
                     _tablesStatus[2].Add(new TableStatus(tablePosition));
                 }
             }
