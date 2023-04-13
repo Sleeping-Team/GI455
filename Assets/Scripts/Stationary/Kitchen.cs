@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -52,6 +53,7 @@ public class Kitchen : Singletor<Kitchen>
         
         GameObject dish = Instantiate(order.prefab, _counters[counterIndex].Position);
         dish.name = order.name;
+        dish.GetComponent<NetworkObject>().Spawn();
 
         _counters[counterIndex].IsOccupied = true;
     }
