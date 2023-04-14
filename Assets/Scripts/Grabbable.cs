@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
@@ -8,13 +5,20 @@ public class Grabbable : NetworkBehaviour
 {
     //[SerializeField] private float _grabDistance = 5.0f;
 
-    [SerializeField] private Rigidbody m_Rigidbody;
+    private Rigidbody m_Rigidbody;
 
     private NetworkVariable<bool> m_IsGrabbed = new NetworkVariable<bool>();
 
     private void Awake()
     {
-        if(m_Rigidbody == null) m_Rigidbody = GetComponent<Rigidbody>();
+        m_Rigidbody = GetComponent<Rigidbody>();
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        NetworkObject.Spawn();
+        
+        base.OnNetworkSpawn();
     }
 
     private void FixedUpdate()
@@ -53,14 +57,33 @@ public class Grabbable : NetworkBehaviour
     //             var distance = Vector3.Distance(transform.position, localPlayerObject.transform.position);
     //             if (distance <= _grabDistance)
     //             {
+    //                 Debug.Log("In Range");
     //                 if (Input.GetKeyDown(KeyCode.E))
     //                 {
+    //                     Debug.Log("Press E");
     //                     TryGrabServerRpc();
     //                 }
     //             }
     //         }
     //     }
     // }
+
+    public void CarryLogic()
+    {
+        var localPlayerObject = NetworkManager?.SpawnManager?.GetLocalPlayerObject();
+        
+        if (m_IsGrabbed.Value)
+        {
+            if (IsOwner) ReleaseServerRpc();
+        }
+        else
+        {
+            if (localPlayerObject != null)
+            {
+                TryGrabServerRpc();
+            }
+        }
+    }
 
     public override void OnNetworkObjectParentChanged(NetworkObject parentNetworkObject)
     {
@@ -71,7 +94,7 @@ public class Grabbable : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void TryGrabServerRpc(ServerRpcParams serverRpcParams = default)
+    private void TryGrabServerRpc(ServerRpcParams serverRpcParams = default)
     {
         Debug.Log("Try Grab Server Rpc");
         if (!m_IsGrabbed.Value)
@@ -93,7 +116,7 @@ public class Grabbable : NetworkBehaviour
     }
 
     [ServerRpc]
-    public void ReleaseServerRpc()
+    private void ReleaseServerRpc()
     {
         Debug.Log("Try Release Server Rpc");
         if (m_IsGrabbed.Value)
@@ -105,5 +128,13 @@ public class Grabbable : NetworkBehaviour
 
             m_IsGrabbed.Value = false;
         }
+    }
+
+    public void PlaceOnTable(Transform table)
+    {
+        ReleaseServerRpc();
+
+        transform.parent = table;
+        transform.position = Vector3.zero;
     }
 }

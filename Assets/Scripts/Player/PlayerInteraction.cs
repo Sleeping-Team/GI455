@@ -110,7 +110,7 @@ public class PlayerInteraction : MonoBehaviour
                         Debug.Log("Served!");
                         table.OrderStatus[_dishOnHand.name] = true;
                         
-                        //_dishOnHand.GetComponent<Grabbable>().ReleaseServerRpc();
+                        _dishOnHand.GetComponent<Grabbable>().PlaceOnTable(table.transform);
 
                         _dishOnHand = null;
 
@@ -125,21 +125,21 @@ public class PlayerInteraction : MonoBehaviour
                         break;
                 }
                 break;
-            // case "Dish":
-            //     if(_dishOnHand != null) return;
-            //     
-            //     Debug.Log("Activated Dish Protocal");
-            //     
-            //     _dishOnHand = _interactingObject;
-            //     
-            //     _dishOnHand.GetComponent<Grabbable>().Grab();
-            //     
-            //     // _dishOnHand.transform.SetParent(_hand);
-            //     //
-            //     // _dishOnHand.transform.localPosition = Vector3.zero;
-            //
-            //     _interactingObject = null;
-            //     break;
+            case "Dish":
+                if(_dishOnHand != null) return;
+                
+                Debug.Log("Activated Dish Protocal");
+                
+                _dishOnHand = _interactingObject;
+                
+                _dishOnHand.GetComponent<Grabbable>().CarryLogic();
+                
+                // _dishOnHand.transform.SetParent(_hand);
+                //
+                // _dishOnHand.transform.localPosition = Vector3.zero;
+            
+                _interactingObject = null;
+                break;
         }
     }
     
