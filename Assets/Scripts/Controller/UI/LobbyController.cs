@@ -12,7 +12,7 @@ public class LobbyController : MonoBehaviour
     [SerializeField] private Button continueButton;
     [SerializeField] private Button exitButton;
 
-    [SerializeField] private CanvasGroup pauseUI;
+    [SerializeField] private GameObject pauseUI;
     
     // Start is called before the first frame update
     void Start()
@@ -53,17 +53,13 @@ public class LobbyController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            pauseUI.interactable = true;
-            pauseUI.blocksRaycasts = true;
-            pauseUI.alpha = 1f;
+            pauseUI.SetActive(true);
         }
     }
 
     public void Pause()
     {
-        pauseUI.interactable = true;
-        pauseUI.blocksRaycasts = true;
-        pauseUI.alpha = 1f;
+        pauseUI.SetActive(true);
     }
     
     public void ContinueButtonOnClick()
@@ -71,9 +67,7 @@ public class LobbyController : MonoBehaviour
         //check the button is clicked
         Debug.Log("You have clicked the continue button!");
         
-        pauseUI.interactable = true;
-        pauseUI.blocksRaycasts = true;
-        pauseUI.alpha = 0f;
+        pauseUI.SetActive(false);
     }
     
     public void ExitButtonOnClick()
