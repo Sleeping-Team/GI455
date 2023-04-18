@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Cat
   m_EditorClassIdentifier: 
   characterName: Kitt
-  characterPrefab: {fileID: 0}
-  characterProfile: {fileID: 0}
+  characterPrefab: {fileID: 364789151654167465, guid: cbec29653c7b03745a3eff941f691730, type: 3}
+  characterProfile: {fileID: 21300000, guid: e5de1a2abb66d6044a98dd5d39d92980, type: 3}
   clientId: 0
   playerId: -1
   isSelected: 0

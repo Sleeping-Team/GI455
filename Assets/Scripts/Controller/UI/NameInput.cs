@@ -37,6 +37,7 @@ public class NameInput : MonoBehaviour
     public void ConfirmButtonOnClick()
     {
        SceneManager.LoadScene("MainMenu"); 
+       //SceneManagement.Instance.LoadScene(SceneName.MainMenu);
     }
     
     /*

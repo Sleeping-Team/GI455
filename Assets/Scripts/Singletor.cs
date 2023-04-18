@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Netcode;
 
 // https://gist.github.com/mstevenson/4325117
 public class Singletor<T> : MonoBehaviour
@@ -38,6 +39,41 @@ public class SingletorPersistent<T> : MonoBehaviour
             DontDestroyOnLoad (this);
         } else {
             Destroy (gameObject);
+        }
+    }
+}
+
+public class SingletonNetwork<T> : NetworkBehaviour where T : Component
+{
+    public static T Instance { get; private set; }
+
+    public virtual void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this as T;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+}
+
+public class SingletonNetworkPersistent<T> : NetworkBehaviour where T : Component
+{
+    public static T Instance { get; private set; }
+
+    public virtual void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this as T;
+            DontDestroyOnLoad(this);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 }
