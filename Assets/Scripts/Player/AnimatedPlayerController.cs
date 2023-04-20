@@ -71,8 +71,9 @@ public class AnimatedPlayerController : NetworkBehaviour
         m_Animator.SetBool("Walking", m_Move);
     }
 
-    private void PlayWalkingAnimation()
+    private void PlayWalkingAnimation(bool isMoving)
     {
+        m_Move = isMoving;
         if (m_IsServerAuthoritative)
         {
             if (!IsServer && IsOwner)
@@ -99,7 +100,11 @@ public class AnimatedPlayerController : NetworkBehaviour
 
         if (m_PlayerMovement.IsMoving)
         {
-            PlayWalkingAnimation();
+            PlayWalkingAnimation(true);
+        }
+        else
+        {
+            PlayWalkingAnimation(false);
         }
     }
 }

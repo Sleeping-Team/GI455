@@ -34,8 +34,6 @@ public class PlayerMovement : NetworkTransform
 
     public void OnMove(InputValue value)
     {
-        if(!IsSpawned || !IsOwner) return;
-        
         _movementValue = value.Get<Vector2>();
     }
 

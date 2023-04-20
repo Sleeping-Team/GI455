@@ -16,8 +16,11 @@ public class Grabbable : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        NetworkObject.Spawn();
-        
+        if (IsServer)
+        {
+            NetworkObject.Spawn();
+        }
+
         base.OnNetworkSpawn();
     }
 
