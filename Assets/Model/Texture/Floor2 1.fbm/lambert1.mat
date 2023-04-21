@@ -236,7 +236,7 @@ Material:
     - _RimEnabled: 0
     - _RimPower: 5.25
     - _SelfShadingSize: 1
-    - _SelfShadingSizeExtra: 0.824
+    - _SelfShadingSizeExtra: 1
     - _ShadowEdgeSize: 0.5
     - _ShadowEdgeSizeExtra: 0.5
     - _Smoothness: 0
@@ -273,7 +273,7 @@ Material:
     - _ColorDimSteps: {r: 0.85023, g: 0.85034, b: 0.8504499, a: 0.85056}
     - _ColorGradient: {r: 1, g: 1, b: 1, a: 1}
     - _Direction: {r: 0, g: 1, b: 0, a: 0}
-    - _EmissionColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
+    - _EmissionColor: {r: 0.5849056, g: 0.5655927, b: 0.5655927, a: 1}
     - _FlatRimColor: {r: 1, g: 1, b: 1, a: 1}
     - _FlatSpecularColor: {r: 0.95675087, g: 0.95675087, b: 0.95675087, a: 1}
     - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}

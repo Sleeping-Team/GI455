@@ -16,11 +16,12 @@ Material:
   - _TEXTUREBLENDINGMODE_MULTIPLY
   m_InvalidKeywords:
   - _UNITYSHADOWMODE_NONE
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2000
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses:
   - SRPDEFAULTUNLIT
   m_LockedProperties: 
@@ -177,7 +178,7 @@ Material:
     - _ColorDimExtra: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
     - _ColorDimSteps: {r: 0.85023, g: 0.85034, b: 0.8504499, a: 0.85056}
     - _ColorGradient: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _FlatRimColor: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
     - _FlatSpecularColor: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
     - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}

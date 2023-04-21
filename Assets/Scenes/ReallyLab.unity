@@ -1831,6 +1831,7 @@ MonoBehaviour:
   - {fileID: 525875743}
   - {fileID: 943851562}
   - {fileID: 1490823697}
+  _platePosition: []
 --- !u!114 &1097069630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1942,7 +1943,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh38402
+  m_Name: pb_Mesh168144
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -2115,15 +2116,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 702772347514546233, guid: fc69b22849a2bf046b88ae6ba45871f7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1378.6317
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 702772347514546233, guid: fc69b22849a2bf046b88ae6ba45871f7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 328.3223
+      value: 0.98
       objectReference: {fileID: 0}
     - target: {fileID: 702772347514546233, guid: fc69b22849a2bf046b88ae6ba45871f7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 76.90564
+      value: -7.49
       objectReference: {fileID: 0}
     - target: {fileID: 702772347514546233, guid: fc69b22849a2bf046b88ae6ba45871f7, type: 3}
       propertyPath: m_LocalRotation.w

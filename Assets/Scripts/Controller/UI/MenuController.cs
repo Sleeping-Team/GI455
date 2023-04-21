@@ -73,7 +73,7 @@ public class MenuController : MonoBehaviour
         RelayController.Instance.CreateGame();
         _joinCodeText.text = PlayerData.Instance.lobbyCode;
 
-        //SceneManager.LoadScene("Gameplay Lab");
+        SceneManager.LoadScene("Gameplay Lab");
     }
 
     void JoinButtonOnClick()
