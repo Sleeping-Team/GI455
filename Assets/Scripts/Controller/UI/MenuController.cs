@@ -73,7 +73,7 @@ public class MenuController : MonoBehaviour
         RelayController.Instance.CreateGame();
         _joinCodeText.text = PlayerData.Instance.lobbyCode;
 
-        SceneManager.LoadScene("Gameplay Lab");
+        //SceneManager.LoadScene("Gameplay Lab");
     }
 
     void JoinButtonOnClick()
@@ -119,7 +119,7 @@ public class MenuController : MonoBehaviour
         Debug.Log("You have clicked the confirm button!");
 
         RelayController.Instance.JoinGame(joinInput);
-        //SceneManager.LoadScene("Gameplay Lab");
+        SceneManager.LoadScene("Gameplay Lab");
     }
 
     void ExitButtonOnClick()

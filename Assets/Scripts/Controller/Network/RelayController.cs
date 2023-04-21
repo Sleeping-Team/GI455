@@ -42,7 +42,7 @@ public class RelayController : Singleton<RelayController>
         
         NetworkManager.Singleton.StartHost();
         
-        NetworkManager.Singleton.SceneManager.LoadScene("SelectCharacter", LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene("Gameplay Lab", LoadSceneMode.Single);
     }
     
     public async void JoinGame(string code)
@@ -54,7 +54,7 @@ public class RelayController : Singleton<RelayController>
 
         NetworkManager.Singleton.StartClient();
 
-        SceneManager.LoadScene("SelectCharacter");
+        SceneManager.LoadScene("Gameplay Lab");
         
     }
 
