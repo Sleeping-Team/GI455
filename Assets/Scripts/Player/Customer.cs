@@ -38,13 +38,14 @@ public class Customer : MonoBehaviour
         _customerState = CustomerState.OnTable;
 
         TableOrder theTable = _table.GetComponent<TableOrder>();
+        TablePosition tableDetail = _table.GetComponent<TablePosition>();
         
         theTable.ChangeState(TableOrder.TableState.Ordering);
         theTable.SetStatus(true);
         theTable.AssignCustomer(this);
         
         transform.SetParent(_table.transform);
-        transform.position = _table.ChairPosition[0].position;
+        tableDetail.AssignObject(TablePosition.ObjectOnFocus.Chair, this.transform);
     }
     
     IEnumerator EatCoroutine(float waitTime)

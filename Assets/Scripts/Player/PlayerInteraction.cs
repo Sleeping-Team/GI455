@@ -43,7 +43,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (_interactingObject == null)
+        if (_interactingObject == null && !other.CompareTag("Disable"))
         {
             _interactingObject = other.gameObject;
         }
@@ -109,8 +109,10 @@ public class PlayerInteraction : MonoBehaviour
                         
                         Debug.Log("Served!");
                         table.OrderStatus[_dishOnHand.name] = true;
+
+                        Grabbable onHandDish = _dishOnHand.GetComponent<Grabbable>();
                         
-                        _dishOnHand.GetComponent<Grabbable>().PlaceOnTable(table.transform);
+                        onHandDish.PlaceOnTable(table.transform);
 
                         _dishOnHand = null;
 
@@ -122,6 +124,13 @@ public class PlayerInteraction : MonoBehaviour
                             table.ChangeState(TableOrder.TableState.Dirty);
                             Destroy(table.Customers.gameObject);
                         }
+                        break;
+                    case TableOrder.TableState.Dirty:
+                        foreach (GameObject dish in table.transform)
+                        {
+                            Destroy(dish);
+                        }
+                        table.ChangeState(TableOrder.TableState.Vacant);
                         break;
                 }
                 break;

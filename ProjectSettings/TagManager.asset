@@ -8,6 +8,8 @@ TagManager:
   - Table
   - Dish
   - outdoor
+  - Disable
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

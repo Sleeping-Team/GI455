@@ -6,7 +6,6 @@ public class Grabbable : NetworkBehaviour
     //[SerializeField] private float _grabDistance = 5.0f;
 
     private Rigidbody m_Rigidbody;
-
     private NetworkVariable<bool> m_IsGrabbed = new NetworkVariable<bool>();
 
     private void Awake()
@@ -16,7 +15,7 @@ public class Grabbable : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        if (IsServer)
+        if (!NetworkObject.IsSpawned)
         {
             NetworkObject.Spawn();
         }
@@ -139,5 +138,6 @@ public class Grabbable : NetworkBehaviour
 
         transform.parent = table;
         transform.position = Vector3.zero;
+        gameObject.tag = "Disable";
     }
 }

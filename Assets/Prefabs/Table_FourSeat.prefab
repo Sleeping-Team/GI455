@@ -72,7 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1252384126}
   m_Layer: 6
-  m_Name: SitHereTable1(4)
+  m_Name: SitHereTable1(3)
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -103,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1345314878}
   m_Layer: 6
-  m_Name: SitHereTable1(3)
+  m_Name: SitHereTable1(4)
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -861,10 +861,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _chairPosition:
-  - {fileID: 1628221994}
-  - {fileID: 1133069191}
-  - {fileID: 1252384126}
-  - {fileID: 1345314878}
+  - _location: {fileID: 1628221994}
+  - _location: {fileID: 1133069191}
+  - _location: {fileID: 1252384126}
+  - _location: {fileID: 1345314878}
   _platePosition: []
 --- !u!114 &1010336386
 MonoBehaviour:

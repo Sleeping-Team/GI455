@@ -53,7 +53,7 @@ public class PlayerMovement : NetworkTransform
         if (IsOwner)
         {
             var temp = transform.position;
-            temp.y = 2.5f;
+            temp.y = 5f;
             transform.position = temp;
 
             rigidbody = GetComponent<Rigidbody>();
