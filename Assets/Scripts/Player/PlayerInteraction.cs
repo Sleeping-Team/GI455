@@ -116,20 +116,26 @@ public class PlayerInteraction : MonoBehaviour
 
                         _dishOnHand = null;
 
+                        bool allServed = false;
+                        
                         foreach (string dish in table.OrderStatus.Keys)
                         {
-                            bool allServed = table.OrderStatus[dish];
+                            allServed = table.OrderStatus[dish];
                             if (!allServed) break;
-                            
+                        }
+
+                        if (allServed)
+                        {
                             table.ChangeState(TableOrder.TableState.Dirty);
                             Destroy(table.Customers.gameObject);
                         }
+
                         break;
                     case TableOrder.TableState.Dirty:
-                        foreach (GameObject dish in table.transform)
-                        {
-                            Destroy(dish);
-                        }
+                        // foreach (GameObject dish in table.transform)
+                        // {
+                        //     Destroy(dish);
+                        // }
                         table.ChangeState(TableOrder.TableState.Vacant);
                         break;
                 }

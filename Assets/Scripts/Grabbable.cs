@@ -129,6 +129,8 @@ public class Grabbable : NetworkBehaviour
             transform.parent = null;
 
             m_IsGrabbed.Value = false;
+            
+            Destroy(gameObject);
         }
     }
 
