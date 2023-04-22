@@ -9,6 +9,7 @@ using UnityEngine.Serialization;
 public class Kitchen : Singletor<Kitchen>
 {
     public List<MenuProperties> Menus => _menus;
+    public float OrderProcessDelay => _orderProcessDelay;
     
     public int DishesOnMenu { get; private set; }
     public bool HaveOnSpace { get; private set; }

@@ -43,7 +43,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (_interactingObject == null && !other.CompareTag("Disable"))
+        if (_interactingObject == null && (!other.CompareTag("Disable") || !other.CompareTag("Untagged")))
         {
             _interactingObject = other.gameObject;
         }
