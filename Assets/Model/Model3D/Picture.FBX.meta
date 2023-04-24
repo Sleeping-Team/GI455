@@ -9,6 +9,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: canvas_VMT
     second: {fileID: 2100000, guid: 7ed68d05754df5949bd1f5ebf08c5d1f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: frame_VMT
+    second: {fileID: 2100000, guid: 6276803c5cf3725449bb6e012f32436b, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
