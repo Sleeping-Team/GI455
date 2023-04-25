@@ -7,15 +7,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : NetworkTransform
 {
+
     #region Variable
 
-    public bool IsMoving => _isMoving;
+    public bool IsMoving => _isMoving;  
     
     [SerializeField] private Rigidbody rigidbody;
     [SerializeField] private Animator animator;
     [SerializeField] private float speed = 1f;
     [SerializeField] private float lookSmooth = 0.05f;
-
     private Vector2 _movementValue;
     private bool _isMoving;
 

@@ -10,6 +10,7 @@ TagManager:
   - outdoor
   - Disable
   - SpawnPoint
+  - UICat
   layers:
   - Default
   - TransparentFX
