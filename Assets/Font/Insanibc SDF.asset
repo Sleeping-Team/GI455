@@ -59,10 +59,10 @@ Material:
     - _FaceDilate: 0
     - _FaceUVSpeedX: 0
     - _FaceUVSpeedY: 0
-    - _GlowInner: 0.05
-    - _GlowOffset: 0
-    - _GlowOuter: 0.05
-    - _GlowPower: 0.75
+    - _GlowInner: 0
+    - _GlowOffset: 0.25
+    - _GlowOuter: 0.333
+    - _GlowPower: 0.857
     - _GradientScale: 10
     - _LightAngle: 3.1416
     - _MaskSoftnessX: 0
@@ -100,9 +100,9 @@ Material:
     - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
     - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
     - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
+    - _GlowColor: {r: 0.37735844, g: 0.37735844, b: 0.37735844, a: 1}
     - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
     - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
@@ -313,6 +313,21 @@ MonoBehaviour:
       m_Y: 92
       m_Width: 18
       m_Height: 49
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+  - m_Index: 30
+    m_Metrics:
+      m_Width: 17.484375
+      m_Height: 53.875
+      m_HorizontalBearingX: 2.203125
+      m_HorizontalBearingY: 48.46875
+      m_HorizontalAdvance: 21.796875
+    m_GlyphRect:
+      m_X: 10
+      m_Y: 207
+      m_Width: 18
+      m_Height: 55
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
@@ -736,21 +751,6 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
-  - m_Index: 30
-    m_Metrics:
-      m_Width: 17.484375
-      m_Height: 53.875
-      m_HorizontalBearingX: 2.203125
-      m_HorizontalBearingY: 48.46875
-      m_HorizontalAdvance: 21.796875
-    m_GlyphRect:
-      m_X: 10
-      m_Y: 207
-      m_Width: 18
-      m_Height: 55
-    m_Scale: 1
-    m_AtlasIndex: 0
-    m_ClassDefinitionType: 0
   m_CharacterTable:
   - m_ElementType: 1
     m_Unicode: 32
@@ -795,6 +795,10 @@ MonoBehaviour:
   - m_ElementType: 1
     m_Unicode: 58
     m_GlyphIndex: 29
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 59
+    m_GlyphIndex: 30
     m_Scale: 1
   - m_ElementType: 1
     m_Unicode: 65
@@ -977,20 +981,16 @@ MonoBehaviour:
     m_GlyphIndex: 59
     m_Scale: 1
   - m_ElementType: 1
+    m_Unicode: 121
+    m_GlyphIndex: 60
+    m_Scale: 1
+  - m_ElementType: 1
     m_Unicode: 122
     m_GlyphIndex: 61
     m_Scale: 1
   - m_ElementType: 1
     m_Unicode: 8230
     m_GlyphIndex: 152
-    m_Scale: 1
-  - m_ElementType: 1
-    m_Unicode: 59
-    m_GlyphIndex: 30
-    m_Scale: 1
-  - m_ElementType: 1
-    m_Unicode: 121
-    m_GlyphIndex: 60
     m_Scale: 1
   m_AtlasTextures:
   - {fileID: 1802261716376077725}

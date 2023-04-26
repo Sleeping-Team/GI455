@@ -3,15 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="7b3b2d8c-bbe2-4b06-b531-796c0891b806" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FinalProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FinalProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Package/Quirky Series Ultimate/Quirky Series Vol.1/Forest Vol.1/Animations/AC_Crow.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Package/Quirky Series Ultimate/Quirky Series Vol.1/Forest Vol.1/Animations/AC_Crow.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Package/Quirky Series Ultimate/Quirky Series Vol.1/Forest Vol.1/Animations/AC_Owl.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Package/Quirky Series Ultimate/Quirky Series Vol.1/Forest Vol.1/Animations/AC_Owl.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Package/Quirky Series Ultimate/Quirky Series Vol.1/Forest Vol.1/Materials/M_Owl.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Package/Quirky Series Ultimate/Quirky Series Vol.1/Forest Vol.1/Materials/M_Owl.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player_Test 2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player_Test 2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Font/Insanibc SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Font/Insanibc SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Font/Pencil Child SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Font/Pencil Child SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model/Texture/New Folder/Translucent_Glass_Blue.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/Texture/New Folder/Translucent_Glass_Blue.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model/UIGame/Continue .PNG.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/UIGame/Continue .PNG.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Coustomer_Panda_Teenager_Wait.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Coustomer_Panda_Teenager_Wait.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Customer Cheetah WorkerWait.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Customer Cheetah WorkerWait.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Customer_Chicken_Family_Wait.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Customer_Chicken_Family_Wait.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Customer_Slot_Uncle_Wait.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Customer_Slot_Uncle_Wait.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Gameplay Lab.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Gameplay Lab.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SelectCharacter.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SelectCharacter.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Start.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Start.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +112,8 @@
       <workItem from="1679988936050" duration="606000" />
       <workItem from="1680087333449" duration="594000" />
       <workItem from="1682067872801" duration="4910000" />
-      <workItem from="1682416602147" duration="961000" />
+      <workItem from="1682416602147" duration="1616000" />
+      <workItem from="1682495159736" duration="5102000" />
     </task>
     <servers />
   </component>
