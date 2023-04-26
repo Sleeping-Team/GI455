@@ -43,6 +43,11 @@ public class Customer : NetworkBehaviour
         
         _customerState = CustomerState.OnTable;
 
+        if (_table == null)
+        {
+            _table = FloorPlan.Instance.SearchVacantTable(Quantity);
+        }
+        
         TableOrder theTable = _table.GetComponent<TableOrder>();
         TablePosition tableDetail = _table.GetComponent<TablePosition>();
         
