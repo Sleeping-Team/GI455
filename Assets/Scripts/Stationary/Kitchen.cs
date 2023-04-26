@@ -6,8 +6,10 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 [DefaultExecutionOrder(0)]
-public class Kitchen : Singletor<Kitchen>
+public class Kitchen : NetworkBehaviour
 {
+    public static Kitchen Instance;
+    
     public List<MenuProperties> Menus => _menus;
     public float OrderProcessDelay => _orderProcessDelay;
     
@@ -24,16 +26,21 @@ public class Kitchen : Singletor<Kitchen>
     
     private void Awake()
     {
-        DishesOnMenu = _menus.Count;
-
-        TableOrder.OnCustomerOrder += Order;
-
-        int counterQuantity = _countersPosition.Length;
-        _counters = new CounterProperties[counterQuantity];
-        for (int i = 0; i < counterQuantity; i++)
+        Instance = this;
+        
+        if (IsHost)
         {
-            _counters[i] = new CounterProperties(i, _countersPosition[i]);
+            DishesOnMenu = _menus.Count;
+
+            int counterQuantity = _countersPosition.Length;
+            _counters = new CounterProperties[counterQuantity];
+            for (int i = 0; i < counterQuantity; i++)
+            {
+                _counters[i] = new CounterProperties(i, _countersPosition[i]);
+            }
         }
+        
+        TableOrder.OnCustomerOrder += Order;
     }
 
     private void Order(List<MenuProperties> orders)
