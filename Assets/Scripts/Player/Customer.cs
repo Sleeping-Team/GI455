@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Customer : MonoBehaviour
+public class Customer : NetworkBehaviour
 {
     public CustomerState State => _customerState;
     
@@ -31,10 +32,15 @@ public class Customer : MonoBehaviour
     public void AssignTable(TablePosition table)
     {
         if(table == null) return;
-        
+        _table = table;
+        AssignTableServerRpc();
+    }
+    
+    [ServerRpc(RequireOwnership = false)]
+    public void AssignTableServerRpc(ServerRpcParams serverRpcParams = default)
+    {
         Debug.Log("Assign Table");
         
-        _table = table;
         _customerState = CustomerState.OnTable;
 
         TableOrder theTable = _table.GetComponent<TableOrder>();

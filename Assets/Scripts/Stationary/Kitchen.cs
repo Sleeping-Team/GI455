@@ -9,10 +9,10 @@ using UnityEngine.Serialization;
 public class Kitchen : NetworkBehaviour
 {
     public static Kitchen Instance;
-    
+
     public List<MenuProperties> Menus => _menus;
     public float OrderProcessDelay => _orderProcessDelay;
-    
+
     public int DishesOnMenu { get; private set; }
     public bool HaveOnSpace { get; private set; }
 
@@ -23,29 +23,28 @@ public class Kitchen : NetworkBehaviour
     private CounterProperties[] _counters;
 
     private List<Coroutine> _orderProcess = new List<Coroutine>();
-    
+
     private void Awake()
     {
         Instance = this;
         
-        if (IsHost)
-        {
-            DishesOnMenu = _menus.Count;
+        DishesOnMenu = _menus.Count;
 
-            int counterQuantity = _countersPosition.Length;
-            _counters = new CounterProperties[counterQuantity];
-            for (int i = 0; i < counterQuantity; i++)
-            {
-                _counters[i] = new CounterProperties(i, _countersPosition[i]);
-            }
+        int counterQuantity = _countersPosition.Length;
+        _counters = new CounterProperties[counterQuantity];
+        for (int i = 0; i < counterQuantity; i++)
+        {
+            _counters[i] = new CounterProperties(i, _countersPosition[i]);
         }
-        
+
         TableOrder.OnCustomerOrder += Order;
     }
 
     private void Order(List<MenuProperties> orders)
     {
         Debug.Log("Receive Order");
+
+        Debug.LogWarning($"Before execution: {_menus.Count}");
         
         for (int i = 0; i < orders.Count; i++)
         {
@@ -55,15 +54,17 @@ public class Kitchen : NetworkBehaviour
 
     IEnumerator ProcessOrder(int counterIndex, MenuProperties order)
     {
+        Debug.LogWarning($"Enter Function: {_menus.Count}");
         Debug.Log($"Start Order: {order.name}");
         yield return new WaitForSeconds(_orderProcessDelay);
         Debug.Log($"Cooked Order: {order.name}");
-        
+
         GameObject dish = Instantiate(order.prefab, _counters[counterIndex].Position);
         dish.name = order.name;
         dish.GetComponent<NetworkObject>().Spawn();
 
         _counters[counterIndex].IsOccupied = true;
+        Debug.LogWarning($"Exit Function: {_menus.Count}");
     }
 }
 

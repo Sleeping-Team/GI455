@@ -862,7 +862,7 @@ GameObject:
   - component: {fileID: 5861223186183045610}
   - component: {fileID: -9213572575831456975}
   - component: {fileID: -632405203833552022}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Customer Cheetah WorkerWait
   m_TagString: Customer
   m_Icon: {fileID: 0}

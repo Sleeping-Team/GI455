@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 3566839026222701961}
   - component: {fileID: 233730129606562994}
   - component: {fileID: 3745545594445559858}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Customer_Slot_Uncle_Wait
   m_TagString: Customer
   m_Icon: {fileID: 0}

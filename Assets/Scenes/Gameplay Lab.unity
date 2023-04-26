@@ -8078,6 +8078,7 @@ GameObject:
   m_Component:
   - component: {fileID: 747546935}
   - component: {fileID: 747546936}
+  - component: {fileID: 747546937}
   m_Layer: 0
   m_Name: CustomerWaitHere
   m_TagString: Untagged
@@ -8129,6 +8130,22 @@ MonoBehaviour:
   - {fileID: 233730129606562994, guid: 511a196504bda4a45a4911b2ab6eab84, type: 3}
   - {fileID: -2220498520292430907, guid: 8e9f3874ecbef14419660da97d34713d, type: 3}
   _spawnDelay: 10
+--- !u!114 &747546937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747546934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 17070325
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &748463116
 GameObject:
   m_ObjectHideFlags: 0

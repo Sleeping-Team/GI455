@@ -5,7 +5,7 @@ using Unity.Netcode;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class CustomerSpawn : Singletor<CustomerSpawn>
+public class CustomerSpawn : SingletonNetwork<CustomerSpawn>
 {
     [SerializeField] private PositionProperties[] _waitPosition;
     [SerializeField] private Customer[] _customerPrefabs;
@@ -18,9 +18,12 @@ public class CustomerSpawn : Singletor<CustomerSpawn>
     {
         _customersQuantity = _customerPrefabs.Length;
 
-        StartCoroutine(DoSpawn());
+        if (IsHost)
+        {
+            StartCoroutine(DoSpawn());
+        }
     }
-
+    
     IEnumerator DoSpawn()
     {
         while (!gameover)

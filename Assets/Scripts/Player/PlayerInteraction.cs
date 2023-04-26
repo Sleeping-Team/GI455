@@ -43,7 +43,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (_interactingObject == null && (!other.CompareTag("Disable") || !other.CompareTag("Untagged")))
+        if (_interactingObject == null && (!other.CompareTag("Disable") && !other.CompareTag("Untagged")))
         {
             _interactingObject = other.gameObject;
         }
@@ -95,7 +95,7 @@ public class PlayerInteraction : MonoBehaviour
                     case TableOrder.TableState.Ordering:
                         //if(!FloorPlan.Instance.TableIsAvailable) return;
                         
-                        table.RandomOrder();
+                        table.RandomOrderServerRpc();
                         table.ChangeState(TableOrder.TableState.Waiting);
                         break;
                     case TableOrder.TableState.Waiting:

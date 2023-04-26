@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 [DefaultExecutionOrder(3)]
-public class TableOrder : MonoBehaviour
+public class TableOrder : NetworkBehaviour
 {
     public static event Action<List<MenuProperties>> OnCustomerOrder;
 
@@ -47,10 +48,11 @@ public class TableOrder : MonoBehaviour
         _dishesOnMenu = Kitchen.Instance.DishesOnMenu;
     }
     
-    public void RandomOrder()
+    [ServerRpc(RequireOwnership = false)]
+    public void RandomOrderServerRpc()
     {
         int orderQuantity;
-        _tempMenus = Kitchen.Instance.Menus;
+        _tempMenus = new List<MenuProperties>(Kitchen.Instance.Menus);
 
         if(_maximumOrder > _dishesOnMenu) orderQuantity = Random.Range(1, _dishesOnMenu + 1);
         else orderQuantity = Random.Range(1, _maximumOrder + 1);
@@ -78,24 +80,24 @@ public class TableOrder : MonoBehaviour
     {
         _orderStatus[key] = value;
     }
-
+    
     public void ChangeState(TableState state)
     {
         _tableState = state;
     }
-
+    
     public void SetStatus(bool isOccupied)
     {
         _isOccupied = isOccupied;
     }
-
+    
     [ContextMenu("Reset")]
     public void Reset()
     {
         Orders.Clear();
         Debug.Log("is now clear oder");
     }
-
+    
     public void AssignCustomer(Customer person)
     {
         _customer = person;

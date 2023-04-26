@@ -7,15 +7,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : NetworkTransform
 {
-
     #region Variable
 
-    public bool IsMoving => _isMoving;  
+    public bool IsMoving => _isMoving;
+
+    private PlayerProperties _property;
     
-    [SerializeField] private Rigidbody rigidbody;
-    [SerializeField] private Animator animator;
-    [SerializeField] private float speed = 1f;
-    [SerializeField] private float lookSmooth = 0.05f;
+    private Rigidbody _rigidbody;
     private Vector2 _movementValue;
     private bool _isMoving;
 
@@ -56,7 +54,8 @@ public class PlayerMovement : NetworkTransform
             temp.y = 5f;
             transform.position = temp;
 
-            rigidbody = GetComponent<Rigidbody>();
+            _rigidbody = GetComponent<Rigidbody>();
+            _property = GetComponent<PlayerProperties>();
         }
 
         Players[OwnerClientId] = this;
@@ -95,7 +94,7 @@ public class PlayerMovement : NetworkTransform
         if (control != Vector3.zero) _isMoving = true; //animator.SetBool("Walking", true);
         else _isMoving = false; //animator.SetBool("Walking", false);
             
-        transform.position += (control * speed * Time.deltaTime);
+        transform.position += (control * _property.Speed * Time.deltaTime);
         //transform.position = Vector3.Lerp(transform.position, transform.position + control * speed, Time.deltaTime);
     }
 
@@ -109,7 +108,7 @@ public class PlayerMovement : NetworkTransform
         if (inputDirection.magnitude > 0.01f)
         {
             float lookAngle = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg;
-            float effectiveAngle = Mathf.LerpAngle(transform.rotation.eulerAngles.y, lookAngle, lookSmooth);
+            float effectiveAngle = Mathf.LerpAngle(transform.rotation.eulerAngles.y, lookAngle, _property.LookSmooth);
             transform.rotation = Quaternion.Euler(0f, effectiveAngle, 0f);
         }
     }

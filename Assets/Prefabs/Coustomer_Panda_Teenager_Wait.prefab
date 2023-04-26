@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: -6924659097173640430}
   - component: {fileID: -6642925709602937497}
   - component: {fileID: -2123073676544840908}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Coustomer_Panda_Teenager_Wait
   m_TagString: Customer
   m_Icon: {fileID: 0}
