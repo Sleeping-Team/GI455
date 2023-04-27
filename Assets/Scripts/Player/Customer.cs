@@ -57,12 +57,15 @@ public class Customer : NetworkBehaviour
         tableDetail.AssignObject(TablePosition.ObjectOnFocus.Chair, this.transform);
 
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        
+        AssignTableClientRpc(name);
     }
 
     [ClientRpc]
-    public void AssignTableClientRpc()
+    public void AssignTableClientRpc(string target)
     {
-        
+        GameObject focus = GameObject.Find(target);
+        focus.GetComponent<Customer>().SetState(CustomerState.OnTable);
     }
 
     public override void OnNetworkObjectParentChanged(NetworkObject parentNetworkObject)
