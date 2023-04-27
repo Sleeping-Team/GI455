@@ -36,8 +36,6 @@ public class CustomerSpawn : SingletonNetwork<CustomerSpawn>
                 Customer customer = Instantiate(_customerPrefabs[Random.Range(0, _customersQuantity)], _waitPosition[index].Location);
                 customer.transform.localPosition = Vector3.zero;
 
-                customer.name = $"{customer.name}_{customer.NetworkObject.NetworkObjectId}";
-
                 NetworkObject customerNetwork = customer.GetComponent<NetworkObject>();
                 if(!customerNetwork.IsSpawned) customerNetwork.Spawn();
             }
