@@ -52,6 +52,14 @@ public class PlayerInteraction : NetworkBehaviour
         base.OnNetworkDespawn();
     }
 
+    private void Update()
+    {
+        if (IsOwner && Input.GetKeyDown(KeyCode.R))
+        {
+            _interactingObject = null;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (_interactingObject == null && (!other.CompareTag("Disable") && !other.CompareTag("Untagged")))
