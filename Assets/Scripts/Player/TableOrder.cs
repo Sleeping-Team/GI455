@@ -32,6 +32,8 @@ public class TableOrder : NetworkBehaviour
 
     private bool _isOccupied = false;
     private Customer _customer;
+
+    public Dictionary<string, bool> TempOrder = new Dictionary<string, bool>();
     
     public enum TableState
     {
@@ -80,17 +82,35 @@ public class TableOrder : NetworkBehaviour
         
         OnCustomerOrder?.Invoke(Orders);
 
+        ClearOrderClientRpc(name);
+        
         foreach (MenuProperties order in Orders)
         {
             _orderStatus.Add(order.name, false);
+            ListOrderClientRpc(name, order.name);
         }
-        BroadcastClientRpc(name,_orderStatus);
+
+        WrapUpClientRpc(name);
     }
 
     [ClientRpc]
-    public void BroadcastClientRpc(string name,Dictionary<string, bool> data)
+    public void ListOrderClientRpc(string name,string key)
     {
-        FloorPlan.Instance.TablesDatabase[name].GetComponent<TableOrder>().MapOrder(data);
+        TableOrder focus = FloorPlan.Instance.TablesDatabase[name].GetComponent<TableOrder>();
+        focus.TempOrder.Add(key, false);
+    }
+
+    [ClientRpc]
+    public void WrapUpClientRpc(string name)
+    {
+        TableOrder focus = FloorPlan.Instance.TablesDatabase[name].GetComponent<TableOrder>();
+        _orderStatus = focus.TempOrder;
+    }
+    
+    [ClientRpc]
+    public void ClearOrderClientRpc(string name)
+    {
+        FloorPlan.Instance.TablesDatabase[name].GetComponent<TableOrder>().TempOrder = new Dictionary<string, bool>();
     }
 
     public void MapOrder(Dictionary<string, bool> data)
