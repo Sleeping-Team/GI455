@@ -63,6 +63,8 @@ public class Customer : NetworkBehaviour
     {
         if (_table == null & transform.parent != null) _table = transform.parent.GetComponent<TablePosition>();
         
+        Debug.Log($"{gameObject.name} is now {_customerState.Value}");
+        
         base.OnNetworkObjectParentChanged(parentNetworkObject);
     }
 
