@@ -25,7 +25,7 @@ public struct CharacterContainer
 {
     public CharacterSelection characterSelection;    
     public TextMeshProUGUI nameContainer;
-    public Image characterProfile;
+    //public Image characterProfile;
     public GameObject readySign;
     //public GameObject arrow;                      
     //public GameObject arrowReady;                 
@@ -183,8 +183,8 @@ public class CharacterSelectionManager : SingletonNetwork<CharacterSelectionMana
     {
         m_charactersContainers[playerId].characterSelection.SetNonPlayableChar();
         m_charactersContainers[playerId].nameContainer.text = "Waiting...";
-        m_charactersContainers[playerId].characterProfile.sprite = null;
-        m_charactersContainers[playerId].characterProfile.color = new Color(225, 255, 255);
+        //m_charactersContainers[playerId].characterProfile.sprite = null;
+        //m_charactersContainers[playerId].characterProfile.color = new Color(225, 255, 255);
     }
 
     public ConnectionState GetConnectionState(int playerId)

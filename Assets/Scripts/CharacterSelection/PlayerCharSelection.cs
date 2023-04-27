@@ -1,9 +1,18 @@
 ﻿using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerCharSelection : NetworkBehaviour
 {
+    [SerializeField] private Button leftButton;
+    [SerializeField] private Button rightButton;
+
+    [Space]
+    
+    [SerializeField] private TMP_Text roomCode;
+    
     private const int k_noCharacterSelectionValue = -1;
 
     [SerializeField]
@@ -34,6 +43,12 @@ public class PlayerCharSelection : NetworkBehaviour
         }
         // Assign the name of the object base on the player id on every instance
         gameObject.name = PlayerData.Instance.playerName;
+        
+        Button leftBtn = leftButton.GetComponent<Button>();
+        Button rightBtn = rightButton.GetComponent<Button>();
+        
+        leftBtn.onClick.AddListener(LeftButtonOnClick);
+        rightBtn.onClick.AddListener(RightButtonOnClick);
     }
     
     private void OnPlayerIdSet(int oldValue, int newValue)
@@ -152,6 +167,15 @@ public class PlayerCharSelection : NetworkBehaviour
 
     private void Update()
     {
+        if (PlayerData.Instance.lobbyCode == null)
+        {
+            roomCode.text = "Room Code : " + PlayerData.Instance.joinCode;
+        }
+        else
+        {
+            roomCode.text = "Room Code : " + PlayerData.Instance.lobbyCode;
+        }
+        
         if (IsOwner && CharacterSelectionManager.Instance.GetConnectionState(m_playerId.Value) != ConnectionState.ready)
         {
             if (Input.GetKeyDown(KeyCode.A))
@@ -227,5 +251,17 @@ public class PlayerCharSelection : NetworkBehaviour
     public void Despawn()
     {
         NetworkObjectDespawner.DespawnNetworkObject(NetworkObject);
+    }
+    
+    public void LeftButtonOnClick()
+    {
+        //check the button is clicked
+        Debug.Log("You have clicked the LEFT button!");
+    }
+    
+    public void RightButtonOnClick()
+    {
+        //check the button is clicked
+        Debug.Log("You have clicked the Right button!");
     }
 }
