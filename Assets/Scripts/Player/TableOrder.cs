@@ -96,6 +96,8 @@ public class TableOrder : NetworkBehaviour
     public void ChangeState(TableState state)
     {
         _tableState = state;
+        
+        Debug.Log($"Change {name}'s state to {state.ToString()}");
     }
     
     public void SetStatus(bool isOccupied)

@@ -52,14 +52,6 @@ public class PlayerInteraction : NetworkBehaviour
         base.OnNetworkDespawn();
     }
 
-    private void Update()
-    {
-        if (IsOwner && Input.GetKeyDown(KeyCode.E))
-        {
-            Interaction();
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (_interactingObject == null && (!other.CompareTag("Disable") && !other.CompareTag("Untagged")))
@@ -109,17 +101,21 @@ public class PlayerInteraction : NetworkBehaviour
                 
                 if(!pass) return;
 
+                Debug.Log("It's Table");
+                
                 switch (table.State)
                 {
                     case TableOrder.TableState.Ordering:
                         //if(!FloorPlan.Instance.TableIsAvailable) return;
-                        
+                        Debug.Log("Initiate ordering protocol");
                         table.RandomOrder();
                         table.ChangeState(TableOrder.TableState.Waiting);
                         break;
                     case TableOrder.TableState.Waiting:
                         if(_dishOnHand == null) return;
 
+                        Debug.Log("Initiate serving protocol");
+                        
                         if (table.OrderStatus[_dishOnHand.name])
                         {
                             Debug.LogWarning("Already Served");
@@ -155,6 +151,7 @@ public class PlayerInteraction : NetworkBehaviour
                         // {
                         //     Destroy(dish);
                         // }
+                        Debug.Log("Initiate cleaning Protocol");
                         table.ChangeState(TableOrder.TableState.Vacant);
                         break;
                 }
