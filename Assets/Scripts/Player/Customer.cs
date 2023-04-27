@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Customer : NetworkBehaviour
 {
-    public NetworkVariable<CustomerState> State => _customerState;
+    public CustomerState State => _customerState;
     
-    NetworkVariable<CustomerState> _customerState = new NetworkVariable<CustomerState>(CustomerState.WaitingTable);
+    CustomerState _customerState = CustomerState.WaitingTable;
 
     [SerializeField]private TablePosition _table;
     public int Quantity = 1;
@@ -21,12 +21,12 @@ public class Customer : NetworkBehaviour
     
     private void OnEnable()
     {
-        _customerState.Value = CustomerState.WaitingTable;
+        _customerState = CustomerState.WaitingTable;
     }
     
     public void SetState(CustomerState state)
     {
-        _customerState.Value = state;
+        _customerState = state;
     }
 
     public void AssignTable()
@@ -39,7 +39,7 @@ public class Customer : NetworkBehaviour
     {
         Debug.Log("Assign Table");
         
-        _customerState.Value = CustomerState.OnTable;
+        _customerState = CustomerState.OnTable;
 
         if (_table == null)
         {
@@ -59,12 +59,16 @@ public class Customer : NetworkBehaviour
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
     }
 
+    [ClientRpc]
+    public void AssignTableClientRpc()
+    {
+        
+    }
+
     public override void OnNetworkObjectParentChanged(NetworkObject parentNetworkObject)
     {
         if (_table == null & transform.parent != null) _table = transform.parent.GetComponent<TablePosition>();
-        
-        Debug.Log($"{gameObject.name} is now {_customerState.Value}");
-        
+
         base.OnNetworkObjectParentChanged(parentNetworkObject);
     }
 

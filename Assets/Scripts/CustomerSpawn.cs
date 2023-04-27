@@ -18,10 +18,12 @@ public class CustomerSpawn : SingletonNetwork<CustomerSpawn>
     {
         _customersQuantity = _customerPrefabs.Length;
 
-        if (IsHost)
-        {
-            StartCoroutine(DoSpawn());
-        }
+        NetworkManager.Singleton.OnServerStarted += OnServerStarted;
+    }
+    
+    private void OnServerStarted()
+    {
+        StartCoroutine(DoSpawn());
     }
     
     IEnumerator DoSpawn()
@@ -36,6 +38,8 @@ public class CustomerSpawn : SingletonNetwork<CustomerSpawn>
                 Customer customer = Instantiate(_customerPrefabs[Random.Range(0, _customersQuantity)], _waitPosition[index].Location);
                 customer.transform.localPosition = Vector3.zero;
 
+                customer.name = $"{customer.name}_{customer.NetworkObject.NetworkObjectId}";
+
                 NetworkObject customerNetwork = customer.GetComponent<NetworkObject>();
                 if(!customerNetwork.IsSpawned) customerNetwork.Spawn();
             }
@@ -48,8 +52,11 @@ public class CustomerSpawn : SingletonNetwork<CustomerSpawn>
         }
     }
 
-    public void RecheckSlot()
+    private void OnDestroy()
     {
-        
+        if (NetworkManager.Singleton != null)
+        {
+            NetworkManager.Singleton.OnServerStarted -= OnServerStarted;
+        }
     }
 }
