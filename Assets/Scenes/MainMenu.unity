@@ -1103,6 +1103,12 @@ MonoBehaviour:
   _joinCodeText: {fileID: 1304999553}
   menuUI: {fileID: 1291937897}
   joinUI: {fileID: 133145032}
+  nextScene: 2
+  m_characterDatas:
+  - {fileID: 11400000, guid: ed757fae961d7174890efd89a42706f1, type: 2}
+  - {fileID: 11400000, guid: 444fd06fc348692418b32145749413f3, type: 2}
+  - {fileID: 11400000, guid: cbda52920d369de4baa1569b807f4648, type: 2}
+  - {fileID: 11400000, guid: f600898507ad32d489091328598eefde, type: 2}
 --- !u!4 &496829388
 Transform:
   m_ObjectHideFlags: 0
@@ -1135,6 +1141,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 444fd06fc348692418b32145749413f3, type: 2}
   - {fileID: 11400000, guid: cbda52920d369de4baa1569b807f4648, type: 2}
   - {fileID: 11400000, guid: ed757fae961d7174890efd89a42706f1, type: 2}
+  nextScene: 2
 --- !u!1 &502062407
 GameObject:
   m_ObjectHideFlags: 0

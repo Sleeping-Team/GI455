@@ -9,11 +9,15 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private CharacterData[] m_characterDatas;
 
+    [SerializeField] private SceneName nextScene = SceneName.SelectCharacter;
+
     private IEnumerator Start()
     {
         ClearAllCharacterData();
 
         yield return new WaitUntil(() => NetworkManager.Singleton.SceneManager != null);
+        
+        LoadingSceneManager.Instance.Init();
     }
     
     private void ClearAllCharacterData()
@@ -23,5 +27,19 @@ public class MenuManager : MonoBehaviour
         {
             data.EmptyData();
         }
+    }
+
+    public void OnClickCreate()
+    {
+        RelayController.Instance.CreateGame();
+        
+        LoadingSceneManager.Instance.LoadScene(nextScene);
+    }
+
+    public void OnClickConfirm()
+    {
+        RelayController.Instance.JoinGame(PlayerData.Instance.joinCode);
+        
+        LoadingSceneManager.Instance.LoadScene(nextScene);
     }
 }

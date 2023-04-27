@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Gigi
   characterPrefab: {fileID: 364789151654167465, guid: 700d0cf3705a7d14d91daf70f7036228, type: 3}
-  characterProfile: {fileID: 21300000, guid: bf1cd7034d75efe499c59231922d6492, type: 3}
+  characterProfile: {fileID: 21300000, guid: dc2b29ddbb1544744bb31d0eee52c676, type: 3}
   clientId: 0
   playerId: -1
   isSelected: 0

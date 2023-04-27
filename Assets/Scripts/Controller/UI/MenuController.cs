@@ -22,14 +22,28 @@ public class MenuController : MonoBehaviour
     [SerializeField] private Button exitButton;
     [SerializeField] private Button confirmButton;
     
+    [Space]
     
     [SerializeField] private TMP_InputField _joinInput;
     
+    [Space]
+    
     [SerializeField] private TMP_Text pName;
     [SerializeField] private TMP_Text _joinCodeText;
+    
+    [Space]
 
     [SerializeField] private GameObject menuUI;
     [SerializeField] private GameObject joinUI;
+    
+    [Space]
+    
+    [SerializeField] private SceneName nextScene = SceneName.SelectCharacter;
+    
+    [Space]
+    
+    [SerializeField]
+    private CharacterData[] m_characterDatas;
 
     private string joinInput;
     
@@ -60,7 +74,7 @@ public class MenuController : MonoBehaviour
     {
         if (_joinCodeText.text == null)
         {
-            _joinCodeText.text = PlayerData.Instance.lobbyCode;
+            //_joinCodeText.text = PlayerData.Instance.lobbyCode;
         }
             
     }
@@ -70,10 +84,13 @@ public class MenuController : MonoBehaviour
         //check the button is clicked
         Debug.Log ("You have clicked the create button!");
         
-        RelayController.Instance.CreateGame();
-        _joinCodeText.text = PlayerData.Instance.lobbyCode;
+        //RelayController.Instance.CreateGame();
+        //_joinCodeText.text = PlayerData.Instance.lobbyCode;
 
         //SceneManager.LoadScene("Gameplay Lab");
+        RelayController.Instance.CreateGame();
+        
+        LoadingSceneManager.Instance.LoadScene(nextScene);
     }
 
     void JoinButtonOnClick()
@@ -118,8 +135,10 @@ public class MenuController : MonoBehaviour
         //check the button is clicked
         Debug.Log("You have clicked the confirm button!");
 
-        RelayController.Instance.JoinGame(joinInput);
-        SceneManager.LoadScene("Gameplay Lab");
+        StartCoroutine(Join());
+        //RelayController.Instance.JoinGame(PlayerData.Instance.joinCode);
+
+        //LoadingSceneManager.Instance.LoadScene(nextScene);
     }
 
     void ExitButtonOnClick()
@@ -132,4 +151,14 @@ public class MenuController : MonoBehaviour
             Application.Quit();
         #endif
     }
+
+    private IEnumerator Join()
+    {
+        LoadingFadeEffect.Instance.FadeAll();
+        
+        yield return new WaitUntil(() => LoadingFadeEffect.s_canLoad);
+        
+        RelayController.Instance.JoinGame(PlayerData.Instance.joinCode);
+    }
+    
 }

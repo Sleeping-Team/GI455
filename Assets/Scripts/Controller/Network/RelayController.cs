@@ -36,13 +36,15 @@ public class RelayController : Singleton<RelayController>
         Allocation a = await RelayService.Instance.CreateAllocationAsync(MaxPlayers);
         
         PlayerData.Instance.lobbyCode = await RelayService.Instance.GetJoinCodeAsync(a.AllocationId);
+        //PlayerData.Instance.lobbyCode = PlayerData.Instance.lobbyCode.ToUpper();
         
         _transport.SetHostRelayData(a.RelayServer.IpV4,
             (ushort)a.RelayServer.Port,a.AllocationIdBytes,a.Key,a.ConnectionData);
         
         NetworkManager.Singleton.StartHost();
         
-        NetworkManager.Singleton.SceneManager.LoadScene("Gameplay Lab", LoadSceneMode.Single);
+        LoadingSceneManager.Instance.LoadScene(SceneName.SelectCharacter);
+        //NetworkManager.Singleton.SceneManager.LoadScene("Gameplay Lab", LoadSceneMode.Single);
     }
     
     public async void JoinGame(string code)
@@ -54,7 +56,7 @@ public class RelayController : Singleton<RelayController>
 
         NetworkManager.Singleton.StartClient();
 
-        SceneManager.LoadScene("Gameplay Lab");
+        LoadingSceneManager.Instance.LoadScene(SceneName.SelectCharacter);
         
     }
 
