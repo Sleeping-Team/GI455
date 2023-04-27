@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -927,7 +927,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 595754203}
-    PlayerPrefab: {fileID: 364789151654167465, guid: 0e1ecd07004d7f649a76afe912fbac6c, type: 3}
+    PlayerPrefab: {fileID: 0}
     NetworkPrefabs:
     - Override: 0
       Prefab: {fileID: 6409515058441606500, guid: 8f3e654ee29e6304689e0db3b13c4117, type: 3}
@@ -955,22 +955,22 @@ MonoBehaviour:
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
     - Override: 0
-      Prefab: {fileID: 364789151654167465, guid: 0e1ecd07004d7f649a76afe912fbac6c, type: 3}
+      Prefab: {fileID: 7354929625482302314, guid: 8906053e423d36b42968b8c8892f82b5, type: 3}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
     - Override: 0
-      Prefab: {fileID: 364789151654167465, guid: cbec29653c7b03745a3eff941f691730, type: 3}
+      Prefab: {fileID: 5801216561536674466, guid: 918e2b629629d4a48826bcfa63457fa6, type: 3}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
     - Override: 0
-      Prefab: {fileID: 364789151654167465, guid: 4685dc3723cd8bd468f6e99703719492, type: 3}
+      Prefab: {fileID: 1008945192691691901, guid: 5055c3d7339df724b9ff714066d802ff, type: 3}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
     - Override: 0
-      Prefab: {fileID: 364789151654167465, guid: 700d0cf3705a7d14d91daf70f7036228, type: 3}
+      Prefab: {fileID: 2271406641341951848, guid: cd69a5a9e0aeb0c44b016d335154216f, type: 3}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}

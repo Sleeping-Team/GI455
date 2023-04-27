@@ -11,7 +11,7 @@ public enum ConnectionState : byte
     ready
 }
 
-[SerializeField]
+[Serializable]
 public struct PlayerConnectionState
 {
     public ConnectionState playerState;
@@ -20,30 +20,29 @@ public struct PlayerConnectionState
     public ulong clientId;
 }
 
-[SerializeField]
+[Serializable]
 public struct CharacterContainer
 {
     public CharacterSelection characterSelection;    
-    public TextMeshProUGUI nameContainer;           
-    public GameObject arrow;                      
-    public GameObject arrowReady;                 
-    public GameObject arrowClient;              
-    public Image playerIcon;                       
-    public GameObject waitingText;                
-    public GameObject backgroundPlayerSelect;            
-    public TextMeshProUGUI namePlayerText;             
-    public GameObject backgroundPlayerReady;       
-    public TextMeshProUGUI namePlayerReadyText;       
-    public GameObject backgroundClientPlayerReady;   
-    public TextMeshProUGUI nameClientPlayerReadyText;
+    public TextMeshProUGUI nameContainer;
+    public Image characterProfile;
+    public GameObject readySign;
+    //public GameObject arrow;                      
+    //public GameObject arrowReady;                 
+    //public GameObject arrowClient;              
+    //public Image playerIcon;                       
+    //public GameObject waitingText;                
+    //public GameObject backgroundPlayerSelect;            
+    //public TextMeshProUGUI namePlayerText;             
+    //public GameObject backgroundPlayerReady;       
+    //public TextMeshProUGUI namePlayerReadyText;       
+    //public GameObject backgroundClientPlayerReady;   
+    //public TextMeshProUGUI nameClientPlayerReadyText;
 }
 public class CharacterSelectionManager : SingletonNetwork<CharacterSelectionManager>
 {
     public CharacterData[] charactersData;
-
-    [SerializeField]
-    CharacterContainer[] m_charactersContainers;
-
+    
     [SerializeField]
     GameObject m_readyButton;
 
@@ -67,6 +66,9 @@ public class CharacterSelectionManager : SingletonNetwork<CharacterSelectionMana
 
     [SerializeField]
     GameObject m_playerPrefab;
+    
+    [SerializeField]
+    CharacterContainer[] m_charactersContainers;
 
     bool m_isTimerOn;
     float m_timer;
@@ -119,13 +121,14 @@ public class CharacterSelectionManager : SingletonNetwork<CharacterSelectionMana
     
 
     [ClientRpc]
-    void UpdatePlayerStateClientRpc(ulong clientId, int stateIndex, ConnectionState state)
+    void UpdatePlayerStateClientRpc(ulong clientId, int stateIndex, ConnectionState state,string name)
     {
         if (IsServer)
             return;
 
         m_playerStates[stateIndex].playerState = state;
         m_playerStates[stateIndex].clientId = clientId;
+        m_playerStates[stateIndex].playerName = name;
     }
 
     void RemoveSelectedStates()
@@ -146,12 +149,12 @@ public class CharacterSelectionManager : SingletonNetwork<CharacterSelectionMana
                 if (disconected)
                 {
                     m_playerStates[i].playerState = ConnectionState.disconnected;
-                    UpdatePlayerStateClientRpc(clientId, i, ConnectionState.disconnected);
+                    UpdatePlayerStateClientRpc(clientId, i, ConnectionState.disconnected,null);
                 }
                 else
                 {
                     m_playerStates[i].playerState = ConnectionState.connected;
-                    UpdatePlayerStateClientRpc(clientId, i, ConnectionState.connected);
+                    UpdatePlayerStateClientRpc(clientId, i, ConnectionState.connected,PlayerData.Instance.playerName);
                 }
             }
         }
@@ -179,17 +182,9 @@ public class CharacterSelectionManager : SingletonNetwork<CharacterSelectionMana
     void SetNonPlayableChar(int playerId)
     {
         m_charactersContainers[playerId].characterSelection.SetNonPlayableChar();
-        m_charactersContainers[playerId].nameContainer.color = new Color(0f, 0f, 0f, 0f);
-        m_charactersContainers[playerId].nameContainer.text = "";
-        m_charactersContainers[playerId].arrow.SetActive(true);
-        m_charactersContainers[playerId].arrowClient.SetActive(false);
-        m_charactersContainers[playerId].arrowReady.SetActive(false);
-        m_charactersContainers[playerId].playerIcon.gameObject.SetActive(false);
-        m_charactersContainers[playerId].playerIcon.color = m_playerColor;
-        m_charactersContainers[playerId].backgroundPlayerSelect.SetActive(false);
-        m_charactersContainers[playerId].backgroundPlayerReady.SetActive(false);
-        m_charactersContainers[playerId].backgroundClientPlayerReady.SetActive(false);
-        m_charactersContainers[playerId].waitingText.SetActive(true);
+        m_charactersContainers[playerId].nameContainer.text = "Waiting...";
+        m_charactersContainers[playerId].characterProfile.sprite = null;
+        m_charactersContainers[playerId].characterProfile.color = new Color(225, 255, 255);
     }
 
     public ConnectionState GetConnectionState(int playerId)
@@ -217,45 +212,39 @@ public class CharacterSelectionManager : SingletonNetwork<CharacterSelectionMana
 
     public void SetCharacterUI(int playerId, int characterSelected)
     {
-        m_charactersContainers[playerId].nameContainer.text = $"P{playerId+1}";
-            
+        m_charactersContainers[playerId].nameContainer.text = PlayerData.Instance.playerName;
+        
+        //m_charactersContainers[playerId].namePlayerText.text = charactersData[characterSelected].characterName;
 
-        m_charactersContainers[playerId].namePlayerText.text =
-            charactersData[characterSelected].characterName;
+        //m_charactersContainers[playerId].namePlayerReadyText.text = charactersData[characterSelected].characterName;
 
-        m_charactersContainers[playerId].namePlayerReadyText.text =
-            charactersData[characterSelected].characterName;
-
-        m_charactersContainers[playerId].nameClientPlayerReadyText.text =
-            charactersData[characterSelected].characterName;
-
-
-       
+        //m_charactersContainers[playerId].nameClientPlayerReadyText.text = charactersData[characterSelected].characterName;
+        
         SetCharacterColor(playerId, characterSelected);
     }
 
     public void SetPlayableChar(int playerId, int characterSelected, bool isClientOwner)
     {
         SetCharacterUI(playerId, characterSelected);
-        m_charactersContainers[playerId].playerIcon.gameObject.SetActive(true);
+        //m_charactersContainers[playerId].playerIcon.gameObject.SetActive(true);
         if (isClientOwner)
         {
-            m_charactersContainers[playerId].arrowClient.SetActive(true);
-            m_charactersContainers[playerId].arrow.SetActive(false);
-            m_charactersContainers[playerId].arrowReady.SetActive(false);
-            m_charactersContainers[playerId].playerIcon.color = m_clientColor;
+            //m_charactersContainers[playerId].arrowClient.SetActive(true);
+            //m_charactersContainers[playerId].arrow.SetActive(false);
+            //m_charactersContainers[playerId].arrowReady.SetActive(false);
+            //m_charactersContainers[playerId].playerIcon.color = m_clientColor;
         }
         else
         {
-            m_charactersContainers[playerId].arrow.SetActive(true);
-            m_charactersContainers[playerId].arrowReady.SetActive(false);
-            m_charactersContainers[playerId].arrowClient.SetActive(false);
-            m_charactersContainers[playerId].playerIcon.color = m_playerColor;
+            //m_charactersContainers[playerId].arrow.SetActive(true);
+            //m_charactersContainers[playerId].arrowReady.SetActive(false);
+            //m_charactersContainers[playerId].arrowClient.SetActive(false);
+            //m_charactersContainers[playerId].playerIcon.color = m_playerColor;
         }
 
         m_charactersContainers[playerId].characterSelection.SetPlayableChar(characterSelected);
-        m_charactersContainers[playerId].backgroundPlayerSelect.SetActive(true);
-        m_charactersContainers[playerId].waitingText.SetActive(false);
+        //m_charactersContainers[playerId].backgroundPlayerSelect.SetActive(true);
+        //m_charactersContainers[playerId].waitingText.SetActive(false);
     }
 
     [ClientRpc]
@@ -328,24 +317,27 @@ public class CharacterSelectionManager : SingletonNetwork<CharacterSelectionMana
     }
 
     [ClientRpc]
-    void PlayerReadyClientRpc(ulong clientId, int playerId, int characterSelected)
+    void PlayerReadyClientRpc(ulong clientId, int playerId, int characterSelected,string name)
     {
         charactersData[characterSelected].isSelected = true;
         charactersData[characterSelected].clientId = clientId;
         charactersData[characterSelected].playerId = playerId;
+        charactersData[characterSelected].characterName = name;
         m_playerStates[playerId].playerState = ConnectionState.ready;
 
         if (clientId == NetworkManager.Singleton.LocalClientId)
         {
-            m_charactersContainers[playerId].backgroundClientPlayerReady.SetActive(true);
-            m_charactersContainers[playerId].backgroundPlayerSelect.SetActive(false);
+            m_charactersContainers[playerId].readySign.SetActive(true);
+            //m_charactersContainers[playerId].backgroundClientPlayerReady.SetActive(true);
+            //m_charactersContainers[playerId].backgroundPlayerSelect.SetActive(false);
         }
         else
         {
-            m_charactersContainers[playerId].arrow.SetActive(false);
-            m_charactersContainers[playerId].arrowReady.SetActive(true);
-            m_charactersContainers[playerId].backgroundPlayerSelect.SetActive(false);
-            m_charactersContainers[playerId].backgroundPlayerReady.SetActive(true);
+            m_charactersContainers[playerId].readySign.SetActive(true);
+            //m_charactersContainers[playerId].arrow.SetActive(false);
+            //m_charactersContainers[playerId].arrowReady.SetActive(true);
+            //m_charactersContainers[playerId].backgroundPlayerSelect.SetActive(false);
+            //m_charactersContainers[playerId].backgroundPlayerReady.SetActive(true);
         }
 
         for (int i = 0; i < m_playerStates.Length; i++)
@@ -372,17 +364,19 @@ public class CharacterSelectionManager : SingletonNetwork<CharacterSelectionMana
 
         if (clientId == NetworkManager.Singleton.LocalClientId)
         {
-            m_charactersContainers[playerId].arrowClient.SetActive(true);
-            m_charactersContainers[playerId].backgroundClientPlayerReady.SetActive(false);
-            m_charactersContainers[playerId].backgroundPlayerSelect.SetActive(true);
+            m_charactersContainers[playerId].readySign.SetActive(false);
+            //m_charactersContainers[playerId].arrowClient.SetActive(true);
+            //m_charactersContainers[playerId].backgroundClientPlayerReady.SetActive(false);
+            //m_charactersContainers[playerId].backgroundPlayerSelect.SetActive(true);
         }
         else
         {
-            m_charactersContainers[playerId].arrow.SetActive(true);
-            m_charactersContainers[playerId].arrowReady.SetActive(false);
-            m_charactersContainers[playerId].arrowClient.SetActive(false);
-            m_charactersContainers[playerId].backgroundPlayerSelect.SetActive(true);
-            m_charactersContainers[playerId].backgroundPlayerReady.SetActive(false);
+            m_charactersContainers[playerId].readySign.SetActive(false);
+            //m_charactersContainers[playerId].arrow.SetActive(true);
+            //m_charactersContainers[playerId].arrowReady.SetActive(false);
+            //m_charactersContainers[playerId].arrowClient.SetActive(false);
+            //m_charactersContainers[playerId].backgroundPlayerSelect.SetActive(true);
+            //m_charactersContainers[playerId].backgroundPlayerReady.SetActive(false);
         }
 
         
@@ -417,11 +411,11 @@ public class CharacterSelectionManager : SingletonNetwork<CharacterSelectionMana
     }
 
     // Set the player ready if the player is not selected and check if all player are ready to start the countdown
-    public void PlayerReady(ulong clientId, int playerId, int characterSelected)
+    public void PlayerReady(ulong clientId, int playerId, int characterSelected,string name)
     {
         if (!charactersData[characterSelected].isSelected)
         {
-            PlayerReadyClientRpc(clientId, playerId, characterSelected);
+            PlayerReadyClientRpc(clientId, playerId, characterSelected, name);
 
             StartGameTimer();
         }
