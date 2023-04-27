@@ -117,7 +117,7 @@ public class TableOrder : NetworkBehaviour
         FloorPlan.Instance.TablesDatabase[name].GetComponent<TableOrder>().TempOrder = new List<string>();
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void ClearCustomerServerRpc()
     {
         Customers.NetworkObject.Despawn();
@@ -192,7 +192,7 @@ public class TableOrder : NetworkBehaviour
         ServeServerRpc(order);
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void ServeServerRpc(string order)
     {
         ServeClientRpc(order);
