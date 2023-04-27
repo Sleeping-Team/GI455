@@ -134,11 +134,17 @@ public class Grabbable : NetworkBehaviour
         }
     }
 
-    public void PlaceOnTable(Transform table)
+    public void PlaceOnTable(string tableName)
     {
         ReleaseServerRpc();
 
-        transform.parent = table;
+        PlaceServerRpc(tableName);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void PlaceServerRpc(string name)
+    {
+        transform.parent = GameObject.Find(name).transform;
         transform.position = Vector3.zero;
         gameObject.tag = "Disable";
     }

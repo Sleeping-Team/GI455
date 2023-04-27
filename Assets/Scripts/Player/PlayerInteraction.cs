@@ -127,7 +127,7 @@ public class PlayerInteraction : NetworkBehaviour
 
                         Grabbable onHandDish = _dishOnHand.GetComponent<Grabbable>();
                         
-                        onHandDish.PlaceOnTable(table.transform);
+                        onHandDish.PlaceOnTable(table.name);
 
                         _dishOnHand = null;
 
