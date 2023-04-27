@@ -61,7 +61,7 @@ public class Customer : NetworkBehaviour
 
     public override void OnNetworkObjectParentChanged(NetworkObject parentNetworkObject)
     {
-        if (_table == null) _table = transform.parent.GetComponent<TablePosition>();
+        if (_table == null & transform.parent != null) _table = transform.parent.GetComponent<TablePosition>();
         
         base.OnNetworkObjectParentChanged(parentNetworkObject);
     }
