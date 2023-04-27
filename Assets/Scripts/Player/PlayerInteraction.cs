@@ -120,6 +120,7 @@ public class PlayerInteraction : NetworkBehaviour
                         table.NextStateServerRpc();
                         break;
                     case TableOrder.TableState.Waiting:
+                        CheckServeStatus(table);
                         if(_dishOnHand == null) return;
 
                         Debug.Log("Initiate serving protocol");
@@ -147,19 +148,7 @@ public class PlayerInteraction : NetworkBehaviour
 
                         if (!IsHost) return;
 
-                        bool allServed = false;
-                        
-                        foreach (string dish in table.OrderStatus.Keys)
-                        {
-                            allServed = table.OrderStatus[dish];
-                            if (!allServed) break;
-                        }
-
-                        if (allServed)
-                        {
-                            table.NextStateServerRpc();
-                            table.ClearCustomer();
-                        }
+                        CheckServeStatus(table);
 
                         break;
                     case TableOrder.TableState.Dirty:
@@ -189,5 +178,21 @@ public class PlayerInteraction : NetworkBehaviour
                 break;
         }
     }
-    
+
+    private static void CheckServeStatus(TableOrder table)
+    {
+        bool allServed = false;
+
+        foreach (string dish in table.OrderStatus.Keys)
+        {
+            allServed = table.OrderStatus[dish];
+            if (!allServed) break;
+        }
+
+        if (allServed)
+        {
+            table.NextStateServerRpc();
+            table.ClearCustomer();
+        }
+    }
 }
