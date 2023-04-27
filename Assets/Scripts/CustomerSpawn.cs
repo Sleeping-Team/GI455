@@ -18,14 +18,12 @@ public class CustomerSpawn : SingletonNetwork<CustomerSpawn>
     {
         _customersQuantity = _customerPrefabs.Length;
 
-        NetworkManager.Singleton.OnServerStarted += OnServerStarted;
+        if (IsHost)
+        {
+            StartCoroutine(DoSpawn());
+        }
     }
-    
-    private void OnServerStarted()
-    {
-        StartCoroutine(DoSpawn());
-    }
-    
+
     IEnumerator DoSpawn()
     {
         while (!gameover)
@@ -49,14 +47,6 @@ public class CustomerSpawn : SingletonNetwork<CustomerSpawn>
             }
 
             yield return new WaitForSeconds(_spawnDelay);
-        }
-    }
-
-    private void OnDestroy()
-    {
-        if (NetworkManager.Singleton != null)
-        {
-            NetworkManager.Singleton.OnServerStarted -= OnServerStarted;
         }
     }
 }
