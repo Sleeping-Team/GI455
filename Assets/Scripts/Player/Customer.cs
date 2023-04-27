@@ -57,6 +57,8 @@ public class Customer : NetworkBehaviour
         
         transform.SetParent(_table.transform);
         tableDetail.AssignObject(TablePosition.ObjectOnFocus.Chair, this.transform);
+
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
     }
     
     IEnumerator EatCoroutine(float waitTime)

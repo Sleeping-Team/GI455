@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
-public class PlayerInteraction : MonoBehaviour
+public class PlayerInteraction : NetworkBehaviour
 {
     public GameObject DishOnHand => _dishOnHand;
 
@@ -22,23 +22,42 @@ public class PlayerInteraction : MonoBehaviour
         _input = new PlayerInput();
     }
 
-    #region Input System Activation
-
-    private void OnEnable()
+    public override void OnNetworkSpawn()
     {
-        _input.Enable();
+        if (IsOwner)
+        {
+            _input.Enable();
+        
+            _input.Player.Interact.performed += _ => Interaction();
+            
+            Debug.Log(transform.parent.parent.name);
+        }
+        else
+        {
+            gameObject.GetComponent<SphereCollider>().enabled = false;
+        }
+
+        base.OnNetworkSpawn();
     }
 
-    private void OnDisable()
+    public override void OnNetworkDespawn()
     {
-        _input.Disable();
+        if (IsOwner)
+        {
+            _input.Disable();
+        
+            _input.Player.Interact.performed -= _ => Interaction();
+        }
+
+        base.OnNetworkDespawn();
     }
 
-    #endregion
-
-    private void Start()
+    private void Update()
     {
-        _input.Player.Interact.performed += _ => Interaction();
+        if (IsOwner && Input.GetKeyDown(KeyCode.E))
+        {
+            Interaction();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -95,7 +114,7 @@ public class PlayerInteraction : MonoBehaviour
                     case TableOrder.TableState.Ordering:
                         //if(!FloorPlan.Instance.TableIsAvailable) return;
                         
-                        table.RandomOrderServerRpc();
+                        table.RandomOrder();
                         table.ChangeState(TableOrder.TableState.Waiting);
                         break;
                     case TableOrder.TableState.Waiting:

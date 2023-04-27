@@ -47,10 +47,18 @@ public class TableOrder : NetworkBehaviour
     {
         _dishesOnMenu = Kitchen.Instance.DishesOnMenu;
     }
+
+    public void RandomOrder()
+    {
+        Debug.Log("Run Random Order");
+        RandomOrderServerRpc();
+    }
     
     [ServerRpc(RequireOwnership = false)]
     public void RandomOrderServerRpc()
     {
+        Debug.Log("In Random Order Server RPC");
+        
         int orderQuantity;
         _tempMenus = new List<MenuProperties>(Kitchen.Instance.Menus);
 
