@@ -123,6 +123,12 @@ public class PlayerInteraction : NetworkBehaviour
                         if(_dishOnHand == null) return;
 
                         Debug.Log("Initiate serving protocol");
+
+                        if (!table.OrderStatus.ContainsKey(_dishOnHand.name))
+                        {
+                            Debug.LogWarning("Not my order");
+                            return;
+                        }
                         
                         if (table.OrderStatus[_dishOnHand.name])
                         {
