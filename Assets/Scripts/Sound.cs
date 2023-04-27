@@ -36,7 +36,7 @@ public class Sound : MonoBehaviour
         else
         {
             audioSource.clip = backgroundMusic;
-            audioSource.loop = false;
+            audioSource.loop = true;
             audioSource.Play();
         }
     }

@@ -255,12 +255,14 @@ public class PlayerCharSelection : NetworkBehaviour
     
     public void LeftButtonOnClick()
     {
+        ChangeCharacterSelection(-1);
         //check the button is clicked
         Debug.Log("You have clicked the LEFT button!");
     }
     
     public void RightButtonOnClick()
     {
+        ChangeCharacterSelection(1);
         //check the button is clicked
         Debug.Log("You have clicked the Right button!");
     }
