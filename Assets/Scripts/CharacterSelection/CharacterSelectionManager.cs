@@ -199,13 +199,13 @@ public class CharacterSelectionManager : SingletonNetwork<CharacterSelectionMana
     {
         if (charactersData[characterSelected].isSelected)
         {
-            m_charactersContainers[playerId].nameContainer.color = k_selectedColor;
-            m_charactersContainers[playerId].characterSelection.ShowLight(false);
+            //m_charactersContainers[playerId].nameContainer.color = k_selectedColor;
+            m_charactersContainers[playerId].characterSelection.ShowLight(true);
         }
         else
         {
-            m_charactersContainers[playerId].nameContainer.color = Color.white;
-            m_charactersContainers[playerId].characterSelection.ShowLight(true);
+            //m_charactersContainers[playerId].nameContainer.color = Color.white;
+            m_charactersContainers[playerId].characterSelection.ShowLight(false);
         }
         m_charactersContainers[playerId].characterSelection.SetPlayableChar(characterSelected);
     }

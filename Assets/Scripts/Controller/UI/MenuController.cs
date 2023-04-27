@@ -100,11 +100,7 @@ public class MenuController : MonoBehaviour
         
         menuUI.SetActive(false);
         joinUI.SetActive(true);
-        /*
-        _joinInput.text = _joinInput.text.ToUpper();
-
-        PlayerData.Instance.joinCode = _joinCodeText.text;
-        */
+        
     }
 
     public void StoreCode()
@@ -135,7 +131,7 @@ public class MenuController : MonoBehaviour
         //check the button is clicked
         Debug.Log("You have clicked the confirm button!");
 
-        StartCoroutine(Join());
+        Join();
         //RelayController.Instance.JoinGame(PlayerData.Instance.joinCode);
 
         //LoadingSceneManager.Instance.LoadScene(nextScene);
@@ -152,12 +148,8 @@ public class MenuController : MonoBehaviour
         #endif
     }
 
-    private IEnumerator Join()
+    void Join()
     {
-        LoadingFadeEffect.Instance.FadeAll();
-        
-        yield return new WaitUntil(() => LoadingFadeEffect.s_canLoad);
-        
         RelayController.Instance.JoinGame(PlayerData.Instance.joinCode);
     }
     

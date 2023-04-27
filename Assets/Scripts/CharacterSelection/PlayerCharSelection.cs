@@ -9,6 +9,15 @@ public class PlayerCharSelection : NetworkBehaviour
     [SerializeField] private Button leftButton;
     [SerializeField] private Button rightButton;
 
+    [Space] 
+    
+    [SerializeField] private Button readyButton;
+    [SerializeField] private Button cancleButton;
+
+    [Space] 
+    [SerializeField] private GameObject readyUI;
+    [SerializeField] private GameObject cancleUI;
+    
     [Space]
     
     [SerializeField] private TMP_Text roomCode;
@@ -46,9 +55,13 @@ public class PlayerCharSelection : NetworkBehaviour
         
         Button leftBtn = leftButton.GetComponent<Button>();
         Button rightBtn = rightButton.GetComponent<Button>();
+        Button readyBtn = readyButton.GetComponent<Button>();
+        Button cancleBtn = cancleButton.GetComponent<Button>();
         
         leftBtn.onClick.AddListener(LeftButtonOnClick);
         rightBtn.onClick.AddListener(RightButtonOnClick);
+        readyBtn.onClick.AddListener(ReadyButtonOnClick);
+        cancleBtn.onClick.AddListener(CancleButtonOnClick);
     }
     
     private void OnPlayerIdSet(int oldValue, int newValue)
@@ -239,14 +252,14 @@ public class PlayerCharSelection : NetworkBehaviour
     {
         m_playerId.OnValueChanged += OnPlayerIdSet;
         m_charSelected.OnValueChanged += OnCharacterChanged;
-        OnButtonPress.a_OnButtonPress += OnUIButtonPress;
+        //OnButtonPress.a_OnButtonPress += OnUIButtonPress;
     }
 
     private void OnDisable()
     {
         m_playerId.OnValueChanged -= OnPlayerIdSet;
         m_charSelected.OnValueChanged -= OnCharacterChanged;
-        OnButtonPress.a_OnButtonPress -= OnUIButtonPress;
+        //OnButtonPress.a_OnButtonPress -= OnUIButtonPress;
     }
     public void Despawn()
     {
@@ -265,5 +278,27 @@ public class PlayerCharSelection : NetworkBehaviour
         ChangeCharacterSelection(1);
         //check the button is clicked
         Debug.Log("You have clicked the Right button!");
+    }
+    
+    public void ReadyButtonOnClick()
+    {
+        //check the button is clicked
+        Debug.Log("You have clicked the Ready button!");
+        
+        readyUI.SetActive(false);
+        cancleUI.SetActive(true);
+        
+        ReadyServerRpc();
+    }
+    
+    public void CancleButtonOnClick()
+    {
+        //check the button is clicked
+        Debug.Log("You have clicked the Cancle button!");
+        
+        readyUI.SetActive(true);
+        cancleUI.SetActive(false);
+        
+        NotReadyServerRpc();
     }
 }
