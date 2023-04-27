@@ -60,7 +60,6 @@ public class Kitchen : NetworkBehaviour
         Debug.Log($"Cooked Order: {order.name}");
 
         GameObject dish = Instantiate(order.prefab, _counters[counterIndex].Position);
-        dish.name = order.name;
         dish.GetComponent<NetworkObject>().Spawn();
 
         _counters[counterIndex].IsOccupied = true;
