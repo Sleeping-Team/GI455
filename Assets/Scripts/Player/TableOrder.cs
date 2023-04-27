@@ -84,9 +84,19 @@ public class TableOrder : NetworkBehaviour
         {
             _orderStatus.Add(order.name, false);
         }
+        BroadcastClientRpc(name,_orderStatus);
     }
-    
-    
+
+    [ClientRpc]
+    public void BroadcastClientRpc(string name,Dictionary<string, bool> data)
+    {
+        FloorPlan.Instance.TablesDatabase[name].GetComponent<TableOrder>().MapOrder(data);
+    }
+
+    public void MapOrder(Dictionary<string, bool> data)
+    {
+        _orderStatus = data;
+    }
     
     public void SetOrderStatus(string key, bool value)
     {

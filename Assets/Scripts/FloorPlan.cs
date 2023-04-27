@@ -10,9 +10,11 @@ public class FloorPlan : NetworkBehaviour
     public static FloorPlan Instance;
 
     public Dictionary<int, List<TableStatus>> TablesStatus => _tablesStatus;
+    public Dictionary<string, GameObject> TablesDatabase => _tablesObjects;
     public bool TableIsAvailable { get; private set; }
 
     private Dictionary<int, List<TableStatus>> _tablesStatus = new Dictionary<int, List<TableStatus>>();
+    private Dictionary<string, GameObject> _tablesObjects = new Dictionary<string, GameObject>();
 
     private void Awake()
     {
@@ -40,6 +42,7 @@ public class FloorPlan : NetworkBehaviour
                     Debug.Log("Customer have not more than 2");
                     _tablesStatus[2].Add(new TableStatus(tablePosition));
                 }
+                _tablesObjects.Add(table.name, table);
             }
         }
     }
