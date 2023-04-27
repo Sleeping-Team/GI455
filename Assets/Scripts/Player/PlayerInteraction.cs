@@ -109,7 +109,7 @@ public class PlayerInteraction : NetworkBehaviour
                         //if(!FloorPlan.Instance.TableIsAvailable) return;
                         Debug.Log("Initiate ordering protocol");
                         table.RandomOrder();
-                        table.ChangeStateCall(TableOrder.TableState.Waiting);
+                        table.NextStateServerRpc();
                         break;
                     case TableOrder.TableState.Waiting:
                         if(_dishOnHand == null) return;
@@ -141,7 +141,7 @@ public class PlayerInteraction : NetworkBehaviour
 
                         if (allServed)
                         {
-                            table.ChangeStateCall(TableOrder.TableState.Dirty);
+                            table.NextStateServerRpc();
                             table.ClearCustomer();
                         }
 
@@ -152,7 +152,7 @@ public class PlayerInteraction : NetworkBehaviour
                         //     Destroy(dish);
                         // }
                         Debug.Log("Initiate cleaning Protocol");
-                        table.ChangeStateCall(TableOrder.TableState.Vacant);
+                        table.NextStateServerRpc();
                         break;
                 }
                 break;

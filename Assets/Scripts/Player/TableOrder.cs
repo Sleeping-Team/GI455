@@ -38,8 +38,10 @@ public class TableOrder : NetworkBehaviour
     public enum TableState
     {
         Vacant, // No Person
+        //Thinking, // Delay to think what to eat
         Ordering, // Player need to go and pick up the order
         Waiting, // Wait for food
+        //Eating, // Customer Eating
         Dirty
     }
 
@@ -112,8 +114,7 @@ public class TableOrder : NetworkBehaviour
     [ClientRpc]
     public void ClearOrderClientRpc(string name)
     {
-        TableOrder focus = FloorPlan.Instance.TablesDatabase[name].GetComponent<TableOrder>();
-        focus.TempOrder = new List<string>();
+        FloorPlan.Instance.TablesDatabase[name].GetComponent<TableOrder>().TempOrder = new List<string>();
     }
 
     [ServerRpc]
@@ -137,28 +138,36 @@ public class TableOrder : NetworkBehaviour
         _orderStatus[key] = value;
     }
     
-    public void ChangeStateCall(TableState state)
+    public void ChangeState(TableState state)
     {
-        BroadcastStateClientRpc(name);
+        _tableState = state;
 
         Debug.Log($"Change {name}'s state to {state.ToString()}");
     }
 
-    public void ChangeState(TableState state)
-    {
-        _tableState = state;
-    }
-
     public void NextState()
     {
-        _tableState++;
+        if (_tableState == TableState.Dirty)
+        {
+            _tableState = TableState.Vacant;
+        }
+        else
+        {
+            _tableState++;
+        }
     }
 
     [ClientRpc]
-    public void BroadcastStateClientRpc(string name)
+    public void NextStateClientRpc(string name)
     {
-        TableOrder focus = FloorPlan.Instance.TablesDatabase[name].GetComponent<TableOrder>();
+        TableOrder focus = GameObject.Find(name).GetComponent<TableOrder>();
         focus.NextState();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void NextStateServerRpc()
+    {
+        NextStateClientRpc(name);
     }
     
     public void SetStatus(bool isOccupied)

@@ -69,7 +69,7 @@ public class Customer : NetworkBehaviour
     public void TableSetupClientRpc(string target, string customer)
     {
         TableOrder focus = GameObject.Find(target).GetComponent<TableOrder>();
-        focus.ChangeStateCall(TableOrder.TableState.Ordering);
+        focus.ChangeState(TableOrder.TableState.Ordering);
         focus.SetStatus(true);
         focus.AssignCustomer(GameObject.Find(customer).GetComponent<Customer>());
     }
