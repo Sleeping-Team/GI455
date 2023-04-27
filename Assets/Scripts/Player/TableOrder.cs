@@ -38,10 +38,8 @@ public class TableOrder : NetworkBehaviour
     public enum TableState
     {
         Vacant, // No Person
-        Thinking, // Delay to think what to eat
         Ordering, // Player need to go and pick up the order
         Waiting, // Wait for food
-        Eating, // Customer Eating
         Dirty
     }
 
@@ -114,7 +112,8 @@ public class TableOrder : NetworkBehaviour
     [ClientRpc]
     public void ClearOrderClientRpc(string name)
     {
-        FloorPlan.Instance.TablesDatabase[name].GetComponent<TableOrder>().TempOrder = new List<string>();
+        TableOrder focus = FloorPlan.Instance.TablesDatabase[name].GetComponent<TableOrder>();
+        focus.TempOrder = new List<string>();
     }
 
     [ServerRpc]
@@ -140,7 +139,7 @@ public class TableOrder : NetworkBehaviour
     
     public void ChangeStateCall(TableState state)
     {
-        BroadcastStateClientRpc(name, state);
+        BroadcastStateClientRpc(name);
 
         Debug.Log($"Change {name}'s state to {state.ToString()}");
     }
@@ -150,10 +149,16 @@ public class TableOrder : NetworkBehaviour
         _tableState = state;
     }
 
-    [ClientRpc]
-    public void BroadcastStateClientRpc(string name,TableState state)
+    public void NextState()
     {
-        FloorPlan.Instance.TablesDatabase[name].GetComponent<TableOrder>().ChangeState(state);
+        _tableState++;
+    }
+
+    [ClientRpc]
+    public void BroadcastStateClientRpc(string name)
+    {
+        TableOrder focus = FloorPlan.Instance.TablesDatabase[name].GetComponent<TableOrder>();
+        focus.NextState();
     }
     
     public void SetStatus(bool isOccupied)
