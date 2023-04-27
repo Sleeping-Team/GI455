@@ -186,4 +186,27 @@ public class TableOrder : NetworkBehaviour
     {
         _customer = person;
     }
+
+    public void Serve(string order)
+    {
+        ServeServerRpc(order);
+    }
+
+    [ServerRpc]
+    public void ServeServerRpc(string order)
+    {
+        ServeClientRpc(order);
+    }
+
+    [ClientRpc]
+    public void ServeClientRpc(string order)
+    {
+        TableOrder focus = GameObject.Find(name).GetComponent<TableOrder>();
+        Served(order);
+    }
+
+    public void Served(string order)
+    {
+        _orderStatus[order] = true;
+    }
 }

@@ -123,13 +123,15 @@ public class PlayerInteraction : NetworkBehaviour
                         }
                         
                         Debug.Log("Served!");
-                        table.OrderStatus[_dishOnHand.name] = true;
+                        table.Serve(_dishOnHand.name);
 
                         Grabbable onHandDish = _dishOnHand.GetComponent<Grabbable>();
                         
                         onHandDish.PlaceOnTable(table.name);
 
                         _dishOnHand = null;
+
+                        if (!IsHost) return;
 
                         bool allServed = false;
                         
