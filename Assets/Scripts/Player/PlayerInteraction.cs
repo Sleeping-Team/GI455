@@ -96,7 +96,7 @@ public class PlayerInteraction : NetworkBehaviour
 
                 Debug.Log("Get Customer Pass");
                 
-                switch (customer.State)
+                switch (customer.State.Value)
                 {
                     case Customer.CustomerState.WaitingTable:
                         Debug.Log("Customer is waiting");

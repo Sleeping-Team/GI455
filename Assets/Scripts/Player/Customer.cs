@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Customer : NetworkBehaviour
 {
-    public CustomerState State => _customerState;
+    public NetworkVariable<CustomerState> State => _customerState;
     
-    [SerializeField] CustomerState _customerState = CustomerState.WaitingTable;
+    NetworkVariable<CustomerState> _customerState = new NetworkVariable<CustomerState>(CustomerState.WaitingTable);
 
     [SerializeField]private TablePosition _table;
     public int Quantity = 1;
@@ -21,12 +21,12 @@ public class Customer : NetworkBehaviour
     
     private void OnEnable()
     {
-        _customerState = CustomerState.WaitingTable;
+        _customerState.Value = CustomerState.WaitingTable;
     }
     
     public void SetState(CustomerState state)
     {
-        _customerState = state;
+        _customerState.Value = state;
     }
 
     public void AssignTable()
@@ -39,7 +39,7 @@ public class Customer : NetworkBehaviour
     {
         Debug.Log("Assign Table");
         
-        _customerState = CustomerState.OnTable;
+        _customerState.Value = CustomerState.OnTable;
 
         if (_table == null)
         {
