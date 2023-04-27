@@ -33,7 +33,7 @@ public class TableOrder : NetworkBehaviour
     private bool _isOccupied = false;
     private Customer _customer;
 
-    public Dictionary<string, bool> TempOrder = new Dictionary<string, bool>();
+    public List<string> TempOrder = new List<string>();
     
     public enum TableState
     {
@@ -97,20 +97,35 @@ public class TableOrder : NetworkBehaviour
     public void ListOrderClientRpc(string name,string key)
     {
         TableOrder focus = FloorPlan.Instance.TablesDatabase[name].GetComponent<TableOrder>();
-        focus.TempOrder.Add(key, false);
+        focus.TempOrder.Add(key);
     }
 
     [ClientRpc]
     public void WrapUpClientRpc(string name)
     {
         TableOrder focus = FloorPlan.Instance.TablesDatabase[name].GetComponent<TableOrder>();
-        _orderStatus = focus.TempOrder;
+        _orderStatus = new Dictionary<string, bool>();
+        foreach (string order in focus.TempOrder)
+        {
+            _orderStatus.Add(order, false);
+        }
     }
     
     [ClientRpc]
     public void ClearOrderClientRpc(string name)
     {
-        FloorPlan.Instance.TablesDatabase[name].GetComponent<TableOrder>().TempOrder = new Dictionary<string, bool>();
+        FloorPlan.Instance.TablesDatabase[name].GetComponent<TableOrder>().TempOrder = new List<string>();
+    }
+
+    [ServerRpc]
+    public void ClearCustomerServerRpc()
+    {
+        Customers.NetworkObject.Despawn();
+    }
+
+    public void ClearCustomer()
+    {
+        ClearCustomerServerRpc();
     }
 
     public void MapOrder(Dictionary<string, bool> data)
@@ -125,9 +140,16 @@ public class TableOrder : NetworkBehaviour
     
     public void ChangeState(TableState state)
     {
-        _tableState = state;
+        BroadcastStateClientRpc(name, state);
+        ;
         
         Debug.Log($"Change {name}'s state to {state.ToString()}");
+    }
+
+    [ClientRpc]
+    public void BroadcastStateClientRpc(string name,TableState state)
+    {
+        FloorPlan.Instance.TablesDatabase[name].GetComponent<TableOrder>().ChangeState(state);
     }
     
     public void SetStatus(bool isOccupied)

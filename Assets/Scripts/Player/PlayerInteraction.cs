@@ -142,7 +142,7 @@ public class PlayerInteraction : NetworkBehaviour
                         if (allServed)
                         {
                             table.ChangeState(TableOrder.TableState.Dirty);
-                            Destroy(table.Customers.gameObject);
+                            table.ClearCustomer();
                         }
 
                         break;
