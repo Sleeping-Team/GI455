@@ -29,10 +29,8 @@ public class Customer : NetworkBehaviour
         _customerState = state;
     }
 
-    public void AssignTable(TablePosition table)
+    public void AssignTable()
     {
-        if(table == null) return;
-        _table = table;
         AssignTableServerRpc();
     }
     

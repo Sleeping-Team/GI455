@@ -1,11 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 [DefaultExecutionOrder(1)]
-public class FloorPlan : Singletor<FloorPlan>
+public class FloorPlan : NetworkBehaviour
 {
+    public static FloorPlan Instance;
+
     public Dictionary<int, List<TableStatus>> TablesStatus => _tablesStatus;
     public bool TableIsAvailable { get; private set; }
 
@@ -13,6 +16,8 @@ public class FloorPlan : Singletor<FloorPlan>
 
     private void Awake()
     {
+        Instance = this;
+    
         _tablesStatus.Add(2, new List<TableStatus>());
         _tablesStatus.Add(4, new List<TableStatus>());
         Debug.Log("Created Dictionary");

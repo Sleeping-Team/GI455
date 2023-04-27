@@ -43,9 +43,11 @@ public class TableOrder : NetworkBehaviour
         Dirty
     }
 
-    private void Start()
+    public override void OnNetworkSpawn()
     {
         _dishesOnMenu = Kitchen.Instance.DishesOnMenu;
+        
+        base.OnNetworkSpawn();
     }
 
     public void RandomOrder()
@@ -83,6 +85,8 @@ public class TableOrder : NetworkBehaviour
             _orderStatus.Add(order.name, false);
         }
     }
+    
+    
     
     public void SetOrderStatus(string key, bool value)
     {

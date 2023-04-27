@@ -100,7 +100,7 @@ public class PlayerInteraction : NetworkBehaviour
                 {
                     case Customer.CustomerState.WaitingTable:
                         Debug.Log("Customer is waiting");
-                        customer.AssignTable(FloorPlan.Instance.SearchVacantTable(customer.Quantity));
+                        customer.AssignTable();
                         break;
                 }
                 break;
