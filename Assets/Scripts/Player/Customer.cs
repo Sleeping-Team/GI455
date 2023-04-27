@@ -58,7 +58,14 @@ public class Customer : NetworkBehaviour
 
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
     }
-    
+
+    public override void OnNetworkObjectParentChanged(NetworkObject parentNetworkObject)
+    {
+        if (_table == null) _table = transform.parent.GetComponent<TablePosition>();
+        
+        base.OnNetworkObjectParentChanged(parentNetworkObject);
+    }
+
     IEnumerator EatCoroutine(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
