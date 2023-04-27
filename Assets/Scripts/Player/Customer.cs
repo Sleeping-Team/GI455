@@ -46,13 +46,10 @@ public class Customer : NetworkBehaviour
             _table = FloorPlan.Instance.SearchVacantTable(Quantity);
         }
         
-        TableOrder theTable = _table.GetComponent<TableOrder>();
         TablePosition tableDetail = _table.GetComponent<TablePosition>();
-        
-        theTable.ChangeState(TableOrder.TableState.Ordering);
-        theTable.SetStatus(true);
-        theTable.AssignCustomer(this);
-        
+
+        TableSetupRpc(_table.name, name);
+
         transform.SetParent(_table.transform);
         tableDetail.AssignObject(TablePosition.ObjectOnFocus.Chair, this.transform);
 
@@ -66,6 +63,15 @@ public class Customer : NetworkBehaviour
     {
         GameObject focus = GameObject.Find(target);
         focus.GetComponent<Customer>().SetState(CustomerState.OnTable);
+    }
+
+    [ClientRpc]
+    public void TableSetupRpc(string target, string customer)
+    {
+        TableOrder focus = GameObject.Find(target).GetComponent<TableOrder>();
+        focus.ChangeState(TableOrder.TableState.Ordering);
+        focus.SetStatus(true);
+        focus.AssignCustomer(GameObject.Find(customer).GetComponent<Customer>());
     }
 
     public override void OnNetworkObjectParentChanged(NetworkObject parentNetworkObject)
