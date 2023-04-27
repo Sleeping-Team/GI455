@@ -48,7 +48,7 @@ public class Customer : NetworkBehaviour
         
         TablePosition tableDetail = _table.GetComponent<TablePosition>();
 
-        TableSetupRpc(_table.name, name);
+        TableSetupClientRpc(_table.name, name);
 
         transform.SetParent(_table.transform);
         tableDetail.AssignObject(TablePosition.ObjectOnFocus.Chair, this.transform);
@@ -66,7 +66,7 @@ public class Customer : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void TableSetupRpc(string target, string customer)
+    public void TableSetupClientRpc(string target, string customer)
     {
         TableOrder focus = GameObject.Find(target).GetComponent<TableOrder>();
         focus.ChangeState(TableOrder.TableState.Ordering);
