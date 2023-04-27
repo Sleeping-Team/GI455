@@ -138,12 +138,16 @@ public class TableOrder : NetworkBehaviour
         _orderStatus[key] = value;
     }
     
-    public void ChangeState(TableState state)
+    public void ChangeStateCall(TableState state)
     {
         BroadcastStateClientRpc(name, state);
-        ;
-        
+
         Debug.Log($"Change {name}'s state to {state.ToString()}");
+    }
+
+    public void ChangeState(TableState state)
+    {
+        _tableState = state;
     }
 
     [ClientRpc]
