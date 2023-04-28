@@ -31,7 +31,7 @@ public struct CharacterContainer
     //public GameObject arrowReady;                 
     //public GameObject arrowClient;              
     //public Image playerIcon;                       
-    //public GameObject waitingText;                
+    public GameObject waitingText;                
     //public GameObject backgroundPlayerSelect;            
     //public TextMeshProUGUI namePlayerText;             
     //public GameObject backgroundPlayerReady;       
@@ -55,11 +55,11 @@ public class CharacterSelectionManager : SingletonNetwork<CharacterSelectionMana
     [SerializeField]
     SceneName m_nextScene = SceneName.Gameplay;
 
-    [SerializeField]
-    Color m_clientColor;
+    // [SerializeField]
+    // Color m_clientColor;
 
-    [SerializeField]
-    Color m_playerColor;
+    // [SerializeField]
+    // Color m_playerColor;
 
     [SerializeField]
     PlayerConnectionState[] m_playerStates;

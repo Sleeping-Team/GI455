@@ -84,13 +84,13 @@ public class LoadingSceneManager : SingletorPersistent<LoadingSceneManager>
         {
             // When a client/host connects tell the manager
             case SceneName.SelectCharacter:
-                //CharacterSelectionManager.Instance.ServerSceneInit(clientId);
+                CharacterSelectionManager.Instance.ServerSceneInit(clientId);
                 break;
 
             // When a client/host connects tell the manager to create the ship and change the music
-            case SceneName.Gameplay:
-                //GameplayManager.Instance.ServerSceneInit(clientId);
-                break;
+            // case SceneName.Gameplay:
+            //     GameplayManager.Instance.ServerSceneInit(clientId);
+            //     break;
 
 
         }

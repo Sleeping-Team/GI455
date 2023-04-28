@@ -1144,6 +1144,7 @@ GameObject:
   - component: {fileID: 826051505}
   - component: {fileID: 826051504}
   - component: {fileID: 826051508}
+  - component: {fileID: 826051509}
   m_Layer: 6
   m_Name: Customer?
   m_TagString: Customer
@@ -1252,6 +1253,22 @@ MonoBehaviour:
   _customerState: 0
   _table: {fileID: 0}
   Quantity: 1
+--- !u!114 &826051509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826051502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 765548078
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &943851561
 GameObject:
   m_ObjectHideFlags: 0
@@ -1807,6 +1824,7 @@ GameObject:
   - component: {fileID: 1097069631}
   - component: {fileID: 1097069630}
   - component: {fileID: 1097069629}
+  - component: {fileID: 1097069635}
   m_Layer: 6
   m_Name: Table
   m_TagString: Table
@@ -1827,10 +1845,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _chairPosition:
-  - {fileID: 665526709}
-  - {fileID: 525875743}
-  - {fileID: 943851562}
-  - {fileID: 1490823697}
+  - _location: {fileID: 0}
+  - _location: {fileID: 0}
+  - _location: {fileID: 0}
+  - _location: {fileID: 0}
   _platePosition: []
 --- !u!114 &1097069630
 MonoBehaviour:
@@ -1937,13 +1955,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1097069635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097069628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1733834927
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!43 &1202250017
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh168144
+  m_Name: pb_Mesh208768
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -2486,6 +2520,7 @@ GameObject:
   - component: {fileID: 1729843639}
   - component: {fileID: 1729843638}
   - component: {fileID: 1729843637}
+  - component: {fileID: 1729843640}
   m_Layer: 0
   m_Name: ---RestaurantControl
   m_TagString: Untagged
@@ -2549,6 +2584,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1729843640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729843636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1398378213
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &2065870868
 GameObject:
   m_ObjectHideFlags: 0

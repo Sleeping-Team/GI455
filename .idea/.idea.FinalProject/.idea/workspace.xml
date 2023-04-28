@@ -3,15 +3,26 @@
   <component name="ChangeListManager">
     <list default="true" id="7b3b2d8c-bbe2-4b06-b531-796c0891b806" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FinalProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FinalProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Font/Insanibc SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Font/Insanibc SDF.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/PlayerCharacter/Profile/CharacterA.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/PlayerCharacter/Profile/CharacterA.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/PlayerCharacter/Profile/CharacterB.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/PlayerCharacter/Profile/CharacterB.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/PlayerCharacter/Profile/CharacterC.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/PlayerCharacter/Profile/CharacterC.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/PlayerCharacter/Profile/CharacterD.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/PlayerCharacter/Profile/CharacterD.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Gameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Gameplay.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ReallyLab.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ReallyLab.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SelectCharacter.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SelectCharacter.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Start.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Start.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/PlayerA.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObjects/PlayerA.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/PlayerB.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObjects/PlayerB.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/PlayerC.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObjects/PlayerC.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/PlayerD.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObjects/PlayerD.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CharacterSelection/CharacterSelection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CharacterSelection/CharacterSelection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CharacterSelection/CharacterSelectionManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CharacterSelection/CharacterSelectionManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/CharacterSelection/PlayerCharSelection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CharacterSelection/PlayerCharSelection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Sound.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Sound.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Network/ClientConnection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Network/ClientConnection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utilities/LoadingSceneManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Utilities/LoadingSceneManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,12 +31,13 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerCharselecioning.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects@1.2.0/Runtime/Core/NetworkBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects@1.2.0/Runtime/Logging/NetworkLog.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects@1.2.0/Runtime/SceneManagement/NetworkSceneManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@14.0.6/Runtime/Debugging/DebugUpdater.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/EventSystem.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../FinalProject_clone_0/Assets/Scripts/Player/TableOrder.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../FinalProject_clone_0/Assets/Scripts/Player/TableOrder.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Week08/Assets/Scripts/AnimatedCubeController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Week08/Assets/Scripts/Gameplay/EnableDisableSceneNetworkObject.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -115,6 +127,9 @@
       <workItem from="1682067872801" duration="4910000" />
       <workItem from="1682416602147" duration="1616000" />
       <workItem from="1682495159736" duration="5940000" />
+      <workItem from="1682618319146" duration="7543000" />
+      <workItem from="1682667760252" duration="2056000" />
+      <workItem from="1682672409597" duration="2369000" />
     </task>
     <servers />
   </component>

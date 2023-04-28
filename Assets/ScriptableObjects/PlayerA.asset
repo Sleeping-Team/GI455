@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ea57a630ed12742b838b7d5d40e2df, type: 3}
   m_Name: PlayerA
   m_EditorClassIdentifier: 
-  characterName: Gigi
+  characterName: 
   characterPrefab: {fileID: 7354929625482302314, guid: 8906053e423d36b42968b8c8892f82b5, type: 3}
   characterProfile: {fileID: 21300000, guid: dc2b29ddbb1544744bb31d0eee52c676, type: 3}
   clientId: 0

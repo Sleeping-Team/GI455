@@ -1,49 +1,36 @@
-﻿using System.Collections;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
-public class PlayerCharSelection : NetworkBehaviour
+public class PlayerCharselecioning : NetworkBehaviour
 {
-    // [SerializeField] private Button leftButton;
-    // [SerializeField] private Button rightButton;
-    //
-    // [Space] 
-    //
-    // [SerializeField] private Button readyButton;
-    // [SerializeField] private Button cancleButton;
-    //
-    // [Space] 
-    // [SerializeField] private GameObject readyUI;
-    // [SerializeField] private GameObject cancleUI;
-    //
-    [Space]
-    
+    private const int k_noCharacterSelectedValue = -1;
     [SerializeField] private TMP_Text roomCode;
-    
-    private const int k_noCharacterSelectionValue = -1;
+    [SerializeField]
+    private NetworkVariable<int> m_charSelected =
+       new NetworkVariable<int>(k_noCharacterSelectedValue);
 
     [SerializeField]
-    private NetworkVariable<int> m_charSelected = new NetworkVariable<int>(k_noCharacterSelectionValue);
+    private NetworkVariable<int> m_playerId =
+        new NetworkVariable<int>(k_noCharacterSelectedValue);
 
-    [SerializeField] 
-    private NetworkVariable<int> m_playerId = new NetworkVariable<int>(k_noCharacterSelectionValue);
-    
     public int CharSelected => m_charSelected.Value;
 
-    private bool HasSelectCharacter()
+    private bool HasAcharacterSelected()
     {
-        return m_playerId.Value != k_noCharacterSelectionValue;
+        return m_playerId.Value != k_noCharacterSelectedValue;
     }
 
+    // Start is called before the first frame update
     void Start()
     {
         if (IsServer)
         {
             m_playerId.Value = CharacterSelectionManager.Instance.GetPlayerId(OwnerClientId);
         }
-        else if (!IsOwner && HasSelectCharacter())
+        else if (!IsOwner && HasAcharacterSelected())
         {
             CharacterSelectionManager.Instance.SetPlayableChar(
                 m_playerId.Value,
@@ -51,19 +38,9 @@ public class PlayerCharSelection : NetworkBehaviour
                 IsOwner);
         }
         // Assign the name of the object base on the player id on every instance
-        gameObject.name = PlayerData.Instance.playerName;
-        
-        // Button leftBtn = leftButton.GetComponent<Button>();
-        // Button rightBtn = rightButton.GetComponent<Button>();
-        // Button readyBtn = readyButton.GetComponent<Button>();
-        // Button cancleBtn = cancleButton.GetComponent<Button>();
-        //
-        // leftBtn.onClick.AddListener(LeftButtonOnClick);
-        // rightBtn.onClick.AddListener(RightButtonOnClick);
-        // readyBtn.onClick.AddListener(ReadyButtonOnClick);
-        // cancleBtn.onClick.AddListener(CancleButtonOnClick);
+        gameObject.name = $"Player{m_playerId.Value + 1}";
     }
-    
+
     private void OnPlayerIdSet(int oldValue, int newValue)
     {
         CharacterSelectionManager.Instance.SetPlayableChar(newValue, newValue, IsOwner);
@@ -76,7 +53,7 @@ public class PlayerCharSelection : NetworkBehaviour
     private void OnCharacterChanged(int oldValue, int newValue)
     {
         // If I am not the owner, update the character selection UI
-        if (!IsOwner && HasSelectCharacter())
+        if (!IsOwner && HasAcharacterSelected())
             CharacterSelectionManager.Instance.SetCharacterUI(m_playerId.Value, newValue);
     }
     IEnumerator HostShutdown()
@@ -135,18 +112,17 @@ public class PlayerCharSelection : NetworkBehaviour
         m_charSelected.Value = newValue;
     }
 
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     private void ReadyServerRpc()
     {
         CharacterSelectionManager.Instance.PlayerReady(
             OwnerClientId,
             m_playerId.Value,
             m_charSelected.Value,
-            PlayerData.Instance.playerName
-            );
+            PlayerData.Instance.playerName);
     }
 
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     private void NotReadyServerRpc()
     {
         CharacterSelectionManager.Instance.PlayerNotReady(OwnerClientId, m_charSelected.Value);
@@ -183,14 +159,12 @@ public class PlayerCharSelection : NetworkBehaviour
         if (PlayerData.Instance.lobbyCode == null)
         {
             roomCode.text = "Room Code : " + PlayerData.Instance.joinCode;
-            Debug.Log("IS now gen code game");
         }
         else
         {
             roomCode.text = "Room Code : " + PlayerData.Instance.lobbyCode;
-            Debug.Log("IS now joint code game");
         }
-        
+
         if (IsOwner && CharacterSelectionManager.Instance.GetConnectionState(m_playerId.Value) != ConnectionState.ready)
         {
             if (Input.GetKeyDown(KeyCode.A))
@@ -254,53 +228,17 @@ public class PlayerCharSelection : NetworkBehaviour
     {
         m_playerId.OnValueChanged += OnPlayerIdSet;
         m_charSelected.OnValueChanged += OnCharacterChanged;
-        //OnButtonPress.a_OnButtonPress += OnUIButtonPress;
+        OnButtonPress.a_OnButtonPress += OnUIButtonPress;
     }
 
     private void OnDisable()
     {
         m_playerId.OnValueChanged -= OnPlayerIdSet;
         m_charSelected.OnValueChanged -= OnCharacterChanged;
-        //OnButtonPress.a_OnButtonPress -= OnUIButtonPress;
+        OnButtonPress.a_OnButtonPress -= OnUIButtonPress;
     }
     public void Despawn()
     {
         NetworkObjectDespawner.DespawnNetworkObject(NetworkObject);
     }
-    
-    // public void LeftButtonOnClick()
-    // {
-    //     ChangeCharacterSelection(-1);
-    //     //check the button is clicked
-    //     Debug.Log("You have clicked the LEFT button!");
-    // }
-    //
-    // public void RightButtonOnClick()
-    // {
-    //     ChangeCharacterSelection(1);
-    //     //check the button is clicked
-    //     Debug.Log("You have clicked the Right button!");
-    // }
-    
-    // public void ReadyButtonOnClick()
-    // {
-    //     //check the button is clicked
-    //     Debug.Log("You have clicked the Ready button!");
-    //     
-    //     readyUI.SetActive(false);
-    //     cancleUI.SetActive(true);
-    //     
-    //     ReadyServerRpc();
-    // }
-    //
-    // public void CancleButtonOnClick()
-    // {
-    //     //check the button is clicked
-    //     Debug.Log("You have clicked the Cancle button!");
-    //     
-    //     readyUI.SetActive(true);
-    //     cancleUI.SetActive(false);
-    //     
-    //     NotReadyServerRpc();
-    // }
 }

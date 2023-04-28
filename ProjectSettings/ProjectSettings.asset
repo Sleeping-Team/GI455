@@ -730,11 +730,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 1bfd7636-d200-42cf-be19-98d24e26431d
+  cloudProjectId: c42378ca-9b20-489c-829c-8031ced14b9e
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: Table One
-  organizationId: kataruna
+  organizationId: dhmesport
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

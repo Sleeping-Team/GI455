@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,7 @@ public class CharacterSelection : MonoBehaviour
         foreach (var character in characters)
         {
             character.SetActive(false);
+            Debug.Log("Is not active");
         }
     }
 

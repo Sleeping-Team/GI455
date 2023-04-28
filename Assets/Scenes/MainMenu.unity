@@ -582,7 +582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &133145033
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1131,16 +1131,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 496829386}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a2454f79fd8e64046bccaffa9c5cc708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterDatas:
-  - {fileID: 11400000, guid: f600898507ad32d489091328598eefde, type: 2}
-  - {fileID: 11400000, guid: 444fd06fc348692418b32145749413f3, type: 2}
-  - {fileID: 11400000, guid: cbda52920d369de4baa1569b807f4648, type: 2}
   - {fileID: 11400000, guid: ed757fae961d7174890efd89a42706f1, type: 2}
+  - {fileID: 11400000, guid: 444fd06fc348692418b32145749413f3, type: 2}
+  - {fileID: 11400000, guid: f600898507ad32d489091328598eefde, type: 2}
+  - {fileID: 11400000, guid: cbda52920d369de4baa1569b807f4648, type: 2}
   nextScene: 2
 --- !u!1 &502062407
 GameObject:
@@ -1649,10 +1649,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 496829387}
-        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: JoinGame
-        m_Mode: 1
+      - m_Target: {fileID: 496829389}
+        m_TargetAssemblyTypeName: UnityEngine.MonoBehaviour, UnityEngine
+        m_MethodName: set_runInEditMode
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2158,7 +2158,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1291937898
 RectTransform:
   m_ObjectHideFlags: 0

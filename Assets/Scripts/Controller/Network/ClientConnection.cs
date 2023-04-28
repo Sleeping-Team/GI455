@@ -37,7 +37,7 @@ public class ClientConnection : SingletonNetwork<ClientConnection>
     //    so we check the data of the characters because there we now witch character is selected and by who
     private bool CanConnect(ulong clientId)
            {
-               if (SceneManager.GetActiveScene() == scene)
+               if (LoadingSceneManager.Instance.SceneActive == SceneName.SelectCharacter)
                {
                    int playersConnected = NetworkManager.Singleton.ConnectedClientsList.Count;
           
@@ -104,6 +104,6 @@ public class ClientConnection : SingletonNetwork<ClientConnection>
     private void Shutdown()
     {
         NetworkManager.Singleton.Shutdown();
-        SceneManager.LoadScene("MainMenu");
+       LoadingSceneManager.Instance.LoadScene(SceneName.MainMenu,false);
     }
 }

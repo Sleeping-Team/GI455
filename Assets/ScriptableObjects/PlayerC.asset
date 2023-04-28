@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ea57a630ed12742b838b7d5d40e2df, type: 3}
   m_Name: PlayerC
   m_EditorClassIdentifier: 
-  characterName: Crowii
+  characterName: 
   characterPrefab: {fileID: 1008945192691691901, guid: 5055c3d7339df724b9ff714066d802ff, type: 3}
   characterProfile: {fileID: 21300000, guid: 8f56757077e953b4f9b98b3865975c63, type: 3}
   clientId: 0
