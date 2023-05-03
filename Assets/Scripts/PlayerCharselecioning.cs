@@ -15,6 +15,9 @@ public class PlayerCharselecioning : NetworkBehaviour
     [SerializeField]
     private NetworkVariable<int> m_playerId =
         new NetworkVariable<int>(k_noCharacterSelectedValue);
+    
+    [SerializeField]
+    private NetworkVariable<string> m_playerName = new NetworkVariable<string>(PlayerData.Instance.playerName);
 
     public int CharSelected => m_charSelected.Value;
 
@@ -35,7 +38,8 @@ public class PlayerCharselecioning : NetworkBehaviour
             CharacterSelectionManager.Instance.SetPlayableChar(
                 m_playerId.Value,
                 m_charSelected.Value,
-                IsOwner);
+                IsOwner,
+                m_playerName.Value);
         }
         // Assign the name of the object base on the player id on every instance
         gameObject.name = $"Player{m_playerId.Value + 1}";
@@ -43,7 +47,7 @@ public class PlayerCharselecioning : NetworkBehaviour
 
     private void OnPlayerIdSet(int oldValue, int newValue)
     {
-        CharacterSelectionManager.Instance.SetPlayableChar(newValue, newValue, IsOwner);
+        CharacterSelectionManager.Instance.SetPlayableChar(newValue, newValue, IsOwner,m_playerName.Value);
 
         if (IsServer)
             m_charSelected.Value = newValue;
@@ -102,7 +106,8 @@ public class PlayerCharselecioning : NetworkBehaviour
             CharacterSelectionManager.Instance.SetPlayableChar(
                 m_playerId.Value,
                 charTemp,
-                IsOwner);
+                IsOwner,
+                m_playerName.Value);
         }
     }
 

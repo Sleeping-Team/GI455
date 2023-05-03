@@ -223,7 +223,7 @@ public class CharacterSelectionManager : SingletonNetwork<CharacterSelectionMana
         SetCharacterColor(playerId, characterSelected);
     }
 
-    public void SetPlayableChar(int playerId, int characterSelected, bool isClientOwner)
+    public void SetPlayableChar(int playerId, int characterSelected, bool isClientOwner, string name)
     {
         SetCharacterUI(playerId, characterSelected);
         //m_charactersContainers[playerId].playerIcon.gameObject.SetActive(true);

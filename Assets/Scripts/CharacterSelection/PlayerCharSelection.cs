@@ -51,7 +51,9 @@ public class PlayerCharSelection : NetworkBehaviour
             CharacterSelectionManager.Instance.SetPlayableChar(
                 m_playerId.Value,
                 m_charSelected.Value,
-                IsOwner);
+                IsOwner,
+                m_playerName.Value
+                );
         }
         // Assign the name of the object base on the player id on every instance
         //gameObject.name = PlayerData.Instance.playerName;
@@ -69,7 +71,7 @@ public class PlayerCharSelection : NetworkBehaviour
     
     private void OnPlayerIdSet(int oldValue, int newValue)
     {
-        CharacterSelectionManager.Instance.SetPlayableChar(newValue, newValue, IsOwner);
+        CharacterSelectionManager.Instance.SetPlayableChar(newValue, newValue, IsOwner,m_playerName.Value);
 
         if (IsServer)
             m_charSelected.Value = newValue;
@@ -128,7 +130,8 @@ public class PlayerCharSelection : NetworkBehaviour
             CharacterSelectionManager.Instance.SetPlayableChar(
                 m_playerId.Value,
                 charTemp,
-                IsOwner);
+                IsOwner,
+                m_playerName.Value);
         }
     }
 
