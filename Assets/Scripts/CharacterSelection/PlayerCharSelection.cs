@@ -29,7 +29,10 @@ public class PlayerCharSelection : NetworkBehaviour
 
     [SerializeField] 
     private NetworkVariable<int> m_playerId = new NetworkVariable<int>(k_noCharacterSelectionValue);
-    
+
+    [SerializeField]
+    private NetworkVariable<string> m_playerName = new NetworkVariable<string>(PlayerData.Instance.playerName);
+
     public int CharSelected => m_charSelected.Value;
 
     private bool HasSelectCharacter()
@@ -51,7 +54,7 @@ public class PlayerCharSelection : NetworkBehaviour
                 IsOwner);
         }
         // Assign the name of the object base on the player id on every instance
-        gameObject.name = PlayerData.Instance.playerName;
+        //gameObject.name = PlayerData.Instance.playerName;
         
         // Button leftBtn = leftButton.GetComponent<Button>();
         // Button rightBtn = rightButton.GetComponent<Button>();
@@ -141,9 +144,8 @@ public class PlayerCharSelection : NetworkBehaviour
         CharacterSelectionManager.Instance.PlayerReady(
             OwnerClientId,
             m_playerId.Value,
-            m_charSelected.Value,
-            PlayerData.Instance.playerName
-            );
+            m_charSelected.Value
+        );
     }
 
     [ServerRpc(RequireOwnership = false)]

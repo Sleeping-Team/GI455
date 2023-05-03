@@ -121,14 +121,14 @@ public class CharacterSelectionManager : SingletonNetwork<CharacterSelectionMana
     
 
     [ClientRpc]
-    void UpdatePlayerStateClientRpc(ulong clientId, int stateIndex, ConnectionState state,string name)
+    void UpdatePlayerStateClientRpc(ulong clientId, int stateIndex, ConnectionState state)
     {
         if (IsServer)
             return;
 
         m_playerStates[stateIndex].playerState = state;
         m_playerStates[stateIndex].clientId = clientId;
-        m_playerStates[stateIndex].playerName = name;
+        //m_playerStates[stateIndex].playerName = name;
     }
 
     void RemoveSelectedStates()
@@ -149,12 +149,12 @@ public class CharacterSelectionManager : SingletonNetwork<CharacterSelectionMana
                 if (disconected)
                 {
                     m_playerStates[i].playerState = ConnectionState.disconnected;
-                    UpdatePlayerStateClientRpc(clientId, i, ConnectionState.disconnected,null);
+                    UpdatePlayerStateClientRpc(clientId, i, ConnectionState.disconnected);
                 }
                 else
                 {
                     m_playerStates[i].playerState = ConnectionState.connected;
-                    UpdatePlayerStateClientRpc(clientId, i, ConnectionState.connected,PlayerData.Instance.playerName);
+                    UpdatePlayerStateClientRpc(clientId, i, ConnectionState.connected);
                 }
             }
         }
@@ -317,12 +317,12 @@ public class CharacterSelectionManager : SingletonNetwork<CharacterSelectionMana
     }
 
     [ClientRpc]
-    void PlayerReadyClientRpc(ulong clientId, int playerId, int characterSelected,string name)
+    void PlayerReadyClientRpc(ulong clientId, int playerId, int characterSelected)
     {
         charactersData[characterSelected].isSelected = true;
         charactersData[characterSelected].clientId = clientId;
         charactersData[characterSelected].playerId = playerId;
-        charactersData[characterSelected].characterName = name;
+        //charactersData[characterSelected].characterName = name;
         m_playerStates[playerId].playerState = ConnectionState.ready;
 
         if (clientId == NetworkManager.Singleton.LocalClientId)
@@ -411,11 +411,11 @@ public class CharacterSelectionManager : SingletonNetwork<CharacterSelectionMana
     }
 
     // Set the player ready if the player is not selected and check if all player are ready to start the countdown
-    public void PlayerReady(ulong clientId, int playerId, int characterSelected,string name)
+    public void PlayerReady(ulong clientId, int playerId, int characterSelected)
     {
         if (!charactersData[characterSelected].isSelected)
         {
-            PlayerReadyClientRpc(clientId, playerId, characterSelected, name);
+            PlayerReadyClientRpc(clientId, playerId, characterSelected);
 
             StartGameTimer();
         }

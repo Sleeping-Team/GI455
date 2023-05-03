@@ -118,8 +118,7 @@ public class PlayerCharselecioning : NetworkBehaviour
         CharacterSelectionManager.Instance.PlayerReady(
             OwnerClientId,
             m_playerId.Value,
-            m_charSelected.Value,
-            PlayerData.Instance.playerName);
+            m_charSelected.Value);
     }
 
     [ServerRpc]
