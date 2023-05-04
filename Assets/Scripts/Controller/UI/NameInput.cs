@@ -50,7 +50,7 @@ public class NameInput : MonoBehaviour
     }
     public void ConfirmButtonOnClick()
     {
-       LoadingSceneManager.Instance.LoadScene(SceneName.MainMenu , false); 
+       LoadingSceneManager.Instance.LoadScene(SceneName.MainMenu); 
        //SceneManagement.Instance.LoadScene(SceneName.MainMenu,false);
     }
 

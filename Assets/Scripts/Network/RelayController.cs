@@ -43,7 +43,7 @@ public class RelayController : Singleton<RelayController>
         
         NetworkManager.Singleton.StartHost();
         
-        LoadingSceneManager.Instance.LoadScene(SceneName.SelectCharacter);
+        //LoadingSceneManager.Instance.LoadScene(SceneName.SelectCharacter);
         //NetworkManager.Singleton.SceneManager.LoadScene("Gameplay Lab", LoadSceneMode.Single);
     }
     
@@ -56,7 +56,7 @@ public class RelayController : Singleton<RelayController>
 
         NetworkManager.Singleton.StartClient();
 
-        LoadingSceneManager.Instance.LoadScene(SceneName.SelectCharacter);
+        //LoadingSceneManager.Instance.LoadScene(SceneName.SelectCharacter);
         
     }
 

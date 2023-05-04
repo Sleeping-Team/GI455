@@ -3002,6 +3002,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 484418657}
+  - {fileID: 280048870}
   - {fileID: 679994068}
   - {fileID: 2051214518}
   - {fileID: 2008006828}
@@ -3010,7 +3011,6 @@ RectTransform:
   - {fileID: 692916358}
   - {fileID: 168783543}
   - {fileID: 397102283}
-  - {fileID: 280048870}
   - {fileID: 327935703}
   - {fileID: 318810853}
   - {fileID: 338619807}
@@ -3766,6 +3766,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1724342657}
   m_CullTransparentMesh: 1
+--- !u!1 &1836928327
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1836928329}
+  m_Layer: 0
+  m_Name: SelectCharacterManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1836928329
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836928327}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1867946016
 PrefabInstance:
   m_ObjectHideFlags: 0

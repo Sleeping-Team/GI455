@@ -8,5 +8,5 @@ public class PlayerData : Singleton<PlayerData>
     public string lobbyCode;
     public string joinCode;
 
-    public CharacterData characterData;
+    //public CharacterData characterData;
 }
