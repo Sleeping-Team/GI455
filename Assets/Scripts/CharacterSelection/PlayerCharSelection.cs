@@ -36,6 +36,7 @@ public class PlayerCharSelection : NetworkBehaviour
         }
         else if(!IsOwner && HasAcharacterSelected())
         {
+            ChangeNameServerRpc(PlayerData.Instance.playerName);
             CharacterSelectionManager.Instance.SetPlayebleChar(m_playerId.Value,m_charSelected.Value,IsOwner,m_playerName.Value.ToString());
         }
 
