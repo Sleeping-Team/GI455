@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.UI;
 
-public class PlayerInteraction : MonoBehaviour
+public class PlayerInteraction : NetworkBehaviour
 {
     public GameObject DishOnHand => _dishOnHand;
 
@@ -15,6 +17,8 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private GameObject _interactingObject;
     private GameObject _dishOnHand;
 
+    private Color alphaWhite = new Color(255f, 255f, 255f, 0f);
+
     #region Unity Function
 
     private void Awake()
@@ -22,23 +26,42 @@ public class PlayerInteraction : MonoBehaviour
         _input = new PlayerInput();
     }
 
-    #region Input System Activation
-
-    private void OnEnable()
+    public override void OnNetworkSpawn()
     {
-        _input.Enable();
+        if (IsOwner)
+        {
+            _input.Enable();
+        
+            _input.Player.Interact.performed += _ => Interaction();
+            
+            Debug.Log(transform.parent.parent.name);
+        }
+        else
+        {
+            gameObject.GetComponent<SphereCollider>().enabled = false;
+        }
+
+        base.OnNetworkSpawn();
     }
 
-    private void OnDisable()
+    public override void OnNetworkDespawn()
     {
-        _input.Disable();
+        if (IsOwner)
+        {
+            _input.Disable();
+        
+            _input.Player.Interact.performed -= _ => Interaction();
+        }
+
+        base.OnNetworkDespawn();
     }
 
-    #endregion
-
-    private void Start()
+    private void Update()
     {
-        _input.Player.Interact.performed += _ => Interaction();
+        if (IsOwner && Input.GetKeyDown(KeyCode.R))
+        {
+            _interactingObject = null;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,6 +69,22 @@ public class PlayerInteraction : MonoBehaviour
         if (_interactingObject == null && (!other.CompareTag("Disable") && !other.CompareTag("Untagged")))
         {
             _interactingObject = other.gameObject;
+
+            if (_interactingObject.CompareTag("Table") && 
+                _interactingObject.GetComponent<TableOrder>().State != TableOrder.TableState.Vacant)
+            {
+                if(_dishOnHand == null && _interactingObject.GetComponent<TableOrder>().State == TableOrder.TableState.Waiting ) return;
+                
+                _interactingObject.GetComponent<TableOrder>().OnEnter();
+            }
+            else if (_interactingObject.CompareTag("Customer"))
+            {
+                _interactingObject.GetComponent<Customer>().OnEnter();
+            }
+            else if (_interactingObject.CompareTag("Dish"))
+            {
+                _interactingObject.GetComponent<Grabbable>().OnEnter();
+            }
         }
     }
 
@@ -53,6 +92,22 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (_interactingObject == other.gameObject)
         {
+            if (_interactingObject.CompareTag("Table") && 
+                _interactingObject.GetComponent<TableOrder>().State != TableOrder.TableState.Vacant)
+            {
+                if(_dishOnHand == null && _interactingObject.GetComponent<TableOrder>().State == TableOrder.TableState.Waiting ) return;
+                
+                _interactingObject.GetComponent<TableOrder>().OnExit();
+            }
+            else if (_interactingObject.CompareTag("Customer"))
+            {
+                _interactingObject.GetComponent<Customer>().OnExit();
+            }
+            else if (_interactingObject.CompareTag("Dish"))
+            {
+                _interactingObject.GetComponent<Grabbable>().OnExit();
+            }
+            
             _interactingObject = null;
         }
     }
@@ -81,7 +136,9 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     case Customer.CustomerState.WaitingTable:
                         Debug.Log("Customer is waiting");
-                        customer.AssignTable(FloorPlan.Instance.SearchVacantTable(customer.Quantity));
+                        customer.AssignTable();
+                        customer.OnExit();
+                        _interactingObject = null;
                         break;
                 }
                 break;
@@ -90,17 +147,30 @@ public class PlayerInteraction : MonoBehaviour
                 
                 if(!pass) return;
 
+                Debug.Log("It's Table");
+                
                 switch (table.State)
                 {
                     case TableOrder.TableState.Ordering:
                         //if(!FloorPlan.Instance.TableIsAvailable) return;
-                        
-                        table.RandomOrderServerRpc();
-                        table.ChangeState(TableOrder.TableState.Waiting);
+                        Debug.Log("Initiate ordering protocol");
+                        table.RandomOrder();
+                        table.NextStateServerRpc();
+                        table.OnExit();
+                        _interactingObject = null;
                         break;
                     case TableOrder.TableState.Waiting:
+                        CheckServeStatus(table);
                         if(_dishOnHand == null) return;
 
+                        Debug.Log("Initiate serving protocol");
+
+                        if (!table.OrderStatus.ContainsKey(_dishOnHand.name))
+                        {
+                            Debug.LogWarning("Not my order");
+                            return;
+                        }
+                        
                         if (table.OrderStatus[_dishOnHand.name])
                         {
                             Debug.LogWarning("Already Served");
@@ -108,27 +178,17 @@ public class PlayerInteraction : MonoBehaviour
                         }
                         
                         Debug.Log("Served!");
-                        table.OrderStatus[_dishOnHand.name] = true;
+                        table.Serve(_dishOnHand.name);
 
                         Grabbable onHandDish = _dishOnHand.GetComponent<Grabbable>();
                         
-                        onHandDish.PlaceOnTable(table.transform);
+                        onHandDish.PlaceOnTable(table.name);
 
                         _dishOnHand = null;
 
-                        bool allServed = false;
-                        
-                        foreach (string dish in table.OrderStatus.Keys)
-                        {
-                            allServed = table.OrderStatus[dish];
-                            if (!allServed) break;
-                        }
+                        if (!IsHost) return;
 
-                        if (allServed)
-                        {
-                            table.ChangeState(TableOrder.TableState.Dirty);
-                            Destroy(table.Customers.gameObject);
-                        }
+                        CheckServeStatus(table);
 
                         break;
                     case TableOrder.TableState.Dirty:
@@ -136,19 +196,23 @@ public class PlayerInteraction : MonoBehaviour
                         // {
                         //     Destroy(dish);
                         // }
-                        table.ChangeState(TableOrder.TableState.Vacant);
+                        Debug.Log("Initiate cleaning Protocol");
+                        table.NextStateServerRpc();
+                        table.OnExit();
                         break;
                 }
                 break;
             case "Dish":
                 if(_dishOnHand != null) return;
                 
-                Debug.Log("Activated Dish Protocal");
+                Debug.Log("Activated Dish Protocol");
                 
                 _dishOnHand = _interactingObject;
                 
                 _dishOnHand.GetComponent<Grabbable>().CarryLogic();
                 
+                _dishOnHand.GetComponent<Grabbable>().OnExit();
+
                 // _dishOnHand.transform.SetParent(_hand);
                 //
                 // _dishOnHand.transform.localPosition = Vector3.zero;
@@ -157,5 +221,21 @@ public class PlayerInteraction : MonoBehaviour
                 break;
         }
     }
-    
+
+    private static void CheckServeStatus(TableOrder table)
+    {
+        bool allServed = false;
+
+        foreach (string dish in table.OrderStatus.Keys)
+        {
+            allServed = table.OrderStatus[dish];
+            if (!allServed) break;
+        }
+
+        if (allServed)
+        {
+            table.NextStateServerRpc();
+            table.ClearCustomer();
+        }
+    }
 }

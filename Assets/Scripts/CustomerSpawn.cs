@@ -23,7 +23,7 @@ public class CustomerSpawn : SingletonNetwork<CustomerSpawn>
             StartCoroutine(DoSpawn());
         }
     }
-    
+
     IEnumerator DoSpawn()
     {
         while (!gameover)
@@ -46,10 +46,5 @@ public class CustomerSpawn : SingletonNetwork<CustomerSpawn>
 
             yield return new WaitForSeconds(_spawnDelay);
         }
-    }
-
-    public void RecheckSlot()
-    {
-        
     }
 }

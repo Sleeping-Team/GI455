@@ -1,18 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 [DefaultExecutionOrder(1)]
-public class FloorPlan : Singletor<FloorPlan>
+public class FloorPlan : NetworkBehaviour
 {
+    public static FloorPlan Instance;
+
     public Dictionary<int, List<TableStatus>> TablesStatus => _tablesStatus;
+    public Dictionary<string, GameObject> TablesDatabase => _tablesObjects;
     public bool TableIsAvailable { get; private set; }
 
     private Dictionary<int, List<TableStatus>> _tablesStatus = new Dictionary<int, List<TableStatus>>();
+    private Dictionary<string, GameObject> _tablesObjects = new Dictionary<string, GameObject>();
 
     private void Awake()
     {
+        Instance = this;
+    
         _tablesStatus.Add(2, new List<TableStatus>());
         _tablesStatus.Add(4, new List<TableStatus>());
         Debug.Log("Created Dictionary");
@@ -35,6 +42,7 @@ public class FloorPlan : Singletor<FloorPlan>
                     Debug.Log("Customer have not more than 2");
                     _tablesStatus[2].Add(new TableStatus(tablePosition));
                 }
+                _tablesObjects.Add(table.name, table);
             }
         }
     }
