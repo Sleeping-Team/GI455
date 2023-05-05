@@ -1,12 +1,13 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "Player",menuName = "Character Data",order = 2)]
 public class CharacterData : ScriptableObject
-{
+{ 
         [Header("Data")] 
         public GameObject characterPrefab;
-        public Sprite characterSprite;
+        public Image characterProfile;
 
         [Header("Client Info")] 
         public ulong clientId;

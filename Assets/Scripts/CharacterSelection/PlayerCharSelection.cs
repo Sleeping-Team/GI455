@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerCharSelection : NetworkBehaviour
 {
@@ -13,6 +15,11 @@ public class PlayerCharSelection : NetworkBehaviour
 
     [SerializeField] private NetworkVariable<int> m_playerId =
         new NetworkVariable<int>(k_noCharacterSelectedValue);
+
+    private NetworkVariable<FixedString32Bytes> m_playerName =
+        new NetworkVariable<FixedString32Bytes>("waiting");
+    
+    [SerializeField] private TMP_Text roomCode;
 
     public int CharSelected => m_charSelected.Value;
 
@@ -29,15 +36,25 @@ public class PlayerCharSelection : NetworkBehaviour
         }
         else if(!IsOwner && HasAcharacterSelected())
         {
-            CharacterSelectionManager.Instance.SetPlayebleChar(m_playerId.Value,m_charSelected.Value,IsOwner);
+            CharacterSelectionManager.Instance.SetPlayebleChar(m_playerId.Value,m_charSelected.Value,IsOwner,m_playerName.Value.ToString());
         }
 
         gameObject.name = $"Player{m_playerId.Value + 1}";
+        
+        if (IsHost)
+        {
+            roomCode.text = "Room Code : " + PlayerData.Instance.lobbyCode;
+        }
+        else if (IsClient && !IsHost)
+        {
+            roomCode.text = "Room Code : " + PlayerData.Instance.joinCode;
+        }
     }
 
     private void OnPlayerIdSet(int oldValue, int newValue)
     {
-        CharacterSelectionManager.Instance.SetPlayebleChar(newValue,newValue,IsOwner);
+        ChangeNameServerRpc(PlayerData.Instance.playerName);
+        CharacterSelectionManager.Instance.SetPlayebleChar(newValue,newValue,IsOwner,m_playerName.Value.ToString());
 
         if (IsServer)
         {
@@ -97,7 +114,7 @@ public class PlayerCharSelection : NetworkBehaviour
         {
             ChangeCharacterSelectionServerRpc(charTemp);
             
-            CharacterSelectionManager.Instance.SetPlayebleChar(m_playerId.Value,charTemp,IsOwner);
+            CharacterSelectionManager.Instance.SetPlayebleChar(m_playerId.Value,charTemp,IsOwner,m_playerName.Value.ToString());
         }
     }
 
@@ -105,6 +122,12 @@ public class PlayerCharSelection : NetworkBehaviour
     private void ChangeCharacterSelectionServerRpc(int newValue)
     {
         m_charSelected.Value = newValue;
+    }
+
+    [ServerRpc]
+    private void ChangeNameServerRpc(FixedString32Bytes newName)
+    {
+        m_playerName.Value = newName;
     }
 
     [ServerRpc]
@@ -148,15 +171,14 @@ public class PlayerCharSelection : NetworkBehaviour
         {
             if (Input.GetKeyDown(KeyCode.A))
             {
-                ChangeCharacterSelection(-1);
-                
+                OnClickLeft();
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
-                ChangeCharacterSelection(1);
-                
+                OnClickRight();
             }
         }
+
     }
     
     private void OnEnable()
@@ -175,5 +197,54 @@ public class PlayerCharSelection : NetworkBehaviour
     public void Despawn()
     {
         NetworkObjectDespawner.DespawnNetworkObject(NetworkObject);
+    }
+
+    public void OnClickLeft()
+    {
+        ChangeCharacterSelection(-1);
+    }
+
+    public void OnClickRight()
+    {
+        ChangeCharacterSelection(1);
+    }
+
+    public void OnClickReady()
+    {
+        if (IsOwner)
+        {
+            if (!CharacterSelectionManager.Instance.IsReady(m_charSelected.Value))
+            {
+                CharacterSelectionManager.Instance.SetPlayerReadyUIButtons(true,m_charSelected.Value);
+                
+                ReadyServerRpc();
+            }
+            else
+            {
+                Debug.Log("Bugggg");
+            }
+        }
+    }
+
+    public void OnClickCancle()
+    {
+        if (CharacterSelectionManager.Instance.IsSelectedByPlayer(m_playerId.Value,m_charSelected.Value))
+        {
+            CharacterSelectionManager.Instance.SetPlayerReadyUIButtons(false,m_charSelected.Value);
+                    
+            NotReadyServerRpc();
+        }
+    }
+
+    public void OnClickBack()
+    {
+        if (m_playerId.Value == 0)
+        {
+            StartCoroutine(HostShutdown());
+        }
+        else
+        {
+            Shutdown();
+        }
     }
 }

@@ -64,7 +64,7 @@ public class MenuController : MonoBehaviour
     {
         ClearAllCharacterData();
 
-        pName.GetComponent<TMP_Text>().text = PlayerData.Instance.playerName;
+        pName.GetComponent<TMP_Text>().text = PlayerData.Instance.playerName.ToString();
         
         Button createBtn = createButton.GetComponent<Button>();
         Button joinBtn = joinButton.GetComponent<Button>();

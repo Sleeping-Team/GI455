@@ -2,25 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class CharacterSelection : MonoBehaviour
 {
     public GameObject[] characters;
+    public Image[] characterProfiles;
     public int indexCharacter;
     public GameObject lightSelected;
-
-    [SerializeField] private TMP_Text roomCode;
     
     void Update()
     {
-        roomCode.text = PlayerData.Instance.lobbyCode;
+        
     }
     
     public void SetNonPlayableChar()
     {
-        foreach (var character in characters)
+        for (int i = 0; i < characters.Length ; i++)
         {
-            character.SetActive(false);
+            characterProfiles[i].enabled = false;
+            characters[i].SetActive(false);
+            lightSelected.SetActive(false);
         }
     }
 
@@ -29,6 +31,7 @@ public class CharacterSelection : MonoBehaviour
         SetNonPlayableChar();
         
         characters[index].SetActive(true);
+        characterProfiles[index].enabled = true;
     }
 
     public void ShowLight(bool isLightOn)

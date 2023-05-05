@@ -1,6 +1,7 @@
 ﻿using System;
 using TMPro;
 using Unity.Netcode;
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -93,7 +94,7 @@ public class CharacterSelectionManager : SingletonNetwork<CharacterSelectionMana
     }
 
     [ClientRpc]
-    void UpdatePlayerStateClientRpc(ulong clientId, int stateIndex, ConnectionState state,string name)
+    public void UpdatePlayerStateClientRpc(ulong clientId, int stateIndex, ConnectionState state,string name)
     {
         if (IsServer)
         {
@@ -128,7 +129,7 @@ public class CharacterSelectionManager : SingletonNetwork<CharacterSelectionMana
                 else
                 {
                     m_playerStates[i].PlayerState = ConnectionState.connected;
-                    UpdatePlayerStateClientRpc(clientId,i,ConnectionState.connected, PlayerData.Instance.playerName);
+                    UpdatePlayerStateClientRpc(clientId,i,ConnectionState.connected,m_playerStates[clientId].playerName);
                 }
             }
         }
@@ -174,29 +175,43 @@ public class CharacterSelectionManager : SingletonNetwork<CharacterSelectionMana
         if (charactersData[characterSelected].isSelected)
         {
             //can not select THIS character
-            m_charactersContainers[playerId].characterSelection.ShowLight(false);
+            m_charactersContainers[playerId].characterSelection.ShowLight(true);
         }
         else
         {
             //can select THIS character
-            m_charactersContainers[playerId].characterSelection.ShowLight(true);
+            m_charactersContainers[playerId].characterSelection.ShowLight(false);
         }
         m_charactersContainers[playerId].characterSelection.SetPlayableChar(characterSelected);
     }
 
     public void SetCharacterUI(int playerId, int characterSelected)
     {
-        m_charactersContainers[playerId].nameContainer.text = PlayerData.Instance.playerName;
+        //m_charactersContainers[playerId].nameContainer.text = PlayerData.Instance.playerName;
         
         SetCharacterColor(playerId,characterSelected);
     }
 
-    public void SetPlayebleChar(int playerId, int characterSelected, bool isClientOwner)
+    public void SetPlayebleChar(int playerId, int characterSelected, bool isClientOwner,string name)
     {
         SetCharacterUI(playerId,characterSelected);
         
         m_charactersContainers[playerId].readyIcon.SetActive(false);
+        
+        m_charactersContainers[playerId].nameContainer.text = name;
+        
         m_charactersContainers[playerId].characterSelection.SetPlayableChar(characterSelected);
+    }
+
+    public void ChangePlayerName(int playerId, string name)
+    {
+        m_charactersContainers[playerId].nameContainer.text = name;
+    }
+    
+    [ClientRpc]
+    void ChangeNameClientRpc(ulong clientId, int stateIndex, ConnectionState state, string name)
+    {
+        m_playerStates[stateIndex].playerName = name;
     }
 
     [ClientRpc]
@@ -212,6 +227,7 @@ public class CharacterSelectionManager : SingletonNetwork<CharacterSelectionMana
         {
             m_playerStates[stateIndex].PlayerState = state;
             m_playerStates[stateIndex].clientId = clientId;
+            m_playerStates[stateIndex].playerName = name;
 
             if (player.TryGet(out NetworkObject playerObject))
             {

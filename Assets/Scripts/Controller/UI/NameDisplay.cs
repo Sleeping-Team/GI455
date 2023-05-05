@@ -19,7 +19,7 @@ public class NameDisplay : NetworkBehaviour
     {
         if (IsHost || IsClient)
         {
-            _name.text = PlayerData.Instance.playerName;
+            _name.text = PlayerData.Instance.playerName.ToString();
         }
 
         if (PlayerData.Instance.playerName == null)

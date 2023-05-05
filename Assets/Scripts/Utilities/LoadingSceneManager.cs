@@ -81,6 +81,7 @@ public class LoadingSceneManager : SingletorPersistent<LoadingSceneManager>
         switch (m_sceneActive)
         {
             case SceneName.SelectCharacter:
+                CharacterSelectionManager.Instance.ServerSceneInit(clientId);
                 break;
             
             case SceneName.Gameplay:
