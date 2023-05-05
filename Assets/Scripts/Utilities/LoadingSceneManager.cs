@@ -85,6 +85,7 @@ public class LoadingSceneManager : SingletorPersistent<LoadingSceneManager>
                 break;
             
             case SceneName.Gameplay:
+                GameplayManager.Instance.ServerSceneInit(clientId);
                 break;
         }
     }

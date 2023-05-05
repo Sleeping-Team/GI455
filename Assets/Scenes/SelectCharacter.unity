@@ -519,6 +519,7 @@ GameObject:
   - component: {fileID: 227120601}
   - component: {fileID: 227120600}
   - component: {fileID: 227120599}
+  - component: {fileID: 227120602}
   m_Layer: 0
   m_Name: ClientConnection
   m_TagString: Untagged
@@ -575,6 +576,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &227120602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227120598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d85fa3165bac1d24b947b0c41c1a1e86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomCode: {fileID: 73514486}
 --- !u!1001 &270128028
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1810,7 +1824,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1615610785}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerCharSelection, Assembly-CSharp
         m_MethodName: OnClickRight
         m_Mode: 1
@@ -2159,6 +2173,83 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1099147453837684792, guid: 7f5757494b43176438ec2ed8f2ee004d, type: 3}
   m_PrefabInstance: {fileID: 718160144}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &806703340
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 806703342}
+  - component: {fileID: 806703341}
+  - component: {fileID: 806703344}
+  - component: {fileID: 806703343}
+  m_Layer: 0
+  m_Name: Button Center
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &806703341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806703340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05c1add5af3448a19043d08140f1a28f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonAction: 0
+--- !u!4 &806703342
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806703340}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 84.63728, y: -32.139633, z: 25.37922}
+  m_LocalScale: {x: 9.353074, y: 9.353074, z: 9.353074}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1222103263}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &806703343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806703340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 4028993025
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &806703344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806703340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c39949cb517b9b64ba7b8f7d7ab82297, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _leftButton: {fileID: 2051214519}
+  _rightButton: {fileID: 679994069}
 --- !u!1 &849166490
 GameObject:
   m_ObjectHideFlags: 0
@@ -2975,9 +3066,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1615610785}
-        m_TargetAssemblyTypeName: PlayerCharSelection, Assembly-CSharp
-        m_MethodName: OnClickCancle
+      - m_Target: {fileID: 806703341}
+        m_TargetAssemblyTypeName: OnButtonPress, Assembly-CSharp
+        m_MethodName: OnPress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3333,6 +3424,7 @@ RectTransform:
   - {fileID: 280048870}
   - {fileID: 679994068}
   - {fileID: 2051214518}
+  - {fileID: 806703342}
   - {fileID: 2008006828}
   - {fileID: 1124432956}
   - {fileID: 1889626014}
@@ -3494,86 +3586,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4450621551579629826, guid: a28e337d2900f354c900cee7dd906825, type: 3}
   m_PrefabInstance: {fileID: 4450621553055145486}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1615610784
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4513533421465347384, guid: 7fdfa85babfdd674180b10629eae83ef, type: 3}
-      propertyPath: roomCode
-      value: 
-      objectReference: {fileID: 73514486}
-    - target: {fileID: 4513533421465347385, guid: 7fdfa85babfdd674180b10629eae83ef, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 1861585919
-      objectReference: {fileID: 0}
-    - target: {fileID: 4513533421465347387, guid: 7fdfa85babfdd674180b10629eae83ef, type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4513533421465347387, guid: 7fdfa85babfdd674180b10629eae83ef, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 71.09961
-      objectReference: {fileID: 0}
-    - target: {fileID: 4513533421465347387, guid: 7fdfa85babfdd674180b10629eae83ef, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.2529716
-      objectReference: {fileID: 0}
-    - target: {fileID: 4513533421465347387, guid: 7fdfa85babfdd674180b10629eae83ef, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 4513533421465347387, guid: 7fdfa85babfdd674180b10629eae83ef, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4513533421465347387, guid: 7fdfa85babfdd674180b10629eae83ef, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4513533421465347387, guid: 7fdfa85babfdd674180b10629eae83ef, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4513533421465347387, guid: 7fdfa85babfdd674180b10629eae83ef, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4513533421465347387, guid: 7fdfa85babfdd674180b10629eae83ef, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4513533421465347387, guid: 7fdfa85babfdd674180b10629eae83ef, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4513533421465347387, guid: 7fdfa85babfdd674180b10629eae83ef, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4513533421465347390, guid: 7fdfa85babfdd674180b10629eae83ef, type: 3}
-      propertyPath: m_Name
-      value: PlayerCharSelection
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7fdfa85babfdd674180b10629eae83ef, type: 3}
---- !u!114 &1615610785 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4513533421465347384, guid: 7fdfa85babfdd674180b10629eae83ef, type: 3}
-  m_PrefabInstance: {fileID: 1615610784}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3e0a3c22d6d4911a630d0e182d37c15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1680170346
 GameObject:
   m_ObjectHideFlags: 0
@@ -4628,9 +4640,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1615610785}
-        m_TargetAssemblyTypeName: PlayerCharSelection, Assembly-CSharp
-        m_MethodName: OnClickReady
+      - m_Target: {fileID: 806703341}
+        m_TargetAssemblyTypeName: OnButtonPress, Assembly-CSharp
+        m_MethodName: OnPress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4761,7 +4773,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1615610785}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerCharSelection, Assembly-CSharp
         m_MethodName: OnClickLeft
         m_Mode: 1

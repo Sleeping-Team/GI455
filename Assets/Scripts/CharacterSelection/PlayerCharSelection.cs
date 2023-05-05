@@ -18,8 +18,6 @@ public class PlayerCharSelection : NetworkBehaviour
 
     private NetworkVariable<FixedString32Bytes> m_playerName =
         new NetworkVariable<FixedString32Bytes>("waiting");
-    
-    [SerializeField] private TMP_Text roomCode;
 
     public int CharSelected => m_charSelected.Value;
 
@@ -42,14 +40,8 @@ public class PlayerCharSelection : NetworkBehaviour
 
         gameObject.name = $"Player{m_playerId.Value + 1}";
         
-        if (IsHost)
-        {
-            roomCode.text = "Room Code : " + PlayerData.Instance.lobbyCode;
-        }
-        else if (IsClient && !IsHost)
-        {
-            roomCode.text = "Room Code : " + PlayerData.Instance.joinCode;
-        }
+        ButtonProtocol.Instance.LeftButton.onClick.AddListener(OnClickLeft);
+        ButtonProtocol.Instance.RightButton.onClick.AddListener(OnClickRight);
     }
 
     private void OnPlayerIdSet(int oldValue, int newValue)
@@ -119,25 +111,25 @@ public class PlayerCharSelection : NetworkBehaviour
         }
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void ChangeCharacterSelectionServerRpc(int newValue)
     {
         m_charSelected.Value = newValue;
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void ChangeNameServerRpc(FixedString32Bytes newName)
     {
         m_playerName.Value = newName;
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void ReadyServerRpc()
     {
         CharacterSelectionManager.Instance.PlayerReady(OwnerClientId,m_playerId.Value,m_charSelected.Value);
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void NotReadyServerRpc()
     {
         CharacterSelectionManager.Instance.PlayerNotReady(OwnerClientId,m_charSelected.Value);
@@ -243,9 +235,7 @@ public class PlayerCharSelection : NetworkBehaviour
 
     public void OnClickReady()
     {
-        if (IsOwner)
-        {
-            if (!CharacterSelectionManager.Instance.IsReady(m_charSelected.Value))
+        if (!CharacterSelectionManager.Instance.IsReady(m_charSelected.Value))
             {
                 CharacterSelectionManager.Instance.SetPlayerReadyUIButtons(true,m_charSelected.Value);
                 
@@ -253,9 +243,8 @@ public class PlayerCharSelection : NetworkBehaviour
             }
             else
             {
-                Debug.Log("Bugggg");
+                Debug.Log("It's Bug");
             }
-        }
     }
 
     public void OnClickCancle()

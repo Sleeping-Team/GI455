@@ -79,6 +79,14 @@ public class ClientConnection : SingletonNetwork<ClientConnection>
     }
     private bool ItHasACharacterSelected(ulong clientId)
     {
+        foreach (var data in m_characterDatas)
+        {
+            if (data.clientId == clientId)
+            {
+                return true;
+            }
+        }
+
         return false;
     }
 

@@ -105,6 +105,8 @@ public class GameplayManager : SingletonNetwork<GameplayManager>
 
     public void ServerSceneInit(ulong clientId)
     {
+        Debug.LogWarning("Louise แกงกู");
+        
         m_connectedClients.Add(clientId);
 
         if (m_connectedClients.Count < NetworkManager.Singleton.ConnectedClients.Count)
