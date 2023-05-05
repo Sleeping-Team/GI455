@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ea57a630ed12742b838b7d5d40e2df, type: 3}
+  m_Script: {fileID: 11500000, guid: 93602231c00c4fbda36077280cccbaa3, type: 3}
   m_Name: PlayerD
   m_EditorClassIdentifier: 
-  characterName: 
   characterPrefab: {fileID: 2271406641341951848, guid: cd69a5a9e0aeb0c44b016d335154216f, type: 3}
-  characterProfile: {fileID: 21300000, guid: fcd4820b7e6a35e4fb032feefc6fe790, type: 3}
+  characterProfile: {fileID: 1283951225451090766, guid: 7f5757494b43176438ec2ed8f2ee004d, type: 3}
   clientId: 0
   playerId: -1
   isSelected: 0

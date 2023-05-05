@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 
 public enum ButtonActions : byte
@@ -6,10 +6,6 @@ public enum ButtonActions : byte
     lobby_ready,
     lobby_not_ready
 }
-
-/*
-    This class works for UI buttons that needs to be press by specific client instance
-*/
 
 public class OnButtonPress : MonoBehaviour
 {

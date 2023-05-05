@@ -79,4 +79,25 @@ public class NetworkObjectSpawner
 
         return newGameObject;
     }
+
+    public static GameObject SpawnNewPlayerObjectToClient(
+        GameObject prefab,
+        Vector3 position,
+        ulong newClientOwnerId,
+        bool destroyWithScene = true)
+    {
+#if UNITY_EDITOR
+        if (!NetworkManager.Singleton.IsServer)
+        {
+            Debug.LogError("ERROR: Spawning not happening in the server!");
+        }
+#endif
+        GameObject newGameObject = Object.Instantiate(prefab, position, Quaternion.identity);
+        NetworkObject newGameObjectNetworkObject = newGameObject.GetComponent<NetworkObject>();
+        newGameObjectNetworkObject.SpawnAsPlayerObject(newClientOwnerId, destroyWithScene);
+             return newGameObject;
+    }
+
+    
+
 }

@@ -2,16 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ParrelSync;
 using TMPro;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
+using Unity.Services.Lobbies.Models;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
+#if UNITY_EDITOR
+using ParrelSync;
+#endif
 
 public class MenuController : MonoBehaviour
 {
@@ -29,8 +35,7 @@ public class MenuController : MonoBehaviour
     [Space]
     
     [SerializeField] private TMP_Text pName;
-    [SerializeField] private TMP_Text _joinCodeText;
-    
+
     [Space]
 
     [SerializeField] private GameObject menuUI;
@@ -44,15 +49,22 @@ public class MenuController : MonoBehaviour
     
     [SerializeField]
     private CharacterData[] m_characterDatas;
+    [SerializeField]
+    private LobbyData m_lobbyData;
 
+    private Lobby _connnectedLobby;
+    private UnityTransport _transport;
+    private string _playerId;
     private string joinInput;
     
+    private void Awake() => _transport = FindObjectOfType<UnityTransport>();
     
     // Start is called before the first frame update
-    void Start()
+    private IEnumerator Start()
     {
-        //show name as text
-        pName.GetComponent<TMP_Text>().text = PlayerData.Instance.playerName;
+        ClearAllCharacterData();
+
+        pName.GetComponent<TMP_Text>().text = PlayerData.Instance.playerName.ToString();
         
         Button createBtn = createButton.GetComponent<Button>();
         Button joinBtn = joinButton.GetComponent<Button>();
@@ -67,30 +79,17 @@ public class MenuController : MonoBehaviour
 
         confirmBtn.onClick.AddListener(ConfirmButtonOnClick);
         
-        //RelayController.Instance.Initialize();
+        yield return new WaitUntil(() => NetworkManager.Singleton.SceneManager != null);
+        
+        LoadingSceneManager.Instance.Init();
     }
-
-    private void Update()
-    {
-        if (_joinCodeText.text == null)
-        {
-            //_joinCodeText.text = PlayerData.Instance.lobbyCode;
-        }
-            
-    }
-
+    
     void CreateButtonOnClick()
     {
-        //check the button is clicked
         Debug.Log ("You have clicked the create button!");
         
-        //RelayController.Instance.CreateGame();
-        //_joinCodeText.text = PlayerData.Instance.lobbyCode;
-
-        //SceneManager.LoadScene("Gameplay Lab");
-        RelayController.Instance.CreateGame();
-        
-        LoadingSceneManager.Instance.LoadScene(nextScene);
+        CreateOrJoinLobby();
+        CreateLobby();
     }
 
     void JoinButtonOnClick()
@@ -128,13 +127,9 @@ public class MenuController : MonoBehaviour
 
     public void ConfirmButtonOnClick()
     {
-        //check the button is clicked
         Debug.Log("You have clicked the confirm button!");
-
-        Join();
-        //RelayController.Instance.JoinGame(PlayerData.Instance.joinCode);
-
-        //LoadingSceneManager.Instance.LoadScene(nextScene);
+        
+        OnClickJoin();
     }
 
     void ExitButtonOnClick()
@@ -148,9 +143,98 @@ public class MenuController : MonoBehaviour
         #endif
     }
 
-    void Join()
+    private void ClearAllCharacterData()
     {
-        RelayController.Instance.JoinGame(PlayerData.Instance.joinCode);
+        foreach (CharacterData data in m_characterDatas)
+        {
+            data.EmptyData();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        try
+        {
+            StopAllCoroutines();
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"Error shutting down lobby: {e}");
+        }
+    }
+
+    public async void CreateOrJoinLobby()
+    {
+        await Authenticate();
+    }
+
+    private async Task Authenticate()
+    {
+        var option = new InitializationOptions();
+        
+        #if UNITY_EDITOR
+        option.SetProfile(ClonesManager.IsClone() ? ClonesManager.GetArgument() : "Primary");
+        #endif
+
+        await UnityServices.InitializeAsync(option);
+
+        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        _playerId = AuthenticationService.Instance.PlayerId;
+        m_lobbyData.playerId = _playerId;
+    }
+
+    private async Task CreateLobby()
+    {
+        const int maxPlayer = 4;
+
+        var a = await RelayService.Instance.CreateAllocationAsync(maxPlayer);
+        var joinCode = await RelayService.Instance.GetJoinCodeAsync(a.AllocationId);
+
+        PlayerData.Instance.lobbyCode = joinCode;
+            
+        _transport.SetHostRelayData(a.RelayServer.IpV4, (ushort)a.RelayServer.Port, a.AllocationIdBytes, a.Key, a.ConnectionData);
+
+        OnClickHost();
+            
+    }
+    
+    private void SetTransformAsClient(JoinAllocation a)
+    {
+        _transport.SetClientRelayData(a.RelayServer.IpV4, (ushort)a.RelayServer.Port, a.AllocationIdBytes, a.Key, a.ConnectionData, a.HostConnectionData);
+    }
+    public void OnClickHost()
+    {
+        NetworkManager.Singleton.StartHost();
+        
+        LoadingSceneManager.Instance.LoadScene(nextScene);
+    }
+
+    public async void OnClickJoin()
+    {
+        JoinAllocation a = null;
+        if (PlayerData.Instance.joinCode != null)
+        {
+            a = await RelayService.Instance.JoinAllocationAsync
+                (PlayerData.Instance.joinCode);
+            
+            SetTransformAsClient(a);
+            StartCoroutine(Join());
+
+            PlayerData.Instance.lobbyCode = PlayerData.Instance.joinCode;
+        }
+        else
+        {
+            Debug.LogError("Can't join lobby");
+        }
+    }
+
+    private IEnumerator Join()
+    {
+        LoadingFadeEffect.Instance.FadeAll();
+
+        yield return new WaitUntil(() => LoadingFadeEffect.s_canLoad);
+
+        NetworkManager.Singleton.StartClient();
     }
     
 }

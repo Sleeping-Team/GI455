@@ -33,8 +33,6 @@ public class PlayerInteraction : NetworkBehaviour
             _input.Enable();
         
             _input.Player.Interact.performed += _ => Interaction();
-            
-            Debug.Log(transform.parent.parent.name);
         }
         else
         {

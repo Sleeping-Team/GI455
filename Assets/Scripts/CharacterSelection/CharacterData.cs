@@ -1,27 +1,28 @@
+﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
-[CreateAssetMenu (menuName ="Character/Character Data")]
+[CreateAssetMenu(fileName = "Player",menuName = "Character Data",order = 2)]
 public class CharacterData : ScriptableObject
-{
-    [Header("Data")]
-    public string characterName;
-    public GameObject characterPrefab;
-    public Sprite characterProfile;
+{ 
+        [Header("Data")] 
+        public GameObject characterPrefab;
+        public Image characterProfile;
 
-    [Header("Client Info")]
-    public ulong clientId;
-    public int playerId;
-    public bool isSelected;
+        [Header("Client Info")] 
+        public ulong clientId;
+        public int playerId;
+        public bool isSelected;
 
-    void OnEnable()
-    {
-        EmptyData();
-    }
+        private void OnEnable()
+        {
+                EmptyData();
+        }
 
-    public void EmptyData()
-    {
-        isSelected = false;
-        clientId = 0;
-        playerId = -1;
-    }
+        public void EmptyData()
+        { 
+                isSelected = false;
+                clientId = 0;
+                playerId = -1;
+        }
 }
