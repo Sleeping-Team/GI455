@@ -22,10 +22,16 @@ public class InterfaceController : NetworkBehaviour
 
     public void Display()
     {
-        orderQuantity.Value++;
+        AddQueueServerRpc();
         
         OrderQueue indicator = Instantiate(_indicatorPrefab, _queueHolder);
         indicator.Setup(orderQuantity.Value);
         indicator.Sequence();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void AddQueueServerRpc()
+    {
+        orderQuantity.Value++;
     }
 }
