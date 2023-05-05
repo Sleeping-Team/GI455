@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.UI;
 
 public class PlayerInteraction : NetworkBehaviour
 {
@@ -14,6 +16,8 @@ public class PlayerInteraction : NetworkBehaviour
     
     [SerializeField] private GameObject _interactingObject;
     private GameObject _dishOnHand;
+
+    private Color alphaWhite = new Color(255f, 255f, 255f, 0f);
 
     #region Unity Function
 
@@ -65,6 +69,22 @@ public class PlayerInteraction : NetworkBehaviour
         if (_interactingObject == null && (!other.CompareTag("Disable") && !other.CompareTag("Untagged")))
         {
             _interactingObject = other.gameObject;
+
+            if (_interactingObject.CompareTag("Table") && 
+                _interactingObject.GetComponent<TableOrder>().State != TableOrder.TableState.Vacant)
+            {
+                if(_dishOnHand == null && _interactingObject.GetComponent<TableOrder>().State == TableOrder.TableState.Waiting ) return;
+                
+                _interactingObject.GetComponent<TableOrder>().OnEnter();
+            }
+            else if (_interactingObject.CompareTag("Customer"))
+            {
+                _interactingObject.GetComponent<Customer>().OnEnter();
+            }
+            else if (_interactingObject.CompareTag("Dish"))
+            {
+                _interactingObject.GetComponent<Grabbable>().OnEnter();
+            }
         }
     }
 
@@ -72,6 +92,22 @@ public class PlayerInteraction : NetworkBehaviour
     {
         if (_interactingObject == other.gameObject)
         {
+            if (_interactingObject.CompareTag("Table") && 
+                _interactingObject.GetComponent<TableOrder>().State != TableOrder.TableState.Vacant)
+            {
+                if(_dishOnHand == null && _interactingObject.GetComponent<TableOrder>().State == TableOrder.TableState.Waiting ) return;
+                
+                _interactingObject.GetComponent<TableOrder>().OnExit();
+            }
+            else if (_interactingObject.CompareTag("Customer"))
+            {
+                _interactingObject.GetComponent<Customer>().OnExit();
+            }
+            else if (_interactingObject.CompareTag("Dish"))
+            {
+                _interactingObject.GetComponent<Grabbable>().OnExit();
+            }
+            
             _interactingObject = null;
         }
     }
@@ -101,6 +137,8 @@ public class PlayerInteraction : NetworkBehaviour
                     case Customer.CustomerState.WaitingTable:
                         Debug.Log("Customer is waiting");
                         customer.AssignTable();
+                        customer.OnExit();
+                        _interactingObject = null;
                         break;
                 }
                 break;
@@ -118,6 +156,8 @@ public class PlayerInteraction : NetworkBehaviour
                         Debug.Log("Initiate ordering protocol");
                         table.RandomOrder();
                         table.NextStateServerRpc();
+                        table.OnExit();
+                        _interactingObject = null;
                         break;
                     case TableOrder.TableState.Waiting:
                         CheckServeStatus(table);
@@ -158,18 +198,21 @@ public class PlayerInteraction : NetworkBehaviour
                         // }
                         Debug.Log("Initiate cleaning Protocol");
                         table.NextStateServerRpc();
+                        table.OnExit();
                         break;
                 }
                 break;
             case "Dish":
                 if(_dishOnHand != null) return;
                 
-                Debug.Log("Activated Dish Protocal");
+                Debug.Log("Activated Dish Protocol");
                 
                 _dishOnHand = _interactingObject;
                 
                 _dishOnHand.GetComponent<Grabbable>().CarryLogic();
                 
+                _dishOnHand.GetComponent<Grabbable>().OnExit();
+
                 // _dishOnHand.transform.SetParent(_hand);
                 //
                 // _dishOnHand.transform.localPosition = Vector3.zero;

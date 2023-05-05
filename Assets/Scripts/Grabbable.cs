@@ -1,16 +1,32 @@
 using UnityEngine;
 using Unity.Netcode;
+using FlatKit;
+using UnityEngine.UI;
+using DG.Tweening;
 
-public class Grabbable : NetworkBehaviour
+public class Grabbable : NetworkBehaviour, IInteractable
 {
     //[SerializeField] private float _grabDistance = 5.0f;
 
     private Rigidbody m_Rigidbody;
     private NetworkVariable<bool> m_IsGrabbed = new NetworkVariable<bool>();
 
+    private MeshRenderer[] _meshRenderers;
+    private MeshRenderer _thisMeshRenderer;
+
+    public enum Selection
+    {
+        Selected,
+        Deselected,
+    }
+
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
+
+        gameObject.TryGetComponent(out _thisMeshRenderer);
+        
+        _meshRenderers = transform.GetComponentsInChildren<MeshRenderer>();
     }
 
     public override void OnNetworkSpawn()
@@ -36,39 +52,46 @@ public class Grabbable : NetworkBehaviour
         }
     }
 
-    // private void Update()
-    // {
-    //     if (NetworkManager == null)
-    //     {
-    //         return;
-    //     }
-    //
-    //     var localPlayerObject = NetworkManager?.SpawnManager?.GetLocalPlayerObject();
-    //
-    //     if (m_IsGrabbed.Value)
-    //     {
-    //         if (IsOwner && Input.GetKeyDown(KeyCode.E))
-    //         {
-    //             ReleaseServerRpc();
-    //         }
-    //     }
-    //     else
-    //     {
-    //         if (localPlayerObject != null)
-    //         {
-    //             var distance = Vector3.Distance(transform.position, localPlayerObject.transform.position);
-    //             if (distance <= _grabDistance)
-    //             {
-    //                 Debug.Log("In Range");
-    //                 if (Input.GetKeyDown(KeyCode.E))
-    //                 {
-    //                     Debug.Log("Press E");
-    //                     TryGrabServerRpc();
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+    public void SelectionState(Selection state)
+    {
+        switch (state)
+        {
+            case Selection.Selected:
+                if (_thisMeshRenderer != null)
+                {
+                    foreach (Material mat in _thisMeshRenderer.materials)
+                    {
+                        mat.SetFloat("_OutlineEnabled", 1);
+                    }
+                }
+                
+                foreach (MeshRenderer renderer in _meshRenderers)
+                {
+                    foreach (Material mat in renderer.materials)
+                    {
+                        mat.SetFloat("_OutlineEnabled", 1);
+                    }
+                }
+                break;
+            case Selection.Deselected:
+                if (_thisMeshRenderer != null)
+                {
+                    foreach (Material mat in _thisMeshRenderer.materials)
+                    {
+                        mat.SetInt("_OutlineEnabled", 0);
+                    }
+                }
+                
+                foreach (MeshRenderer renderer in _meshRenderers)
+                {
+                    foreach (Material mat in renderer.materials)
+                    {
+                        mat.SetInt("_OutlineEnabled", 0);
+                    }
+                }
+                break;
+        }
+    }
 
     public void CarryLogic()
     {
@@ -148,4 +171,52 @@ public class Grabbable : NetworkBehaviour
         transform.position = Vector3.zero;
         gameObject.tag = "Disable";
     }
+
+    public void OnEnter()
+    {
+        Image interactionIcon = GetComponentInChildren<Image>();
+        interactionIcon.transform.DOLocalMoveY(-243.788f, 1f);
+        interactionIcon.DOFade(1f, 1f);
+    }
+
+    public void OnExit()
+    {
+        Image interactionIcon = GetComponentInChildren<Image>();
+        interactionIcon.transform.DOLocalMoveY(-243.905f, 1f);
+        interactionIcon.DOFade(0f, 0.5f);
+    }
 }
+
+// private void Update()
+// {
+//     if (NetworkManager == null)
+//     {
+//         return;
+//     }
+//
+//     var localPlayerObject = NetworkManager?.SpawnManager?.GetLocalPlayerObject();
+//
+//     if (m_IsGrabbed.Value)
+//     {
+//         if (IsOwner && Input.GetKeyDown(KeyCode.E))
+//         {
+//             ReleaseServerRpc();
+//         }
+//     }
+//     else
+//     {
+//         if (localPlayerObject != null)
+//         {
+//             var distance = Vector3.Distance(transform.position, localPlayerObject.transform.position);
+//             if (distance <= _grabDistance)
+//             {
+//                 Debug.Log("In Range");
+//                 if (Input.GetKeyDown(KeyCode.E))
+//                 {
+//                     Debug.Log("Press E");
+//                     TryGrabServerRpc();
+//                 }
+//             }
+//         }
+//     }
+// }

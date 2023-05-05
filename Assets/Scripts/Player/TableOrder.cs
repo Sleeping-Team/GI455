@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
+using DG.Tweening;
 
 [DefaultExecutionOrder(3)]
-public class TableOrder : NetworkBehaviour
+public class TableOrder : NetworkBehaviour, IInteractable
 {
     public static event Action<List<MenuProperties>> OnCustomerOrder;
 
@@ -91,6 +93,7 @@ public class TableOrder : NetworkBehaviour
         }
 
         WrapUpClientRpc(name);
+        CreateKitchenDisplayClientRpc();
     }
 
     [ClientRpc]
@@ -109,6 +112,12 @@ public class TableOrder : NetworkBehaviour
         {
             _orderStatus.Add(order, false);
         }
+    }
+
+    [ClientRpc]
+    public void CreateKitchenDisplayClientRpc()
+    {
+        InterfaceController.Instance.Display();
     }
     
     [ClientRpc]
@@ -208,5 +217,19 @@ public class TableOrder : NetworkBehaviour
     public void Served(string order)
     {
         _orderStatus[order] = true;
+    }
+
+    public void OnEnter()
+    {
+        Image interactionIcon = GetComponentInChildren<Image>();
+        interactionIcon.transform.DOLocalMoveY(-243.899f, 1f);
+        interactionIcon.DOFade(1f, 1f);
+    }
+
+    public void OnExit()
+    {
+        Image interactionIcon = GetComponentInChildren<Image>();
+        interactionIcon.transform.DOLocalMoveY(-244.256f, 1f);
+        interactionIcon.DOFade(0f, 0.5f);
     }
 }

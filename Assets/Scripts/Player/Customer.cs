@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
-public class Customer : NetworkBehaviour
+public class Customer : NetworkBehaviour, IInteractable
 {
     public CustomerState State => _customerState;
     
@@ -86,6 +88,20 @@ public class Customer : NetworkBehaviour
     IEnumerator EatCoroutine(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
+    }
+
+    public void OnEnter()
+    {
+        Image interactionIcon = GetComponentInChildren<Image>();
+        interactionIcon.transform.DOLocalMoveZ(-1.03f, 1f);
+        interactionIcon.DOFade(1f, 1f);
+    }
+
+    public void OnExit()
+    {
+        Image interactionIcon = GetComponentInChildren<Image>();
+        interactionIcon.transform.DOLocalMoveZ(-0.74f, 1f);
+        interactionIcon.DOFade(0f, 0.5f);
     }
 }
 

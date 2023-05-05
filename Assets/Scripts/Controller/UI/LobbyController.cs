@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Unity.Netcode;
 
 public class LobbyController : MonoBehaviour
 {
@@ -13,7 +15,7 @@ public class LobbyController : MonoBehaviour
     [SerializeField] private Button exitButton;
 
     [SerializeField] private GameObject pauseUI;
-    
+
     // Start is called before the first frame update
     void Start()
     {
