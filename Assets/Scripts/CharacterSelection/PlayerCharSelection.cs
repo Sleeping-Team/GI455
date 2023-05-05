@@ -178,6 +178,37 @@ public class PlayerCharSelection : NetworkBehaviour
             {
                 OnClickRight();
             }
+            
+        }
+        if (IsOwner)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+
+                // Check that the character is not selected
+                if (!CharacterSelectionManager.Instance.IsReady(m_charSelected.Value))
+                {
+                    CharacterSelectionManager.Instance.SetPlayerReadyUIButtons(
+                        true,
+                        m_charSelected.Value);
+
+                    ReadyServerRpc();
+                }
+                else
+                {
+                    // if selected check if is selected by me
+                    if (CharacterSelectionManager.Instance.IsSelectedByPlayer(
+                            m_playerId.Value, m_charSelected.Value))
+                    {
+                        // If it's selected by me, de-select
+                        CharacterSelectionManager.Instance.SetPlayerReadyUIButtons(
+                            false,
+                            m_charSelected.Value);
+
+                        NotReadyServerRpc();
+                    }
+                }
+            }
         }
 
     }
