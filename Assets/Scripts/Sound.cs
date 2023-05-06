@@ -27,7 +27,7 @@ public class Sound : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "Gameplay Lab")
+        if (scene.name == "Gameplay")
         {
             audioSource.clip = GamePlayScene;
             audioSource.loop = true;

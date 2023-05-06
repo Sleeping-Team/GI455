@@ -9,7 +9,6 @@ using Unity.Netcode;
 
 public class LobbyController : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _lobbyCode;
     
     [SerializeField] private Button continueButton;
     [SerializeField] private Button exitButton;
@@ -22,14 +21,6 @@ public class LobbyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (PlayerData.Instance.lobbyCode == null)
-        {
-            _lobbyCode.text = PlayerData.Instance.joinCode;
-        }
-        else
-        {
-            _lobbyCode.text = PlayerData.Instance.lobbyCode;
-        }
 
         Button continueBtn = continueButton.GetComponent<Button>();
         Button confirmBtn = confirmButton.GetComponent<Button>();
@@ -46,18 +37,6 @@ public class LobbyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_lobbyCode.text == null)
-        {
-            if (PlayerData.Instance.lobbyCode == null)
-            {
-                _lobbyCode.text = PlayerData.Instance.joinCode;
-            }
-            else if(PlayerData.Instance.joinCode == null)
-            {
-                _lobbyCode.text = PlayerData.Instance.lobbyCode;
-            }
-            
-        }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
