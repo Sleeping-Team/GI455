@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -40,7 +41,7 @@ public class LobbyController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            pauseUI.SetActive(true);
+            Pause();
         }
     }
 
