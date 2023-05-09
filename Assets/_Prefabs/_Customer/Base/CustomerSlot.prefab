@@ -256,9 +256,9 @@ GameObject:
   - component: {fileID: 4827368901244897351}
   - component: {fileID: 4827368901244897345}
   - component: {fileID: 3745545594445559858}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: CustomerSlot
-  m_TagString: Customer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 7429416596091376517}
   - component: {fileID: -2028125780765053538}
   - component: {fileID: 260957333069468656}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Customer_Sloth
-  m_TagString: Untagged
+  m_TagString: Customer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
