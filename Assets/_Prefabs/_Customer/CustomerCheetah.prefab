@@ -862,8 +862,9 @@ GameObject:
   - component: {fileID: 5861223186183045610}
   - component: {fileID: -9213572575831456975}
   - component: {fileID: -632405203833552022}
+  - component: {fileID: 5747820743186252495}
   m_Layer: 6
-  m_Name: Customer Cheetah WorkerWait
+  m_Name: CustomerCheetah
   m_TagString: Customer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1020,6 +1021,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _table: {fileID: 0}
   Quantity: 1
+--- !u!114 &5747820743186252495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4002655270402319980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 4002655270402319981}
 --- !u!1 &6306303196061354996
 GameObject:
   m_ObjectHideFlags: 0

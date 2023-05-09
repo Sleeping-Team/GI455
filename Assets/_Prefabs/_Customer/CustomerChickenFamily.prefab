@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: -8276655246251603663}
   - component: {fileID: 5303951890522900263}
   m_Layer: 6
-  m_Name: Customer_Chicken_Family_Wait
+  m_Name: CustomerChickenFamily
   m_TagString: Customer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
