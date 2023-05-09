@@ -210,7 +210,7 @@ public class TableOrder : NetworkBehaviour, IInteractable
     [ClientRpc]
     public void ServeClientRpc(string order)
     {
-        TableOrder focus = GameObject.Find(name).GetComponent<TableOrder>();
+        //TableOrder focus = GameObject.Find(name).GetComponent<TableOrder>();
         Served(order);
     }
 

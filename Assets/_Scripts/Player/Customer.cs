@@ -1,18 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.AI;
 
 public class Customer : NetworkBehaviour, IInteractable
 {
     public CustomerState State => _customerState;
+    public int Quantity => _quantity;
     
-    CustomerState _customerState = CustomerState.WaitingTable;
+    [SerializeField] private NavMeshAgent _agent;
+    [SerializeField] private int _quantity = 1;
+    [SerializeField] private TablePosition _table;
 
-    [SerializeField]private TablePosition _table;
-    public int Quantity = 1;
+    CustomerState _customerState = CustomerState.WaitingTable;
     
     public enum CustomerState
     {
@@ -20,7 +24,17 @@ public class Customer : NetworkBehaviour, IInteractable
         OnTable, // Standby at Table
         Roaming
     }
-    
+
+    private void Awake()
+    {
+        if (transform.childCount > 2) _quantity = transform.childCount - 1;
+    }
+
+    private void FixedUpdate()
+    {
+        OnArriveAtTable();
+    }
+
     private void OnEnable()
     {
         _customerState = CustomerState.WaitingTable;
@@ -102,6 +116,19 @@ public class Customer : NetworkBehaviour, IInteractable
         Image interactionIcon = GetComponentInChildren<Image>();
         interactionIcon.transform.DOLocalMoveZ(-0.74f, 1f);
         interactionIcon.DOFade(0f, 0.5f);
+    }
+
+    public void OnArriveAtTable()
+    {
+        if(!_agent.hasPath) return;
+        
+        if (_agent.remainingDistance < .5f)
+        {
+            _agent.isStopped = true;
+            _agent.ResetPath();
+            _agent.enabled = false;
+            _table.AssignSeat(transform);
+        }
     }
 }
 

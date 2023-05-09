@@ -47,8 +47,6 @@ public class PlayerInteraction : NetworkBehaviour
         if (IsOwner)
         {
             _input.Disable();
-        
-            _input.Player.Interact.performed -= _ => Interaction();
         }
 
         base.OnNetworkDespawn();
