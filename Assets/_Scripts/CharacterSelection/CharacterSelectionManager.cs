@@ -40,7 +40,7 @@ public class CharacterSelectionManager : SingletonNetwork<CharacterSelectionMana
     [SerializeField] private GameObject m_cancleButton;
 
     [SerializeField] private float m_timeToStartGame;
-    [SerializeField] private SceneName m_nextScene = SceneName.Gameplay;
+    [SerializeField] private SceneName m_nextScene = SceneName.Load;
 
     [SerializeField] private PlayerConnectionState[] m_playerStates;
 
