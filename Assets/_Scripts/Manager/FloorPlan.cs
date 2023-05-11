@@ -12,8 +12,10 @@ public class FloorPlan : NetworkBehaviour
     public Dictionary<int, List<TableStatus>> TablesStatus => _tablesStatus;
     public Dictionary<string, GameObject> TablesDatabase => _tablesObjects;
     public bool TableIsAvailable { get; private set; }
+    public Transform Exit => _exit;
     public Transform[] PointsOfInterest => _pointOfInterest;
 
+    [SerializeField] private Transform _exit;
     [SerializeField] private Transform[] _pointOfInterest;
     private Dictionary<int, List<TableStatus>> _tablesStatus = new Dictionary<int, List<TableStatus>>();
     private Dictionary<string, GameObject> _tablesObjects = new Dictionary<string, GameObject>();

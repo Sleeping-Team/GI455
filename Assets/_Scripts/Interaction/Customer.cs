@@ -27,13 +27,13 @@ public class Customer : Character, IInteractable, IDestination
     private State _currentState;
     CustomerState _customerState = CustomerState.WaitingTable;
 
-    
+    private bool _iconIsDestroyed = false;
     
     public enum CustomerState
     {
         WaitingTable, //Stand at entrance waiting for table
-        OnTable, // Standby at Table
-        Roaming
+        GetService, // Standby at Table
+        Leaving
     }
 
     private void Awake()
@@ -68,7 +68,7 @@ public class Customer : Character, IInteractable, IDestination
     {
         Debug.Log("Assign Table");
         
-        _customerState = CustomerState.OnTable;
+        _customerState = CustomerState.GetService;
 
         if (_table == null)
         {
@@ -91,7 +91,7 @@ public class Customer : Character, IInteractable, IDestination
     public void AssignTableClientRpc(string target)
     {
         GameObject focus = GameObject.Find(target);
-        focus.GetComponent<Customer>().SetState(CustomerState.OnTable);
+        focus.GetComponent<Customer>().SetState(CustomerState.GetService);
     }
 
     [ClientRpc]
@@ -121,6 +121,8 @@ public class Customer : Character, IInteractable, IDestination
 
     public void OnEnter()
     {
+        if(_iconIsDestroyed) return;
+        
         Image interactionIcon = GetComponentInChildren<Image>();
         interactionIcon.transform.DOLocalMoveZ(-1.03f, 1f);
         interactionIcon.DOFade(1f, 1f);
@@ -128,15 +130,43 @@ public class Customer : Character, IInteractable, IDestination
 
     public void OnExit()
     {
+        if(_iconIsDestroyed) return;
+        
         Image interactionIcon = GetComponentInChildren<Image>();
         interactionIcon.transform.DOLocalMoveZ(-0.74f, 1f);
         interactionIcon.DOFade(0f, 0.5f);
+    }
+
+    public void DisableIcon()
+    {
+        Canvas interactingCanvas = GetComponentInChildren<Canvas>();
+        _iconIsDestroyed = true;
+        Destroy(interactingCanvas.gameObject);
+    }
+    
+    [ServerRpc(RequireOwnership = false)]
+    public void ClearCustomerServerRpc()
+    {
+        foreach (SubCustomer sub in _subCustomer)
+        {
+            sub.HaveParent(true);
+        }
+        NetworkObject.Despawn();
+    }
+
+    public void ClearCustomer()
+    {
+        ClearCustomerServerRpc();
     }
 
     public void SetDestination(Transform waypoint)
     {
         _agent.enabled = true;
         _agent.SetDestination(waypoint.position);
+        foreach (SubCustomer sc in _subCustomer)
+        {
+            sc.SetDestination(transform);
+        }
     }
 }
 

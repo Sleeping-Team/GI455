@@ -28,6 +28,11 @@ public class Walking : State
                 _subCustomer.HaveParent(false);
             }
         }
+
+        Transform characterTransform = Character.transform;
+        
+        characterTransform.GetChild(0).position = characterTransform.position;
+        characterTransform.GetChild(0).rotation = characterTransform.rotation;
         
         Character.IsWalk = true;
         base.Enter();
@@ -39,20 +44,28 @@ public class Walking : State
         {
             if (Agent.remainingDistance < .5f)
             {
-                Agent.isStopped = true;
-
-                if (_customer.Quantity > 1)
+                if (_customer.State == Customer.CustomerState.Leaving)
                 {
-                    foreach (SubCustomer little in _customer.SubCustomer)
+                    _customer.ClearCustomer();
+                }
+                else
+                {
+                    Agent.isStopped = true;
+
+                    if (_customer.Quantity > 1)
                     {
-                        little.HaveParent(true);
-                        little.Follow(false);
+                        foreach (SubCustomer little in _customer.SubCustomer)
+                        {
+                            little.HaveParent(true);
+                            little.Follow(false);
+                        }
                     }
+
+                    _customer.Table.AssignSeat(Character.transform);
+
+                    ChangeToIdleState();
                 }
                 
-                _customer.Table.AssignSeat(Character.transform);
-
-                ChangeToIdleState();
             }
         }
         else

@@ -30,7 +30,7 @@ public class SubCustomer : Character, IDestination
         if (withMaster)
         {
             transform.SetParent(_master.transform);
-            transform.SetSiblingIndex(0);
+            transform.SetSiblingIndex(1);
         }
         else
         {
@@ -40,6 +40,7 @@ public class SubCustomer : Character, IDestination
 
     public void SetDestination(Transform waypoint)
     {
+        _agent.enabled = true;
         _agent.SetDestination(waypoint.position);
     }
 

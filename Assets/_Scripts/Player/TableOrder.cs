@@ -126,17 +126,6 @@ public class TableOrder : NetworkBehaviour, IInteractable
         FloorPlan.Instance.TablesDatabase[name].GetComponent<TableOrder>().TempOrder = new List<string>();
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void ClearCustomerServerRpc()
-    {
-        Customers.NetworkObject.Despawn();
-    }
-
-    public void ClearCustomer()
-    {
-        ClearCustomerServerRpc();
-    }
-
     public void MapOrder(Dictionary<string, bool> data)
     {
         _orderStatus = data;

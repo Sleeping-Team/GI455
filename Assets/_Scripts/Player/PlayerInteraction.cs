@@ -134,6 +134,7 @@ public class PlayerInteraction : NetworkBehaviour
                         Debug.Log("Customer is waiting");
                         customer.AssignTable();
                         customer.OnExit();
+                        customer.DisableIcon();
                         _interactingObject = null;
                         break;
                 }
@@ -231,7 +232,9 @@ public class PlayerInteraction : NetworkBehaviour
         if (allServed)
         {
             table.NextStateServerRpc();
-            table.ClearCustomer();
+            // table.ClearCustomer();
+            table.Customers.SetState(Customer.CustomerState.Leaving);
+            table.Customers.SetDestination(FloorPlan.Instance.Exit);
         }
     }
 }

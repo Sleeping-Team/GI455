@@ -42,14 +42,6 @@ public class TablePosition : MonoBehaviour
                 if (pass)
                 {
                     agent.SetDestination(transform);
-
-                    if (agent.Quantity > 1)
-                    {
-                        foreach (SubCustomer sc in agent.SubCustomer)
-                        {
-                            sc.SetDestination(thing);
-                        }
-                    }
                 }
 
                 break;
