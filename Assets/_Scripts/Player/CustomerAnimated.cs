@@ -78,18 +78,14 @@ public override void OnNetworkSpawn()
         {
             return;
         }
+        if (m_IsServerAuthoritative)
+        {
+            ToggleWalkingAnimationServerRpc(m_Move);
+        }
         else
         {
-            if (m_IsServerAuthoritative)
-            {
-                ToggleWalkingAnimationServerRpc(m_Move);
-            }
-            else
-            {
-                m_Animator.SetTrigger("IsWalk");
-            }
+            m_Animator.SetTrigger("IsWalk");
         }
-        
     }
     
     private void PlayIdleAnimation(bool isIdle)
@@ -125,6 +121,7 @@ public override void OnNetworkSpawn()
             m_Animator.SetTrigger("IsSit");
         }
     }
+    
     private void LateUpdate()
     {
         if (m_Customer.IsWalk)
