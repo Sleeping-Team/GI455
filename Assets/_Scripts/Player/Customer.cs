@@ -93,6 +93,8 @@ public class Customer : NetworkBehaviour, IInteractable
         focus.ChangeState(TableOrder.TableState.Ordering);
         focus.SetStatus(true);
         focus.AssignCustomer(GameObject.Find(customer).GetComponent<Customer>());
+        
+        _isWalk = true;
     }
 
     public override void OnNetworkObjectParentChanged(NetworkObject parentNetworkObject)

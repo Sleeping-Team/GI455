@@ -8,7 +8,8 @@ using NetworkManager = Unity.Netcode.NetworkManager;
 
 public class LoadingScene : MonoBehaviour
 {
-    public Image loadingBar;
+    //public Image loadingBar;
+    
     private void Start()
     {
         StartCoroutine(LoadNextScene());
@@ -16,14 +17,15 @@ public class LoadingScene : MonoBehaviour
 
     private IEnumerator LoadNextScene()
     {
+        Debug.Log("As it's work, it's work");
         AsyncOperation asyncLoad;
 
         asyncLoad = SceneManager.LoadSceneAsync("_Scenes/Gameplay");
         
         while (!asyncLoad.isDone)
         {
-            float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
-            loadingBar.fillAmount = progress;
+            //float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
+            //loadingBar.fillAmount = progress;
             yield return null;
         }
     }

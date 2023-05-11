@@ -9,10 +9,12 @@ public class Sound : MonoBehaviour
     
     void Start()
     {
-        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = backgroundMusic;
         audioSource.loop = true;
+        
         audioSource.Play();
+        
         DontDestroyOnLoad(gameObject);
     }
     void OnEnable()
