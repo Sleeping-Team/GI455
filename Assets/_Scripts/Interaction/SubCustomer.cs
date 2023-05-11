@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SubCustomer : MonoBehaviour, IDestination
+public class SubCustomer : Character, IDestination
 {
     public Customer Master => _master;
     
@@ -17,7 +17,7 @@ public class SubCustomer : MonoBehaviour, IDestination
 
     private void Awake()
     {
-        _currentState = new Idle(gameObject, _agent, _animator);
+        _currentState = new Idle(this, _agent, _animator);
     }
 
     private void FixedUpdate()

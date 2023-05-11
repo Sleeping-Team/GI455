@@ -7,39 +7,27 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.AI;
 
-public class Customer : NetworkBehaviour, IInteractable, IDestination
+public class Customer : Character, IInteractable, IDestination
 {
     public CustomerState State => _customerState;
     public State CurrentState => _currentState;
-    public TablePosition Table => _table;
+    
     public SubCustomer[] SubCustomer => _subCustomer;
     public NavMeshAgent NavAgent => _agent;
     
     public int Quantity => _quantity;
 
-    public bool IsWalk
-    {
-        get => _isWalk;
-        set => _isWalk = value;
-    }
-
-    public bool IsSit
-    {
-        get => _isSit;
-        set => _isSit = value;
-    }
+    
 
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private int _quantity = 1;
-    [SerializeField] private TablePosition _table;
     [SerializeField] private Animator _animator;
     [SerializeField] private SubCustomer[] _subCustomer;
 
     private State _currentState;
     CustomerState _customerState = CustomerState.WaitingTable;
 
-    private bool _isWalk;
-    private bool _isSit;
+    
     
     public enum CustomerState
     {
@@ -52,7 +40,7 @@ public class Customer : NetworkBehaviour, IInteractable, IDestination
     {
         if (transform.childCount > 2) _quantity = transform.childCount - 1;
 
-        _currentState = new Idle(gameObject, _agent, _animator);
+        _currentState = new Idle(this, _agent, _animator);
     }
 
     private void FixedUpdate()

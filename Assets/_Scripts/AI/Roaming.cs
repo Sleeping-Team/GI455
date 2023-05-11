@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Roaming : State
 {
-    public Roaming(GameObject character, NavMeshAgent agent, Animator anim)
+    public Roaming(Character character, NavMeshAgent agent, Animator anim)
         : base(character, agent, anim)
     {
         Name = STATE.ROAMING;

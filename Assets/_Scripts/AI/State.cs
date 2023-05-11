@@ -25,12 +25,12 @@ public class State
     public STATE Name;
 
     protected EVENT Stage;
-    protected GameObject Character;
+    protected Character Character;
     protected NavMeshAgent Agent;
     protected Animator Anim;
     protected State NextState;
 
-    public State(GameObject character, NavMeshAgent agent, Animator anim)
+    public State(Character character, NavMeshAgent agent, Animator anim)
     {
         Character = character;
         Agent = agent;

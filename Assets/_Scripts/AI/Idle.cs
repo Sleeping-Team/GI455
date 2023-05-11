@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Idle : State
 {
-    public Idle(GameObject character, NavMeshAgent agent, Animator anim)
+    public Idle(Character character, NavMeshAgent agent, Animator anim)
         : base(character, agent, anim)
     {
         Name = STATE.IDLE;

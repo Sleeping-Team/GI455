@@ -10,7 +10,7 @@ public class Walking : State
     private bool _isCustomer;
     private bool _isSubCustomer;
 
-    public Walking(GameObject character, NavMeshAgent agent, Animator anim)
+    public Walking(Character character, NavMeshAgent agent, Animator anim)
         : base(character, agent, anim)
     {
         Name = STATE.WALKING;
