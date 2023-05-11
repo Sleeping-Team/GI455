@@ -12,6 +12,9 @@ public class Customer : NetworkBehaviour, IInteractable
     public CustomerState State => _customerState;
     public int Quantity => _quantity;
     public TablePosition Table => _table;
+
+    public bool IsWalk => _isWalk;
+    public bool IsSit => _isSit;
     
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private int _quantity = 1;
@@ -20,6 +23,9 @@ public class Customer : NetworkBehaviour, IInteractable
 
     private State _currentState;
     CustomerState _customerState = CustomerState.WaitingTable;
+
+    private bool _isWalk;
+    private bool _isSit;
     
     public enum CustomerState
     {
