@@ -25,11 +25,18 @@ public class Idle : State
             NextState = new Walking(Character, Agent, Anim);
             Stage = EVENT.EXIT;
         }
+
+        if (Character.Table)
+        {
+            Debug.Log("have seat");
+            Character.IsSit = true;
+        }
         //base.Update();
     }
 
     public override void Exit()
     {
+        Character.IsSit = false;
         base.Exit();
     }
 }
