@@ -11,11 +11,14 @@ public class Customer : NetworkBehaviour, IInteractable
 {
     public CustomerState State => _customerState;
     public int Quantity => _quantity;
+    public TablePosition Table => _table;
     
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private int _quantity = 1;
     [SerializeField] private TablePosition _table;
+    [SerializeField] private Animator _animator;
 
+    private State _currentState;
     CustomerState _customerState = CustomerState.WaitingTable;
     
     public enum CustomerState
@@ -28,11 +31,13 @@ public class Customer : NetworkBehaviour, IInteractable
     private void Awake()
     {
         if (transform.childCount > 2) _quantity = transform.childCount - 1;
+
+        _currentState = new Idle(this, _agent, _animator);
     }
 
     private void FixedUpdate()
     {
-        OnArriveAtTable();
+        _currentState = _currentState.Process();
     }
 
     private void OnEnable()
@@ -116,19 +121,6 @@ public class Customer : NetworkBehaviour, IInteractable
         Image interactionIcon = GetComponentInChildren<Image>();
         interactionIcon.transform.DOLocalMoveZ(-0.74f, 1f);
         interactionIcon.DOFade(0f, 0.5f);
-    }
-
-    public void OnArriveAtTable()
-    {
-        if(!_agent.hasPath) return;
-        
-        if (_agent.remainingDistance < .5f)
-        {
-            _agent.isStopped = true;
-            _agent.ResetPath();
-            _agent.enabled = false;
-            _table.AssignSeat(transform);
-        }
     }
 }
 

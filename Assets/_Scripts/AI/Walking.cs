@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Idle : State
+public class Walking : State
 {
-    public Idle(Customer character, NavMeshAgent agent, Animator anim)
+    public Walking(Customer character, NavMeshAgent agent, Animator anim)
         : base(character, agent, anim)
     {
-        Name = STATE.IDLE;
+        Name = STATE.WALKING;
     }
 
     public override void Enter()
@@ -18,16 +18,22 @@ public class Idle : State
 
     public override void Update()
     {
-        if (Agent.hasPath)
+        if (Agent.remainingDistance < .5f)
         {
-            NextState = new Walking(Character, Agent, Anim);
+            Agent.isStopped = true;
+            
+            Character.Table.AssignSeat(Character.transform);
+
+            NextState = new Idle(Character, Agent, Anim);
             Stage = EVENT.EXIT;
         }
+        
         //base.Update();
     }
 
     public override void Exit()
     {
+        Agent.ResetPath();
         base.Exit();
     }
 }

@@ -9,7 +9,6 @@ public class State
     {
         IDLE,
         WALKING,
-        LEAVING,
     }
 
     public enum EVENT
@@ -22,33 +21,43 @@ public class State
     public STATE Name;
 
     protected EVENT Stage;
-    protected GameObject Character;
+    protected Customer Character;
     protected NavMeshAgent Agent;
     protected Animator Anim;
-    protected Transform Destination;
     protected State NextState;
 
-    public State(GameObject character, NavMeshAgent agent, Animator anim, Transform destination)
+    public State(Customer character, NavMeshAgent agent, Animator anim)
     {
         Character = character;
         Agent = agent;
         Anim = anim;
-        Destination = destination;
         Stage = EVENT.ENTER;
     }
 
+    /// <summary>
+    /// What to do on Enter this stage
+    /// </summary>
     public virtual void Enter()
     {
+        Debug.Log($"{Character.name} now entering Stage : {Name.ToString()}");
         Stage = EVENT.UPDATE;
     }
 
+    /// <summary>
+    /// What to do when is in this stage. Including condition to change stage.
+    /// *You need to Implement "Stage = EVENT.EXIT" on Change Stage by your self*
+    /// </summary>
     public virtual void Update()
     {
         Stage = EVENT.UPDATE;
     }
 
+    /// <summary>
+    /// What to do on Exit this stage (Wrap up)
+    /// </summary>
     public virtual void Exit()
     {
+        Debug.Log($"{Character.name} now exiting Stage : {Name.ToString()}");
         Stage = EVENT.UPDATE;
     }
 
