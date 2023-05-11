@@ -208,6 +208,12 @@ public class TableOrder : NetworkBehaviour, IInteractable
         _orderStatus[order] = true;
     }
 
+    public void Waiting()
+    {
+        _customer.PatientTime();
+        _customer.HaveWait = true;
+    }
+
     public void OnEnter()
     {
         Image interactionIcon = GetComponentInChildren<Image>();

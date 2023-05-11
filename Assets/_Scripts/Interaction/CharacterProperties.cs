@@ -16,9 +16,15 @@ public abstract class CharacterProperties : NetworkBehaviour
         get => _isSit;
         set => _isSit = value;
     }
-    
+
+    public bool HaveWait
+    {
+        get => _haveWait;
+        set => _haveWait = value;
+    }
     protected bool _isWalk;
     protected bool _isSit;
+    protected bool _haveWait;
     
     protected TablePosition _table;
 }

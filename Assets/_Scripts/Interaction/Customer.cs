@@ -23,6 +23,7 @@ public class Customer : CharacterProperties, IInteractable, IDestination
     [SerializeField] private int _quantity = 1;
     [SerializeField] private Animator _animator;
     [SerializeField] private SubCustomer[] _subCustomer;
+    [SerializeField] private float _waitTime = 10.0f;
 
     private State _currentState;
     CustomerState _customerState = CustomerState.WaitingTable;
@@ -117,6 +118,12 @@ public class Customer : CharacterProperties, IInteractable, IDestination
     IEnumerator EatCoroutine(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
+    }
+
+    public IEnumerator PatientTime()
+    {
+        yield return new WaitForSeconds(_waitTime);
+        Debug.Log("have wait");
     }
 
     public void OnEnter()
