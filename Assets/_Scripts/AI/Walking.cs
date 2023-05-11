@@ -26,6 +26,11 @@ public class Walking : State
             {
                 _subCustomer.Master.CurrentState.OnStateChanged += () => ChangeToIdleState();
                 _subCustomer.HaveParent(false);
+                
+                if (_subCustomer.Master.State == Customer.CustomerState.Leaving)
+                {
+                    _subCustomer.Follow(true);
+                }
             }
         }
 
@@ -70,7 +75,18 @@ public class Walking : State
         }
         else
         {
-            _subCustomer.Follow(true);
+            if (!Character.Chair)
+            {
+                _subCustomer.Follow(true);
+            }
+            else
+            {
+                if (Agent.remainingDistance < .5f)
+                {
+                    _subCustomer.Sit();
+                    ChangeToIdleState();
+                }
+            }
         }
 
         //base.Update();

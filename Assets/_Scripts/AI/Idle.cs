@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class Idle : State
 {
+    private bool _isSubCustomer;
+    
     public Idle(CharacterProperties character, NavMeshAgent agent, Animator anim)
         : base(character, agent, anim)
     {
@@ -16,6 +18,9 @@ public class Idle : State
         if (Character.Table) Character.IsSit = true;
         else Character.IsSit = false;
         Character.IsWalk = false;
+
+        _isSubCustomer = Character.TryGetComponent(out SubCustomer sc);
+        
         base.Enter();
     }
 
@@ -27,7 +32,9 @@ public class Idle : State
             Stage = EVENT.EXIT;
         }
 
-        if (Character.Table)
+        if(!_isSubCustomer) return;
+        
+        if (Character.Chair)
         {
             Character.IsSit = true;
             if (Random.Range(0, 100) < 10)
@@ -36,6 +43,7 @@ public class Idle : State
                 Stage = EVENT.EXIT;
             }
         }
+        
         //base.Update();
     }
 

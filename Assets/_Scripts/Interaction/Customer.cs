@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.AI;
 
-public class Customer : CharacterProperties, IInteractable, IDestination
+public class Customer : CharacterProperties, IInteractable, IDestination, ICharacter
 {
     public CustomerState State => _customerState;
     public State CurrentState => _currentState;
@@ -174,6 +174,11 @@ public class Customer : CharacterProperties, IInteractable, IDestination
         {
             sc.SetDestination(transform);
         }
+    }
+    
+    public void SetChair(Transform c)
+    {
+        _chair = c;
     }
 }
 

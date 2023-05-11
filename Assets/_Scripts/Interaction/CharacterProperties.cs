@@ -4,6 +4,7 @@ using Unity.Netcode;
 public abstract class CharacterProperties : NetworkBehaviour
 {
     public TablePosition Table => _table;
+    public Transform Chair => _chair;
     
     public bool IsWalk
     {
@@ -27,4 +28,5 @@ public abstract class CharacterProperties : NetworkBehaviour
     protected bool _haveWait;
     
     protected TablePosition _table;
+    protected Transform _chair;
 }

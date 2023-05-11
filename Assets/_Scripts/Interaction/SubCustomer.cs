@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SubCustomer : CharacterProperties, IDestination
+public class SubCustomer : CharacterProperties, IDestination, ICharacter
 {
     public Customer Master => _master;
     
@@ -54,7 +54,23 @@ public class SubCustomer : CharacterProperties, IDestination
         }
         else
         {
+            _agent.enabled = true;
             _agent.ResetPath();
+            _agent.enabled = false;
         }
+    }
+
+    public void Sit()
+    {
+        if(!_chair) return;
+
+        _agent.enabled = false;
+        transform.position = _chair.position;
+        transform.rotation = _chair.rotation;
+    }
+    
+    public void SetChair(Transform c)
+    {
+        _chair = c;
     }
 }

@@ -65,9 +65,20 @@ public class TablePosition : MonoBehaviour
             {
                 for (int i = 0; i < customer.Quantity; i++)
                 {
-                    Transform selectedCustomer = customer.transform.GetChild(i);
+                    Transform selectedCustomer = thing.transform.GetChild(i);
                     selectedCustomer.position = _chairPosition[i].Location.position;
                     selectedCustomer.rotation = _chairPosition[i].Location.rotation;
+
+                    if (i > 0)
+                    {
+                        ICharacter ic = selectedCustomer.GetComponent(typeof(ICharacter)) as ICharacter;
+                        ic.SetChair(_chairPosition[i].Location);
+                    }
+                    else
+                    {
+                        customer.SetChair(_chairPosition[i].Location);
+                    }
+                    
                     _chairPosition[i].SetOccupied(true);
                 }
             }
