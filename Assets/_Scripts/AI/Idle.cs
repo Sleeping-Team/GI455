@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Idle : State
 {
-    public Idle(Character character, NavMeshAgent agent, Animator anim)
+    public Idle(CharacterProperties character, NavMeshAgent agent, Animator anim)
         : base(character, agent, anim)
     {
         Name = STATE.IDLE;
@@ -13,7 +13,8 @@ public class Idle : State
 
     public override void Enter()
     {
-        Character.IsSit = false;
+        if (Character.Table) Character.IsSit = true;
+        else Character.IsSit = false;
         Character.IsWalk = false;
         base.Enter();
     }
@@ -28,8 +29,11 @@ public class Idle : State
 
         if (Character.Table)
         {
-            Debug.Log("have seat");
-            Character.IsSit = true;
+            if (Random.Range(0, 100) < 10)
+            {
+                NextState = new Roaming(Character, Agent, Anim);
+                Stage = EVENT.EXIT;
+            }
         }
         //base.Update();
     }

@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Roaming : State
 {
-    public Roaming(Character character, NavMeshAgent agent, Animator anim)
+    public Roaming(CharacterProperties character, NavMeshAgent agent, Animator anim)
         : base(character, agent, anim)
     {
         Name = STATE.ROAMING;
@@ -18,6 +18,8 @@ public class Roaming : State
 
     public override void Update()
     {
+        
+        
         base.Update();
     }
 

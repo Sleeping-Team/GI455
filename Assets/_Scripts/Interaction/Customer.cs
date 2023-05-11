@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.AI;
 
-public class Customer : Character, IInteractable, IDestination
+public class Customer : CharacterProperties, IInteractable, IDestination
 {
     public CustomerState State => _customerState;
     public State CurrentState => _currentState;

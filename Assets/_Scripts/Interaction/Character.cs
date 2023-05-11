@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Unity.Netcode;
 
-public class Character : NetworkBehaviour
+public abstract class CharacterProperties : NetworkBehaviour
 {
     public TablePosition Table => _table;
     

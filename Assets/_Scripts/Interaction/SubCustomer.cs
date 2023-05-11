@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SubCustomer : Character, IDestination
+public class SubCustomer : CharacterProperties, IDestination
 {
     public Customer Master => _master;
     
