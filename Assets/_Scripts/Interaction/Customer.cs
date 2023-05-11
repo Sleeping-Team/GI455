@@ -135,6 +135,7 @@ public class Customer : Character, IInteractable, IDestination
 
     public void SetDestination(Transform waypoint)
     {
+        _agent.enabled = true;
         _agent.SetDestination(waypoint.position);
     }
 }

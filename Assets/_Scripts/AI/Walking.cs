@@ -71,6 +71,8 @@ public class Walking : State
             _subCustomer.Follow(false);
             _subCustomer.Master.CurrentState.OnStateChanged -= () => ChangeToIdleState();
         }
+        Agent.enabled = false;
+        
         Character.IsWalk = false;
         base.Exit();
     }
