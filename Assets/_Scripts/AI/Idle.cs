@@ -29,6 +29,7 @@ public class Idle : State
 
         if (Character.Table)
         {
+            Character.IsSit = true;
             if (Random.Range(0, 100) < 10)
             {
                 NextState = new Roaming(Character, Agent, Anim);
