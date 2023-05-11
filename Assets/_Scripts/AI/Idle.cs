@@ -13,6 +13,8 @@ public class Idle : State
 
     public override void Enter()
     {
+        Character.IsSit = false;
+        Character.IsWalk = false;
         base.Enter();
     }
 

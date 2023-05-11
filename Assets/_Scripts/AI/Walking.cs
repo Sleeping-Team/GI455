@@ -13,6 +13,7 @@ public class Walking : State
 
     public override void Enter()
     {
+        Character.IsWalk = true;
         base.Enter();
     }
 
@@ -34,6 +35,7 @@ public class Walking : State
     public override void Exit()
     {
         Agent.ResetPath();
+        Character.IsWalk = false;
         base.Exit();
     }
 }

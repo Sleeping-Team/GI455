@@ -13,9 +13,18 @@ public class Customer : NetworkBehaviour, IInteractable
     public int Quantity => _quantity;
     public TablePosition Table => _table;
 
-    public bool IsWalk => _isWalk;
-    public bool IsSit => _isSit;
-    
+    public bool IsWalk
+    {
+        get => _isWalk;
+        set => _isWalk = value;
+    }
+
+    public bool IsSit
+    {
+        get => _isSit;
+        set => _isSit = value;
+    }
+
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private int _quantity = 1;
     [SerializeField] private TablePosition _table;
