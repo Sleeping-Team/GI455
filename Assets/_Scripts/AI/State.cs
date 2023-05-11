@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,13 @@ using UnityEngine.AI;
 
 public class State
 {
+    public event Action OnStateChanged;
+    
     public enum STATE
     {
         IDLE,
         WALKING,
+        ROAMING,
     }
 
     public enum EVENT
@@ -21,12 +25,12 @@ public class State
     public STATE Name;
 
     protected EVENT Stage;
-    protected Customer Character;
+    protected GameObject Character;
     protected NavMeshAgent Agent;
     protected Animator Anim;
     protected State NextState;
 
-    public State(Customer character, NavMeshAgent agent, Animator anim)
+    public State(GameObject character, NavMeshAgent agent, Animator anim)
     {
         Character = character;
         Agent = agent;
@@ -76,6 +80,7 @@ public class State
         if (Stage == EVENT.EXIT)
         {
             Exit();
+            OnStateChanged?.Invoke();
             return NextState;
         }
 

@@ -7,11 +7,15 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.AI;
 
-public class Customer : NetworkBehaviour, IInteractable
+public class Customer : NetworkBehaviour, IInteractable, IDestination
 {
     public CustomerState State => _customerState;
-    public int Quantity => _quantity;
+    public State CurrentState => _currentState;
     public TablePosition Table => _table;
+    public SubCustomer[] SubCustomer => _subCustomer;
+    public NavMeshAgent NavAgent => _agent;
+    
+    public int Quantity => _quantity;
 
     public bool IsWalk
     {
@@ -29,6 +33,7 @@ public class Customer : NetworkBehaviour, IInteractable
     [SerializeField] private int _quantity = 1;
     [SerializeField] private TablePosition _table;
     [SerializeField] private Animator _animator;
+    [SerializeField] private SubCustomer[] _subCustomer;
 
     private State _currentState;
     CustomerState _customerState = CustomerState.WaitingTable;
@@ -47,7 +52,7 @@ public class Customer : NetworkBehaviour, IInteractable
     {
         if (transform.childCount > 2) _quantity = transform.childCount - 1;
 
-        _currentState = new Idle(this, _agent, _animator);
+        _currentState = new Idle(gameObject, _agent, _animator);
     }
 
     private void FixedUpdate()
@@ -138,6 +143,11 @@ public class Customer : NetworkBehaviour, IInteractable
         Image interactionIcon = GetComponentInChildren<Image>();
         interactionIcon.transform.DOLocalMoveZ(-0.74f, 1f);
         interactionIcon.DOFade(0f, 0.5f);
+    }
+
+    public void SetDestination(Transform waypoint)
+    {
+        _agent.SetDestination(waypoint.position);
     }
 }
 

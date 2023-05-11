@@ -38,10 +38,18 @@ public class TablePosition : MonoBehaviour
         {
             case ObjectOnFocus.Chair:
                 
-                bool pass = thing.TryGetComponent(out NavMeshAgent agent);
+                bool pass = thing.TryGetComponent(out Customer agent);
                 if (pass)
                 {
-                    agent.destination = transform.position;
+                    agent.SetDestination(transform);
+
+                    if (agent.Quantity > 1)
+                    {
+                        foreach (SubCustomer sc in agent.SubCustomer)
+                        {
+                            sc.SetDestination(thing);
+                        }
+                    }
                 }
 
                 break;
@@ -69,7 +77,6 @@ public class TablePosition : MonoBehaviour
                     selectedCustomer.position = _chairPosition[i].Location.position;
                     selectedCustomer.rotation = _chairPosition[i].Location.rotation;
                     _chairPosition[i].SetOccupied(true);
-                    
                 }
             }
             else
