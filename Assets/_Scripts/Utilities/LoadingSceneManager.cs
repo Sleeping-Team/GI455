@@ -9,7 +9,8 @@ public enum SceneName : byte
     Start,
     MainMenu,
     SelectCharacter,
-    Gameplay
+    Gameplay,
+    Load
 }
 
 public class LoadingSceneManager : SingletorPersistent<LoadingSceneManager>
