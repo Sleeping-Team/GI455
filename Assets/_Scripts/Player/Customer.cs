@@ -11,10 +11,15 @@ public class Customer : NetworkBehaviour, IInteractable
 {
     public CustomerState State => _customerState;
     public int Quantity => _quantity;
+    public bool IsWalk => _isWalk;
+    public bool IsSit => _isSit;
     
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private int _quantity = 1;
     [SerializeField] private TablePosition _table;
+    
+    private bool _isWalk = false;
+    private bool _isSit = false;
 
     CustomerState _customerState = CustomerState.WaitingTable;
     
@@ -28,6 +33,7 @@ public class Customer : NetworkBehaviour, IInteractable
     private void Awake()
     {
         if (transform.childCount > 2) _quantity = transform.childCount - 1;
+        //_isWalk = false;
     }
 
     private void FixedUpdate()
@@ -88,6 +94,8 @@ public class Customer : NetworkBehaviour, IInteractable
         focus.ChangeState(TableOrder.TableState.Ordering);
         focus.SetStatus(true);
         focus.AssignCustomer(GameObject.Find(customer).GetComponent<Customer>());
+        
+        _isWalk = true;
     }
 
     public override void OnNetworkObjectParentChanged(NetworkObject parentNetworkObject)
@@ -128,6 +136,8 @@ public class Customer : NetworkBehaviour, IInteractable
             _agent.ResetPath();
             _agent.enabled = false;
             _table.AssignSeat(transform);
+            _isWalk = false;
+            _isSit = true;
         }
     }
 }
