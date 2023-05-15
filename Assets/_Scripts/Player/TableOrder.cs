@@ -37,6 +37,9 @@ public class TableOrder : NetworkBehaviour, IInteractable
 
     public List<string> TempOrder = new List<string>();
     
+    private bool _iconIsDisabled = false;
+    private Canvas _interactingCanvas;
+    
     public enum TableState
     {
         Vacant, // No Person
@@ -45,6 +48,11 @@ public class TableOrder : NetworkBehaviour, IInteractable
         Waiting, // Wait for food
         //Eating, // Customer Eating
         Dirty
+    }
+
+    private void Awake()
+    {
+        _interactingCanvas = GetComponentInChildren<Canvas>();
     }
 
     public override void OnNetworkSpawn()
@@ -226,5 +234,17 @@ public class TableOrder : NetworkBehaviour, IInteractable
         Image interactionIcon = GetComponentInChildren<Image>();
         interactionIcon.transform.DOLocalMoveY(-244.256f, 1f);
         interactionIcon.DOFade(0f, 0.5f);
+    }
+
+    public void DisableIcon()
+    {
+        _iconIsDisabled = true;
+        _interactingCanvas.gameObject.SetActive(false);
+    }
+
+    public void EnableIcon()
+    {
+        _iconIsDisabled = false;
+        _interactingCanvas.gameObject.SetActive(true);
     }
 }

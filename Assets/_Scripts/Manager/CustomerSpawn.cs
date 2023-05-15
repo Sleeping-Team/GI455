@@ -38,6 +38,15 @@ public class CustomerSpawn : SingletonNetwork<CustomerSpawn>
 
                 NetworkObject customerNetwork = customer.GetComponent<NetworkObject>();
                 if(!customerNetwork.IsSpawned) customerNetwork.Spawn();
+
+                NetworkObject[] subCustomerNetwork = customerNetwork.GetComponentsInChildren<NetworkObject>();
+                if (subCustomerNetwork.Length > 0)
+                {
+                    foreach (NetworkObject sCustomer in subCustomerNetwork)
+                    {
+                        if(!sCustomer.IsSpawned) sCustomer.Spawn();
+                    }
+                }
             }
             else
             {

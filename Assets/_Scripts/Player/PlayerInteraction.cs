@@ -34,30 +34,22 @@ public class PlayerInteraction : NetworkBehaviour
         
             _input.Player.Interact.performed += _ => Interaction();
         }
-        else
-        {
-            gameObject.GetComponent<SphereCollider>().enabled = false;
-        }
+        else gameObject.GetComponent<SphereCollider>().enabled = false;
 
         base.OnNetworkSpawn();
     }
 
     public override void OnNetworkDespawn()
     {
-        if (IsOwner)
-        {
-            _input.Disable();
-        }
+        if (IsOwner) _input.Disable();
+        
 
         base.OnNetworkDespawn();
     }
 
     private void Update()
     {
-        if (IsOwner && Input.GetKeyDown(KeyCode.R))
-        {
-            _interactingObject = null;
-        }
+        if (IsOwner && Input.GetKeyDown(KeyCode.R)) _interactingObject = null;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -66,21 +58,15 @@ public class PlayerInteraction : NetworkBehaviour
         {
             _interactingObject = other.gameObject;
 
-            if (_interactingObject.CompareTag("Table") && 
-                _interactingObject.GetComponent<TableOrder>().State != TableOrder.TableState.Vacant)
+            if (_interactingObject.CompareTag("Table") && _interactingObject.GetComponent<TableOrder>().State != TableOrder.TableState.Vacant)
             {
                 if(_dishOnHand == null && _interactingObject.GetComponent<TableOrder>().State == TableOrder.TableState.Waiting ) return;
                 
+                _interactingObject.GetComponent<TableOrder>().EnableIcon();
                 _interactingObject.GetComponent<TableOrder>().OnEnter();
             }
-            else if (_interactingObject.CompareTag("Customer"))
-            {
-                _interactingObject.GetComponent<Customer>().OnEnter();
-            }
-            else if (_interactingObject.CompareTag("Dish"))
-            {
-                _interactingObject.GetComponent<Grabbable>().OnEnter();
-            }
+            else if (_interactingObject.CompareTag("Customer")) _interactingObject.GetComponent<Customer>().OnEnter();
+            else if (_interactingObject.CompareTag("Dish")) _interactingObject.GetComponent<Grabbable>().OnEnter();
         }
     }
 
@@ -88,28 +74,25 @@ public class PlayerInteraction : NetworkBehaviour
     {
         if (_interactingObject == other.gameObject)
         {
-            if (_interactingObject.CompareTag("Table") && 
-                _interactingObject.GetComponent<TableOrder>().State != TableOrder.TableState.Vacant)
+            if (_interactingObject.CompareTag("Table") && _interactingObject.GetComponent<TableOrder>().State != TableOrder.TableState.Vacant)
             {
                 if(_dishOnHand == null && _interactingObject.GetComponent<TableOrder>().State == TableOrder.TableState.Waiting ) return;
                 
                 _interactingObject.GetComponent<TableOrder>().OnExit();
+                _interactingObject.GetComponent<TableOrder>().DisableIcon();
             }
-            else if (_interactingObject.CompareTag("Customer"))
-            {
-                _interactingObject.GetComponent<Customer>().OnExit();
-            }
-            else if (_interactingObject.CompareTag("Dish"))
-            {
-                _interactingObject.GetComponent<Grabbable>().OnExit();
-            }
-            
+            else if (_interactingObject.CompareTag("Customer")) _interactingObject.GetComponent<Customer>().OnExit();
+            else if (_interactingObject.CompareTag("Dish")) _interactingObject.GetComponent<Grabbable>().OnExit();
+
             _interactingObject = null;
         }
     }
 
     #endregion
 
+    /// <summary>
+    /// All Player Interaction Logic
+    /// </summary>
     private void Interaction()
     {
         if(_interactingObject == null) return;
@@ -121,11 +104,10 @@ public class PlayerInteraction : NetworkBehaviour
         {
             case "Customer":
                 Debug.Log("It's Customer");
-                
                 pass = _interactingObject.TryGetComponent(out Customer customer);
                 
                 if(!pass) return;
-
+                
                 Debug.Log("Get Customer Pass");
                 
                 switch (customer.State)
@@ -149,11 +131,11 @@ public class PlayerInteraction : NetworkBehaviour
                 switch (table.State)
                 {
                     case TableOrder.TableState.Ordering:
-                        //if(!FloorPlan.Instance.TableIsAvailable) return;
                         Debug.Log("Initiate ordering protocol");
                         table.RandomOrder();
                         table.NextStateServerRpc();
                         table.OnExit();
+                        table.DisableIcon();
                         _interactingObject = null;
                         break;
                     case TableOrder.TableState.Waiting:
@@ -182,11 +164,12 @@ public class PlayerInteraction : NetworkBehaviour
                         onHandDish.PlaceOnTable(table.name);
 
                         _dishOnHand = null;
+                        _interactingObject = null;
 
                         if (!IsHost) return;
 
                         CheckServeStatus(table);
-
+                
                         break;
                     case TableOrder.TableState.Dirty:
                         // foreach (GameObject dish in table.transform)
@@ -196,6 +179,7 @@ public class PlayerInteraction : NetworkBehaviour
                         Debug.Log("Initiate cleaning Protocol");
                         table.NextStateServerRpc();
                         table.OnExit();
+                        _interactingObject = null;
                         break;
                 }
                 break;
@@ -206,9 +190,11 @@ public class PlayerInteraction : NetworkBehaviour
                 
                 _dishOnHand = _interactingObject;
                 
-                _dishOnHand.GetComponent<Grabbable>().CarryLogic();
+                Grabbable dish = _dishOnHand.GetComponent<Grabbable>();
                 
-                _dishOnHand.GetComponent<Grabbable>().OnExit();
+                dish.CarryLogic();
+                dish.OnExit();
+                dish.DisableIcon();
 
                 // _dishOnHand.transform.SetParent(_hand);
                 //

@@ -13,6 +13,9 @@ public class Grabbable : NetworkBehaviour, IInteractable
 
     private MeshRenderer[] _meshRenderers;
     private MeshRenderer _thisMeshRenderer;
+    
+    private Canvas _interactingCanvas;
+    private bool _iconIsDisabled = false;
 
     public enum Selection
     {
@@ -184,6 +187,18 @@ public class Grabbable : NetworkBehaviour, IInteractable
         Image interactionIcon = GetComponentInChildren<Image>();
         interactionIcon.transform.DOLocalMoveY(-243.905f, 1f);
         interactionIcon.DOFade(0f, 0.5f);
+    }
+
+    public void DisableIcon()
+    {
+        _iconIsDisabled = true;
+        _interactingCanvas.gameObject.SetActive(false);
+    }
+
+    public void EnableIcon()
+    {
+        _iconIsDisabled = false;
+        _interactingCanvas.gameObject.SetActive(true);
     }
 }
 

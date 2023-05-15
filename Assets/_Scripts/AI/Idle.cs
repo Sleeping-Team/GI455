@@ -37,7 +37,7 @@ public class Idle : State
         if (Character.Chair)
         {
             Character.IsSit = true;
-            if (Random.Range(0, 100) < 10)
+            if (Random.Range(0, 1000000) < 100)
             {
                 NextState = new Roaming(Character, Agent, Anim);
                 Stage = EVENT.EXIT;

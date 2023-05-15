@@ -16,19 +16,18 @@ public class Customer : CharacterProperties, IInteractable, IDestination, IChara
     public NavMeshAgent NavAgent => _agent;
     
     public int Quantity => _quantity;
-
     
-
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private int _quantity = 1;
     [SerializeField] private Animator _animator;
     [SerializeField] private SubCustomer[] _subCustomer;
     [SerializeField] private float _waitTime = 10.0f;
 
+    private Canvas _interactingCanvas;
     private State _currentState;
     CustomerState _customerState = CustomerState.WaitingTable;
 
-    private bool _iconIsDestroyed = false;
+    private bool _iconIsDisabled = false;
     
     public enum CustomerState
     {
@@ -42,6 +41,8 @@ public class Customer : CharacterProperties, IInteractable, IDestination, IChara
         if (transform.childCount > 2) _quantity = transform.childCount - 1;
 
         _currentState = new Idle(this, _agent, _animator);
+        
+        _interactingCanvas = GetComponentInChildren<Canvas>();
     }
 
     private void FixedUpdate()
@@ -128,7 +129,7 @@ public class Customer : CharacterProperties, IInteractable, IDestination, IChara
 
     public void OnEnter()
     {
-        if(_iconIsDestroyed) return;
+        if(_iconIsDisabled) return;
         
         Image interactionIcon = GetComponentInChildren<Image>();
         interactionIcon.transform.DOLocalMoveZ(-1.03f, 1f);
@@ -137,7 +138,7 @@ public class Customer : CharacterProperties, IInteractable, IDestination, IChara
 
     public void OnExit()
     {
-        if(_iconIsDestroyed) return;
+        if(_iconIsDisabled) return;
         
         Image interactionIcon = GetComponentInChildren<Image>();
         interactionIcon.transform.DOLocalMoveZ(-0.74f, 1f);
@@ -146,11 +147,16 @@ public class Customer : CharacterProperties, IInteractable, IDestination, IChara
 
     public void DisableIcon()
     {
-        Canvas interactingCanvas = GetComponentInChildren<Canvas>();
-        _iconIsDestroyed = true;
-        Destroy(interactingCanvas.gameObject);
+        _iconIsDisabled = true;
+        _interactingCanvas.gameObject.SetActive(false);
     }
-    
+
+    public void EnableIcon()
+    {
+        _iconIsDisabled = false;
+        _interactingCanvas.gameObject.SetActive(true);
+    }
+
     [ServerRpc(RequireOwnership = false)]
     public void ClearCustomerServerRpc()
     {
