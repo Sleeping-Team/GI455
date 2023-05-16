@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7349f0110d0545f79889fa9b0f27997, type: 3}
+  m_Script: {fileID: 0}
   m_Name: Sushi
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuProperties
   itemName: Sushi
   itemPrefab: {fileID: 8301904206805745075, guid: 184d245a50711d44c8f1b3d70aa6910d, type: 3}
   itemImage: {fileID: 0}
